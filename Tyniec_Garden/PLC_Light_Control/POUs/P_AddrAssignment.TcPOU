@@ -1,0 +1,107 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.5">
+  <POU Name="P_AddrAssignment" Id="{dca35f74-e5ff-47a8-a603-2093bdd5e952}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM P_AddrAssignment
+VAR
+	iDoItOnceCounter	: INT := 0;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[CASE iDoItOnceCounter OF
+	0: // first cycle after download - assign addresses
+		
+		GVL_IO.arrStreetLamps[1].eKL6821Module  	:= eKL6821Module_none;
+		GVL_IO.arrStreetLamps[1].nAddrShort1		:= 63;
+		GVL_IO.arrStreetLamps[1].nAddrShort2		:= 63;
+		GVL_IO.arrStreetLamps[1].p_stCommandBuffer	:= ADR(GVL_IO.stCommandBuffer_RB1);
+		                                        	
+		GVL_IO.arrStreetLamps[2].eKL6821Module  	:= eKL6821Module_RB1;
+		GVL_IO.arrStreetLamps[2].nAddrShort1		:= 2;
+		GVL_IO.arrStreetLamps[2].nAddrShort2		:= 3;
+		GVL_IO.arrStreetLamps[2].p_stCommandBuffer	:= ADR(GVL_IO.stCommandBuffer_RB1);
+		                                        	
+		GVL_IO.arrStreetLamps[3].eKL6821Module  	:= eKL6821Module_RB1;
+		GVL_IO.arrStreetLamps[3].nAddrShort1		:= 0;
+		GVL_IO.arrStreetLamps[3].nAddrShort2		:= 1;
+		GVL_IO.arrStreetLamps[3].p_stCommandBuffer	:= ADR(GVL_IO.stCommandBuffer_RB1);
+		                                        	
+		GVL_IO.arrStreetLamps[4].eKL6821Module  	:= eKL6821Module_RB2;
+		GVL_IO.arrStreetLamps[4].nAddrShort1		:= 0;
+		GVL_IO.arrStreetLamps[4].nAddrShort2		:= 1;
+		GVL_IO.arrStreetLamps[4].p_stCommandBuffer	:= ADR(GVL_IO.stCommandBuffer_RB2);
+		                                        	
+		GVL_IO.arrStreetLamps[5].eKL6821Module  	:= eKL6821Module_RB2;
+		GVL_IO.arrStreetLamps[5].nAddrShort1		:= 6;
+		GVL_IO.arrStreetLamps[5].nAddrShort2		:= 7;
+		GVL_IO.arrStreetLamps[5].p_stCommandBuffer	:= ADR(GVL_IO.stCommandBuffer_RB2);
+		                                        	
+		GVL_IO.arrStreetLamps[6].eKL6821Module  	:= eKL6821Module_RB2;
+		GVL_IO.arrStreetLamps[6].nAddrShort1		:= 3;
+		GVL_IO.arrStreetLamps[6].nAddrShort2		:= 5;
+		GVL_IO.arrStreetLamps[6].p_stCommandBuffer	:= ADR(GVL_IO.stCommandBuffer_RB2);
+		                                        	
+		GVL_IO.arrStreetLamps[7].eKL6821Module  	:= eKL6821Module_RB2;
+		GVL_IO.arrStreetLamps[7].nAddrShort1		:= 2;
+		GVL_IO.arrStreetLamps[7].nAddrShort2		:= 4;
+		GVL_IO.arrStreetLamps[7].p_stCommandBuffer	:= ADR(GVL_IO.stCommandBuffer_RB2);
+		                                        	
+		GVL_IO.arrStreetLamps[8].eKL6821Module  	:= eKL6821Module_RB3;
+		GVL_IO.arrStreetLamps[8].nAddrShort1		:= 0;
+		GVL_IO.arrStreetLamps[8].nAddrShort2		:= 3;
+		GVL_IO.arrStreetLamps[8].p_stCommandBuffer	:= ADR(GVL_IO.stCommandBuffer_RB3);
+		                                        	
+		GVL_IO.arrStreetLamps[9].eKL6821Module  	:= eKL6821Module_RB3;
+		GVL_IO.arrStreetLamps[9].nAddrShort1		:= 1;
+		GVL_IO.arrStreetLamps[9].nAddrShort2		:= 2;
+		GVL_IO.arrStreetLamps[9].p_stCommandBuffer	:= ADR(GVL_IO.stCommandBuffer_RB3);
+		                                        	
+		GVL_IO.arrStreetLamps[10].eKL6821Module 	:= eKL6821Module_RB3;
+		GVL_IO.arrStreetLamps[10].nAddrShort1		:= 4;
+		GVL_IO.arrStreetLamps[10].nAddrShort2		:= 5;
+		GVL_IO.arrStreetLamps[10].p_stCommandBuffer	:= ADR(GVL_IO.stCommandBuffer_RB3);
+		
+		//increment to go to the next step wich is idle
+		iDoItOnceCounter := iDoItOnceCounter + 1;
+	
+	1: // idle state
+		; // do nothing
+		
+END_CASE]]></ST>
+    </Implementation>
+    <LineIds Name="P_AddrAssignment">
+      <LineId Id="56" Count="1" />
+      <LineId Id="59" Count="0" />
+      <LineId Id="5" Count="0" />
+      <LineId Id="9" Count="1" />
+      <LineId Id="72" Count="0" />
+      <LineId Id="12" Count="2" />
+      <LineId Id="11" Count="0" />
+      <LineId Id="73" Count="0" />
+      <LineId Id="16" Count="2" />
+      <LineId Id="15" Count="0" />
+      <LineId Id="74" Count="0" />
+      <LineId Id="20" Count="2" />
+      <LineId Id="19" Count="0" />
+      <LineId Id="75" Count="0" />
+      <LineId Id="24" Count="2" />
+      <LineId Id="23" Count="0" />
+      <LineId Id="76" Count="0" />
+      <LineId Id="28" Count="2" />
+      <LineId Id="27" Count="0" />
+      <LineId Id="77" Count="0" />
+      <LineId Id="32" Count="2" />
+      <LineId Id="31" Count="0" />
+      <LineId Id="78" Count="0" />
+      <LineId Id="36" Count="2" />
+      <LineId Id="35" Count="0" />
+      <LineId Id="79" Count="0" />
+      <LineId Id="40" Count="2" />
+      <LineId Id="39" Count="0" />
+      <LineId Id="80" Count="0" />
+      <LineId Id="44" Count="2" />
+      <LineId Id="51" Count="0" />
+      <LineId Id="81" Count="0" />
+      <LineId Id="60" Count="7" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

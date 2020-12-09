@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.5">
+  <POU Name="MAIN" Id="{18ca1070-638d-4130-82d4-030f23fa1969}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM MAIN
+VAR
+	tonCycle			: TON; //timer used to measure 1min period
+	fbSceneController	: FB_SceneController;
+	fbPBL				: FB_PBL; //previous brightness level data block
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[//init timer and set dimm value for all street lamps every 1M
+//in other words: repeat control signal in case of power failure
+tonCycle(IN := NOT tonCycle.Q, PT:=T#1M, Q=>GVL_StreetLamps.bSetDimmValue);
+
+//assign DALI addresses at the begining of the program
+P_AddrAssignment();
+
+//activate BACnet communication and data traffic
+P_BACnet_ActualLevel();
+P_BACnet_Alarm();
+P_BACnet_Error();
+P_BACnet_Level();
+P_BACnet_Manual();
+P_BACnet_Motion();
+
+//KNX motion sensors activated
+P_MotionSensors(bEnable := TRUE);
+
+//listen to alarm
+P_AlarmMode();
+
+//if there is no alarm
+IF NOT fbBACnet_BV_Alarm.bPresentValue THEN
+	//maintain auto mode and scene control
+	P_AutoMode();
+	fbSceneController();
+END_IF
+
+
+]]></ST>
+    </Implementation>
+    <LineIds Name="MAIN">
+      <LineId Id="23" Count="0" />
+      <LineId Id="40" Count="0" />
+      <LineId Id="24" Count="0" />
+      <LineId Id="28" Count="0" />
+      <LineId Id="22" Count="0" />
+      <LineId Id="7" Count="0" />
+      <LineId Id="34" Count="0" />
+      <LineId Id="33" Count="0" />
+      <LineId Id="35" Count="0" />
+      <LineId Id="64" Count="1" />
+      <LineId Id="36" Count="1" />
+      <LineId Id="57" Count="0" />
+      <LineId Id="67" Count="0" />
+      <LineId Id="56" Count="0" />
+      <LineId Id="55" Count="0" />
+      <LineId Id="75" Count="0" />
+      <LineId Id="88" Count="0" />
+      <LineId Id="76" Count="0" />
+      <LineId Id="72" Count="2" />
+      <LineId Id="79" Count="0" />
+      <LineId Id="85" Count="0" />
+      <LineId Id="80" Count="0" />
+      <LineId Id="78" Count="0" />
+      <LineId Id="69" Count="0" />
+      <LineId Id="68" Count="0" />
+      <LineId Id="39" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

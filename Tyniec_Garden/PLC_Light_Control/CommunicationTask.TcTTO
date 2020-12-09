@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.5">
+  <Task Name="CommunicationTask" Id="{0de60991-3968-4d67-81e8-5b81c6cb75e7}">
+    <!--CycleTime in micro seconds.-->
+    <CycleTime>2000</CycleTime>
+    <Priority>30</Priority>
+    <PouCall>
+      <Name>P_RB1_Communication</Name>
+    </PouCall>
+    <PouCall>
+      <Name>P_RB2_Communication</Name>
+    </PouCall>
+    <PouCall>
+      <Name>P_RB3_Communication</Name>
+    </PouCall>
+    <PouCall>
+      <Name>P_KNX_Communication</Name>
+    </PouCall>
+    <PouCall>
+      <Name>P_KNX_Data_MotionSensors</Name>
+    </PouCall>
+    <TaskFBGuid>{a46b79c5-7a08-4a37-ab59-dbc0b5751537}</TaskFBGuid>
+    <Fb_init>{332bdca8-9eba-4432-9bb3-9bd7c7c3452b}</Fb_init>
+    <Fb_exit>{cea55c41-94de-4e3c-96b6-425daaeb574e}</Fb_exit>
+    <CycleUpdate>{8012d1d6-6421-4309-8e54-039342cd93c8}</CycleUpdate>
+    <PostCycleUpdate>{d522b96f-18be-4476-b7ca-c76d361dc87f}</PostCycleUpdate>
+  </Task>
+</TcPlcObject>

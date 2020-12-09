@@ -1,0 +1,119 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.5">
+  <POU Name="P_MotionSensors" Id="{86ad94ed-fcc9-4be8-93ce-9c468a8c4c10}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM P_MotionSensors
+VAR_INPUT
+	bEnable		: BOOL; // if TRUE, program is active, sonsors are taken into account
+END_VAR
+VAR
+	i			: INT := 0;	// for loop iterator
+	j			: INT := 0; // for loop iterator
+	
+	arrTOF		: ARRAY [1..byStreetLampsCount] OF TOF; 	// array of off-delay timers
+	arrR_TRIG	: ARRAY [1..byStreetLampsCount] OF R_TRIG;	// array of rising edge trigers
+	arrF_TRIG	: ARRAY [1..byStreetLampsCount] OF F_TRIG; 	// array of falling edge trigers
+	
+	arr_byPBL	: ARRAY [1..byStreetLampsCount] OF BYTE;	// array of previous brightness levels
+	
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[//if motion sensors are activated and it is a night
+IF bEnable AND F_IsNight() THEN
+	
+	//iterate through street lamps
+	FOR j := 1 TO byStreetLampsCount BY 1 DO
+		//initializing off-delay timers
+		arrTOF[j](IN := GVL_IO.arrStreetLamps[j].bMotionSensor, PT := tMotionSensorsTOF_PT);
+		//initializing rising edge trigers
+		arrR_TRIG[j](CLK := arrTOF[j].Q);
+		//initializing falling edge trigers
+		arrF_TRIG[j](CLK := arrTOF[j].Q);
+	END_FOR
+	
+	//iterate through street lamps
+	FOR i := 1 TO byStreetLampsCount BY 1 DO
+		//if lamp is not in manual mode then
+		IF NOT GVL_IO.arrStreetLamps[i].bManualCtrl THEN
+			//if rising edge at arrTOF output occured
+			IF arrR_TRIG[i].Q THEN
+				//depending on a lamp, the sensor belongs to
+				CASE i OF
+					//turn the lamp in c_byBrightness_Motion mode
+					1:fbBACnet_AV_SL_Level_1(Device := Device, bEnablePV := TRUE, bNullPV := FALSE, fPV := c_byBrightness_Motion);
+					2:fbBACnet_AV_SL_Level_2(Device := Device, bEnablePV := TRUE, bNullPV := FALSE, fPV := c_byBrightness_Motion);
+					3:fbBACnet_AV_SL_Level_3(Device := Device, bEnablePV := TRUE, bNullPV := FALSE, fPV := c_byBrightness_Motion);
+					4:fbBACnet_AV_SL_Level_4(Device := Device, bEnablePV := TRUE, bNullPV := FALSE, fPV := c_byBrightness_Motion);
+					5:fbBACnet_AV_SL_Level_5(Device := Device, bEnablePV := TRUE, bNullPV := FALSE, fPV := c_byBrightness_Motion);
+					6:fbBACnet_AV_SL_Level_6(Device := Device, bEnablePV := TRUE, bNullPV := FALSE, fPV := c_byBrightness_Motion);
+					7:fbBACnet_AV_SL_Level_7(Device := Device, bEnablePV := TRUE, bNullPV := FALSE, fPV := c_byBrightness_Motion);
+					8:fbBACnet_AV_SL_Level_8(Device := Device, bEnablePV := TRUE, bNullPV := FALSE, fPV := c_byBrightness_Motion);
+					9:fbBACnet_AV_SL_Level_9(Device := Device, bEnablePV := TRUE, bNullPV := FALSE, fPV := c_byBrightness_Motion);
+					10:fbBACnet_AV_SL_Level_10(Device := Device, bEnablePV := TRUE, bNullPV := FALSE, fPV := c_byBrightness_Motion);
+				END_CASE
+			//else if a falling edge at arrTOF output occured
+			ELSIF arrF_TRIG[i].Q THEN
+				//depending on a lamp, the sensor belongs to
+				CASE i OF
+					//retrieve previous brightness levels
+					1:fbBACnet_AV_SL_Level_1(Device := Device, bEnablePV := TRUE, bNullPV := FALSE, fPV := arr_byPBL[1]);
+					2:fbBACnet_AV_SL_Level_2(Device := Device, bEnablePV := TRUE, bNullPV := FALSE, fPV := arr_byPBL[2]);
+					3:fbBACnet_AV_SL_Level_3(Device := Device, bEnablePV := TRUE, bNullPV := FALSE, fPV := arr_byPBL[3]);
+					4:fbBACnet_AV_SL_Level_4(Device := Device, bEnablePV := TRUE, bNullPV := FALSE, fPV := arr_byPBL[4]);
+					5:fbBACnet_AV_SL_Level_5(Device := Device, bEnablePV := TRUE, bNullPV := FALSE, fPV := arr_byPBL[5]);
+					6:fbBACnet_AV_SL_Level_6(Device := Device, bEnablePV := TRUE, bNullPV := FALSE, fPV := arr_byPBL[6]);
+					7:fbBACnet_AV_SL_Level_7(Device := Device, bEnablePV := TRUE, bNullPV := FALSE, fPV := arr_byPBL[7]);
+					8:fbBACnet_AV_SL_Level_8(Device := Device, bEnablePV := TRUE, bNullPV := FALSE, fPV := arr_byPBL[8]);
+					9:fbBACnet_AV_SL_Level_9(Device := Device, bEnablePV := TRUE, bNullPV := FALSE, fPV := arr_byPBL[9]);
+					10:fbBACnet_AV_SL_Level_10(Device := Device, bEnablePV := TRUE, bNullPV := FALSE, fPV := arr_byPBL[10]);
+				END_CASE
+			//else if TOF output is LOW
+			ELSIF NOT arrTOF[i].Q THEN
+				//save current lamp level for future reference
+				arr_byPBL[i] := GVL_IO.arrStreetLamps[i].nLevel;
+			ELSE 
+				; //do nothing
+			END_IF
+		END_IF
+	END_FOR
+	
+END_IF]]></ST>
+    </Implementation>
+    <LineIds Name="P_MotionSensors">
+      <LineId Id="31" Count="0" />
+      <LineId Id="30" Count="0" />
+      <LineId Id="32" Count="0" />
+      <LineId Id="84" Count="3" />
+      <LineId Id="120" Count="1" />
+      <LineId Id="88" Count="0" />
+      <LineId Id="83" Count="0" />
+      <LineId Id="89" Count="1" />
+      <LineId Id="26" Count="0" />
+      <LineId Id="38" Count="0" />
+      <LineId Id="104" Count="1" />
+      <LineId Id="39" Count="2" />
+      <LineId Id="43" Count="0" />
+      <LineId Id="48" Count="0" />
+      <LineId Id="44" Count="0" />
+      <LineId Id="56" Count="0" />
+      <LineId Id="49" Count="6" />
+      <LineId Id="47" Count="0" />
+      <LineId Id="45" Count="0" />
+      <LineId Id="58" Count="0" />
+      <LineId Id="57" Count="0" />
+      <LineId Id="134" Count="1" />
+      <LineId Id="147" Count="0" />
+      <LineId Id="137" Count="9" />
+      <LineId Id="122" Count="0" />
+      <LineId Id="130" Count="0" />
+      <LineId Id="61" Count="1" />
+      <LineId Id="126" Count="0" />
+      <LineId Id="131" Count="1" />
+      <LineId Id="42" Count="0" />
+      <LineId Id="64" Count="0" />
+      <LineId Id="16" Count="0" />
+      <LineId Id="13" Count="0" />
+      <LineId Id="34" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

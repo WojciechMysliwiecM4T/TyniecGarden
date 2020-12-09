@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.5">
+  <POU Name="F_IsNight" Id="{1f2cf256-0fa7-4566-919a-ab9d9347a95e}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION F_IsNight : BOOL
+VAR_INPUT
+END_VAR
+VAR
+	fbCalcSunriseSunset 	: FB_CalcSunriseSunset;
+	todSunrise          	: TOD;
+	todSunset           	: TOD;
+	fbGetSystemTime     	: GETSYSTEMTIME;
+	fileTime            	: T_FILETIME;
+	dtCurrentDateGMT		: DATE_AND_TIME;
+	
+	dtCurrentDate       	: DATE_AND_TIME;
+	todCurrent				: TOD;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[//get system time 
+fbGetSystemTime(timeLoDW =>fileTime.dwLowDateTime, timeHiDW =>fileTime.dwHighDateTime);
+dtCurrentDateGMT := FILETIME_TO_DT(fileTime);
+//convert it to UTC +2
+dtCurrentDate := dtCurrentDateGMT + T#1H;
+todCurrent := DT_TO_TOD(dtCurrentDate);
+
+//calculating sunrise and sunset
+fbCalcSunriseSunset( fDegreeOfLongitude := 17.03,   (* Longitude of Wroclaw *)
+                     fDegreeOfLatitude := 51.1,   (* Latitude of Wroclaw *)
+                     fReferenceMeridian := 15.0,  (* Central European Time *)
+                     dCurrentDate := DT_TO_DATE(dtCurrentDate),
+                     todSunrise => todSunrise,
+                     todSunset => todSunset);
+
+//if it is a night
+IF todCurrent < todSunrise - T#1H OR todCurrent > todSunset THEN
+	//set return value to TRUE
+	F_IsNight := TRUE;
+//else it is a day
+ELSE
+	//set return value to FALSE
+	F_IsNight := FALSE;
+END_IF]]></ST>
+    </Implementation>
+    <LineIds Name="F_IsNight">
+      <LineId Id="17" Count="22" />
+      <LineId Id="7" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

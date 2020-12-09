@@ -1,0 +1,119 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.5">
+  <POU Name="P_AutoMode" Id="{3a6df21b-1a42-48ce-9146-75164385b2da}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM P_AutoMode
+VAR
+	tonCycle				: TON; //timer implemented to reduce CPU usage
+	
+	bIsDay			: BOOL := FALSE;
+	bIsNight		: BOOL := FALSE;
+	
+	rtIsDay			: R_TRIG;
+	rtIsNight		: R_TRIG;			
+	
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[//init tonCycle
+tonCycle(IN:=NOT tonCycle.Q, PT:=T#1S);
+//init rising edge detection
+rtIsDay(CLK := bIsDay);
+rtIsNight(CLK := bIsNight);
+
+//check day-night status every 1S
+IF tonCycle.Q THEN
+	
+	//if it is a night
+	IF F_IsNight() THEN
+		//set flags accordingly
+		bIsNight := TRUE;
+		bIsDay := FALSE;
+	//else, it is a day
+	ELSE
+		//set flags accordingly
+		bIsNight := FALSE;
+		bIsDay := TRUE;
+	END_IF
+
+END_IF
+
+//if a night has come
+IF rtIsNight.Q THEN
+	//if lights are not in manual mode, turn them ON 	
+	IF NOT GVL_IO.arrStreetLamps[1].bManualCtrl THEN fbBACnet_AV_SL_Level_1(Device := Device, bEnablePV := TRUE, bNullPV := FALSE, fPV := c_byBrightness_Night); END_IF
+	IF NOT GVL_IO.arrStreetLamps[2].bManualCtrl THEN fbBACnet_AV_SL_Level_2(Device := Device, bEnablePV := TRUE, bNullPV := FALSE, fPV := c_byBrightness_Night); END_IF
+	IF NOT GVL_IO.arrStreetLamps[3].bManualCtrl THEN fbBACnet_AV_SL_Level_3(Device := Device, bEnablePV := TRUE, bNullPV := FALSE, fPV := c_byBrightness_Night); END_IF
+	IF NOT GVL_IO.arrStreetLamps[4].bManualCtrl THEN fbBACnet_AV_SL_Level_4(Device := Device, bEnablePV := TRUE, bNullPV := FALSE, fPV := c_byBrightness_Night); END_IF
+	IF NOT GVL_IO.arrStreetLamps[5].bManualCtrl THEN fbBACnet_AV_SL_Level_5(Device := Device, bEnablePV := TRUE, bNullPV := FALSE, fPV := c_byBrightness_Night); END_IF
+	IF NOT GVL_IO.arrStreetLamps[6].bManualCtrl THEN fbBACnet_AV_SL_Level_6(Device := Device, bEnablePV := TRUE, bNullPV := FALSE, fPV := c_byBrightness_Night); END_IF
+	IF NOT GVL_IO.arrStreetLamps[7].bManualCtrl THEN fbBACnet_AV_SL_Level_7(Device := Device, bEnablePV := TRUE, bNullPV := FALSE, fPV := c_byBrightness_Night); END_IF
+	IF NOT GVL_IO.arrStreetLamps[8].bManualCtrl THEN fbBACnet_AV_SL_Level_8(Device := Device, bEnablePV := TRUE, bNullPV := FALSE, fPV := c_byBrightness_Night); END_IF
+	IF NOT GVL_IO.arrStreetLamps[9].bManualCtrl THEN fbBACnet_AV_SL_Level_9(Device := Device, bEnablePV := TRUE, bNullPV := FALSE, fPV := c_byBrightness_Night); END_IF
+	IF NOT GVL_IO.arrStreetLamps[10].bManualCtrl THEN fbBACnet_AV_SL_Level_10(Device := Device, bEnablePV := TRUE, bNullPV := FALSE, fPV := c_byBrightness_Night); END_IF
+
+	//turn one street lamp ON
+	GVL_IO.bStreetLamp_DO1 := TRUE;
+END_IF
+
+//if a day has come
+IF rtIsDay.Q THEN
+	//turn all lights OFF
+	fbBACnet_AV_SL_Level_1(Device := Device, bEnablePV := TRUE, bNullPV := FALSE, fPV := 0);
+	fbBACnet_AV_SL_Level_2(Device := Device, bEnablePV := TRUE, bNullPV := FALSE, fPV := 0);
+	fbBACnet_AV_SL_Level_3(Device := Device, bEnablePV := TRUE, bNullPV := FALSE, fPV := 0);
+	fbBACnet_AV_SL_Level_4(Device := Device, bEnablePV := TRUE, bNullPV := FALSE, fPV := 0);
+	fbBACnet_AV_SL_Level_5(Device := Device, bEnablePV := TRUE, bNullPV := FALSE, fPV := 0);
+	fbBACnet_AV_SL_Level_6(Device := Device, bEnablePV := TRUE, bNullPV := FALSE, fPV := 0);
+	fbBACnet_AV_SL_Level_7(Device := Device, bEnablePV := TRUE, bNullPV := FALSE, fPV := 0);
+	fbBACnet_AV_SL_Level_8(Device := Device, bEnablePV := TRUE, bNullPV := FALSE, fPV := 0);
+	fbBACnet_AV_SL_Level_9(Device := Device, bEnablePV := TRUE, bNullPV := FALSE, fPV := 0);
+	fbBACnet_AV_SL_Level_10(Device := Device, bEnablePV := TRUE, bNullPV := FALSE, fPV := 0);
+	
+	//turn one street lamp OFF
+	GVL_IO.bStreetLamp_DO1 := FALSE;
+	
+	//and disable manual mode - fPV = 0 sets all flags to FALSE
+	fbBACnet_AV_SL_Manual(Device := Device, bEnablePV := TRUE, bNullPV := FALSE, fPV := 0);
+END_IF]]></ST>
+    </Implementation>
+    <LineIds Name="P_AutoMode">
+      <LineId Id="101" Count="0" />
+      <LineId Id="30" Count="0" />
+      <LineId Id="117" Count="0" />
+      <LineId Id="115" Count="1" />
+      <LineId Id="102" Count="0" />
+      <LineId Id="100" Count="0" />
+      <LineId Id="104" Count="0" />
+      <LineId Id="108" Count="0" />
+      <LineId Id="31" Count="0" />
+      <LineId Id="34" Count="0" />
+      <LineId Id="119" Count="0" />
+      <LineId Id="50" Count="0" />
+      <LineId Id="118" Count="0" />
+      <LineId Id="85" Count="0" />
+      <LineId Id="54" Count="1" />
+      <LineId Id="120" Count="1" />
+      <LineId Id="45" Count="0" />
+      <LineId Id="107" Count="0" />
+      <LineId Id="56" Count="0" />
+      <LineId Id="126" Count="0" />
+      <LineId Id="123" Count="0" />
+      <LineId Id="122" Count="0" />
+      <LineId Id="124" Count="0" />
+      <LineId Id="144" Count="9" />
+      <LineId Id="169" Count="0" />
+      <LineId Id="168" Count="0" />
+      <LineId Id="170" Count="0" />
+      <LineId Id="125" Count="0" />
+      <LineId Id="141" Count="0" />
+      <LineId Id="128" Count="0" />
+      <LineId Id="127" Count="0" />
+      <LineId Id="129" Count="0" />
+      <LineId Id="131" Count="9" />
+      <LineId Id="154" Count="0" />
+      <LineId Id="171" Count="2" />
+      <LineId Id="155" Count="1" />
+      <LineId Id="130" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

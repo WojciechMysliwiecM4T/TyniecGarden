@@ -1,0 +1,79 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.5">
+  <POU Name="P_BACnet_ActualLevel" Id="{4253a62d-bd39-4e83-9051-5d4bec25f2db}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM P_BACnet_ActualLevel
+VAR
+	i					: INT := 0;		//for loop counter
+	arrActualLevel		: ARRAY [1..10] OF REAL;
+	
+	fbDALIV2QueryActualLevel_1	 	: FB_DALIV2QueryActualLevel;
+	fbDALIV2QueryActualLevel_2	 	: FB_DALIV2QueryActualLevel;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[//iterate through DALI ballasts reading actual levels
+FOR i := 1 TO byStreetLampsCount BY 1 DO
+
+	//query first half of the lamp
+	fbDALIV2QueryActualLevel_1(
+		bStart:= TRUE, 
+		nAddr:= GVL_IO.arrStreetLamps[i].nAddrShort1, 
+		eAddrType:= eDALIV2AddrTypeShort, 
+		eCommandPriority:= eDALIV2CommandPriorityLow,  
+		stCommandBuffer:= GVL_IO.arrStreetLamps[i].p_stCommandBuffer^);
+		
+	//multiplying by 1000 to do an offset in REAL primitive
+	//example: 234128 means that first half of the lamp level is 234, second is 128
+	arrActualLevel[i] := 1000 * fbDALIV2QueryActualLevel_1.nActualLevel;
+	//reset the block
+	fbDALIV2QueryActualLevel_1(bStart:= FALSE, stCommandBuffer:= GVL_IO.arrStreetLamps[i].p_stCommandBuffer^);
+
+	 //query second half of the lamp
+	fbDALIV2QueryActualLevel_2(
+		bStart:= TRUE, 
+		nAddr:= GVL_IO.arrStreetLamps[i].nAddrShort2, 
+		eAddrType:= eDALIV2AddrTypeShort, 
+		eCommandPriority:= eDALIV2CommandPriorityLow,  
+		stCommandBuffer:= GVL_IO.arrStreetLamps[i].p_stCommandBuffer^);
+		
+	//no offset
+	arrActualLevel[i] := arrActualLevel[i] + fbDALIV2QueryActualLevel_2.nActualLevel;
+	//reset the block
+	fbDALIV2QueryActualLevel_2(bStart:= FALSE, stCommandBuffer:= GVL_IO.arrStreetLamps[i].p_stCommandBuffer^);
+
+END_FOR
+
+//rewrite data to BACnet objects
+fbBACnet_AV_SL_ActualLevel_1(Device := Device, bEnablePV := TRUE, bNullPV := FALSE, fPV := arrActualLevel[1]);
+fbBACnet_AV_SL_ActualLevel_2(Device := Device, bEnablePV := TRUE, bNullPV := FALSE, fPV := arrActualLevel[2]);
+fbBACnet_AV_SL_ActualLevel_3(Device := Device, bEnablePV := TRUE, bNullPV := FALSE, fPV := arrActualLevel[3]);
+fbBACnet_AV_SL_ActualLevel_4(Device := Device, bEnablePV := TRUE, bNullPV := FALSE, fPV := arrActualLevel[4]);
+fbBACnet_AV_SL_ActualLevel_5(Device := Device, bEnablePV := TRUE, bNullPV := FALSE, fPV := arrActualLevel[5]);
+fbBACnet_AV_SL_ActualLevel_6(Device := Device, bEnablePV := TRUE, bNullPV := FALSE, fPV := arrActualLevel[6]);
+fbBACnet_AV_SL_ActualLevel_7(Device := Device, bEnablePV := TRUE, bNullPV := FALSE, fPV := arrActualLevel[7]);
+fbBACnet_AV_SL_ActualLevel_8(Device := Device, bEnablePV := TRUE, bNullPV := FALSE, fPV := arrActualLevel[8]);
+fbBACnet_AV_SL_ActualLevel_9(Device := Device, bEnablePV := TRUE, bNullPV := FALSE, fPV := arrActualLevel[9]);
+fbBACnet_AV_SL_ActualLevel_10(Device := Device, bEnablePV := TRUE, bNullPV := FALSE, fPV := arrActualLevel[10]);]]></ST>
+    </Implementation>
+    <LineIds Name="P_BACnet_ActualLevel">
+      <LineId Id="18" Count="0" />
+      <LineId Id="24" Count="1" />
+      <LineId Id="44" Count="0" />
+      <LineId Id="29" Count="3" />
+      <LineId Id="37" Count="0" />
+      <LineId Id="26" Count="0" />
+      <LineId Id="39" Count="1" />
+      <LineId Id="75" Count="0" />
+      <LineId Id="27" Count="0" />
+      <LineId Id="43" Count="0" />
+      <LineId Id="41" Count="0" />
+      <LineId Id="50" Count="12" />
+      <LineId Id="49" Count="0" />
+      <LineId Id="22" Count="0" />
+      <LineId Id="63" Count="0" />
+      <LineId Id="65" Count="0" />
+      <LineId Id="64" Count="0" />
+      <LineId Id="66" Count="8" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

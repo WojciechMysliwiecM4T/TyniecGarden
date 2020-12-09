@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.5">
+  <Task Name="DimmerTask" Id="{f242b34d-d7db-4cb1-8705-591b61596ff9}">
+    <!--CycleTime in micro seconds.-->
+    <CycleTime>10000</CycleTime>
+    <Priority>21</Priority>
+    <PouCall>
+      <Name>P_Dimmers_RB1</Name>
+    </PouCall>
+    <PouCall>
+      <Name>P_Dimmers_RB2</Name>
+    </PouCall>
+    <PouCall>
+      <Name>P_Dimmers_RB3</Name>
+    </PouCall>
+    <PouCall>
+      <Name>P_Dimmers_Broadcast</Name>
+    </PouCall>
+    <TaskFBGuid>{66146888-173f-444a-8c94-d11c96fbde91}</TaskFBGuid>
+    <Fb_init>{c1b6bcc6-8d21-46f0-b9df-f3b2b8211a45}</Fb_init>
+    <Fb_exit>{f20c6c6e-679e-4690-a919-d78f7801561c}</Fb_exit>
+    <CycleUpdate>{715c54ab-08f9-4184-ba88-d4dfc10272f3}</CycleUpdate>
+    <PostCycleUpdate>{5e03884b-c609-497f-b545-2abb50933b2c}</PostCycleUpdate>
+  </Task>
+</TcPlcObject>

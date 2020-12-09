@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.5">
+  <POU Name="P_BACnet_Level" Id="{adbf72dc-6ab6-4f9e-a501-48ed86d435f9}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM P_BACnet_Level
+VAR
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[//keep BACnet objects alive 
+fbBACnet_AV_SL_Level_1(Device := Device, bEnablePV := TRUE, bNullPV := FALSE);
+fbBACnet_AV_SL_Level_2(Device := Device, bEnablePV := TRUE, bNullPV := FALSE);
+fbBACnet_AV_SL_Level_3(Device := Device, bEnablePV := TRUE, bNullPV := FALSE);
+fbBACnet_AV_SL_Level_4(Device := Device, bEnablePV := TRUE, bNullPV := FALSE);
+fbBACnet_AV_SL_Level_5(Device := Device, bEnablePV := TRUE, bNullPV := FALSE);
+fbBACnet_AV_SL_Level_6(Device := Device, bEnablePV := TRUE, bNullPV := FALSE);
+fbBACnet_AV_SL_Level_7(Device := Device, bEnablePV := TRUE, bNullPV := FALSE);
+fbBACnet_AV_SL_Level_8(Device := Device, bEnablePV := TRUE, bNullPV := FALSE);
+fbBACnet_AV_SL_Level_9(Device := Device, bEnablePV := TRUE, bNullPV := FALSE);
+fbBACnet_AV_SL_Level_10(Device := Device, bEnablePV := TRUE, bNullPV := FALSE);
+
+//rewrite present value to street lamp structures
+ GVL_IO.arrStreetLamps[1].nLevel := REAL_TO_BYTE(fbBACnet_AV_SL_Level_1.fPresentValue);
+ GVL_IO.arrStreetLamps[2].nLevel := REAL_TO_BYTE(fbBACnet_AV_SL_Level_2.fPresentValue);
+ GVL_IO.arrStreetLamps[3].nLevel := REAL_TO_BYTE(fbBACnet_AV_SL_Level_3.fPresentValue);
+ GVL_IO.arrStreetLamps[4].nLevel := REAL_TO_BYTE(fbBACnet_AV_SL_Level_4.fPresentValue);
+ GVL_IO.arrStreetLamps[5].nLevel := REAL_TO_BYTE(fbBACnet_AV_SL_Level_5.fPresentValue);
+ GVL_IO.arrStreetLamps[6].nLevel := REAL_TO_BYTE(fbBACnet_AV_SL_Level_6.fPresentValue);
+ GVL_IO.arrStreetLamps[7].nLevel := REAL_TO_BYTE(fbBACnet_AV_SL_Level_7.fPresentValue);
+ GVL_IO.arrStreetLamps[8].nLevel := REAL_TO_BYTE(fbBACnet_AV_SL_Level_8.fPresentValue);
+ GVL_IO.arrStreetLamps[9].nLevel := REAL_TO_BYTE(fbBACnet_AV_SL_Level_9.fPresentValue);
+ GVL_IO.arrStreetLamps[10].nLevel := REAL_TO_BYTE(fbBACnet_AV_SL_Level_10.fPresentValue);]]></ST>
+    </Implementation>
+    <LineIds Name="P_BACnet_Level">
+      <LineId Id="35" Count="0" />
+      <LineId Id="20" Count="8" />
+      <LineId Id="31" Count="0" />
+      <LineId Id="29" Count="1" />
+      <LineId Id="5" Count="0" />
+      <LineId Id="8" Count="8" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.5">
+  <DUT Name="E_KL6821Module" Id="{acf82240-b53e-4434-a336-8e2112a19f2f}">
+    <Declaration><![CDATA[//{attribute 'qualified_only'}
+//{attribute 'strict'}
+TYPE E_KL6821Module :
+(
+	eKL6821Module_none	:= 0,
+	eKL6821Module_RB1 	:= 10,
+	eKL6821Module_RB2	:= 20,
+	eKL6821Module_RB3	:= 30
+	
+);
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.5">
+  <DUT Name="ST_DALI_Lamp" Id="{a3d69f40-b25c-4fe0-b579-a34b94ed8fa1}">
+    <Declaration><![CDATA[TYPE ST_DALI_Lamp :
+STRUCT
+	bManualCtrl		: BOOL;		// if TRUE scenes do not apply
+	bLampFailure	: BOOL;		// if TRUE ballast has a lamp problem
+	
+	nStatus			: BYTE;		// status of a ballast
+	
+	nLevel			: BYTE;		// 0-255
+	
+	eKL6821Module	: E_KL6821Module;	//DALI module to which Lamp is connected
+	nAddrShort1		: BYTE;				//first 	DALI gear address
+	nAddrShort2		: BYTE;				//second 	DALI gear address 
+	
+	p_stCommandBuffer	: POINTER TO ST_DALIV2CommandBuffer;	//pointer to command buffer
+	
+	//group addresses which DALI_Lamp belongs to
+	arrAddrGroup	: ARRAY [1..4] OF BYTE;
+	
+	//sensors
+	bMotionSensor	AT%I*	: BOOL;	//if TRUE, motion has been detected
+	
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

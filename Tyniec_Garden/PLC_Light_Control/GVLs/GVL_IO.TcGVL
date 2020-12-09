@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.5">
+  <GVL Name="GVL_IO" Id="{9eff07a5-b978-427a-9f58-e89e36004185}">
+    <Declaration><![CDATA[{attribute 'qualified_only'}
+VAR_GLOBAL
+	
+	//DALI Communication variables
+	
+		//RB1
+		stKL6821InData_RB1		AT%I*	: ST_KL6821InData;
+		stKL6821OutData_RB1		AT%Q*	: ST_KL6821OutData;
+		stCommandBuffer_RB1				: ST_DALIV2CommandBuffer;
+		//RB2
+		stKL6821InData_RB2		AT%I*	: ST_KL6821InData;
+		stKL6821OutData_RB2		AT%Q*	: ST_KL6821OutData;
+		stCommandBuffer_RB2				: ST_DALIV2CommandBuffer;
+		//RB3
+		stKL6821InData_RB3		AT%I*	: ST_KL6821InData;
+		stKL6821OutData_RB3		AT%Q*	: ST_KL6821OutData;
+		stCommandBuffer_RB3				: ST_DALIV2CommandBuffer;
+	
+	//KNX Communication
+		
+		//KL6301
+		KL6301_IN             	AT%I*	: ARRAY [1..24] OF BYTE;
+		KL6301_OUT            	AT%Q*	: ARRAY [1..24] OF BYTE;
+		str_Data_Rec          			: EIB_REC;
+		
+	//Other
+		
+		//street lamp that has no DALI
+		//therefore it is controlled via digital output (DO)
+		bStreetLamp_DO1			AT%Q*	: BOOL;
+		
+END_VAR
+
+VAR_GLOBAL PERSISTENT
+	
+	//DALI Gears
+		
+		//Street Lamps
+		arrStreetLamps			: ARRAY [1..byStreetLampsCount] OF ST_DALI_Lamp;
+	
+	//DALI Scenes
+		
+		//Street Lamps
+		arrScenesStreetLampsLevels	: ARRAY [1..byStreetLampsScenesNumber, 1..byStreetLampsCount] OF BYTE;	//specifies lamp level in a scene
+		
+		
+END_VAR]]></Declaration>
+  </GVL>
+</TcPlcObject>

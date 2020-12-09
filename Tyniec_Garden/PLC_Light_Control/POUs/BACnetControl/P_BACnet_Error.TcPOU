@@ -1,0 +1,86 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.5">
+  <POU Name="P_BACnet_Error" Id="{cbcb446d-2870-4188-9eca-74baf4a350e8}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM P_BACnet_Error
+VAR
+	i					: INT := 0;		//for loop counter
+	arrLampFailure		: ARRAY [1..10] OF BOOL;
+	dwLampFailure		: DWORD;
+	rLampFailure		: REAL;
+	
+	fbDALIV2QueryLampFailure_1		: FB_DALIV2QueryLampFailure;
+	fbDALIV2QueryLampFailure_2		: FB_DALIV2QueryLampFailure;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[//iterate through DALI ballasts reading lamp failure information
+FOR i := 1 TO byStreetLampsCount BY 1 DO
+	//query first half of the lamp
+	fbDALIV2QueryLampFailure_1(
+			bStart:= TRUE, 
+			nAddr:= GVL_IO.arrStreetLamps[i].nAddrShort1, 
+			eAddrType:= eDALIV2AddrTypeShort, 
+			eCommandPriority:= eDALIV2CommandPriorityLow,  
+			stCommandBuffer:= GVL_IO.arrStreetLamps[i].p_stCommandBuffer^);
+	//reset the block
+	fbDALIV2QueryLampFailure_1(bStart := FALSE, stCommandBuffer := GVL_IO.arrStreetLamps[i].p_stCommandBuffer^);
+
+	//query second half of the lamp
+	fbDALIV2QueryLampFailure_2(
+			bStart:= TRUE, 
+			nAddr:= GVL_IO.arrStreetLamps[i].nAddrShort2, 
+			eAddrType:= eDALIV2AddrTypeShort, 
+			eCommandPriority:= eDALIV2CommandPriorityLow,  
+			stCommandBuffer:= GVL_IO.arrStreetLamps[i].p_stCommandBuffer^);
+	//reset the block
+	fbDALIV2QueryLampFailure_2(bStart := FALSE, stCommandBuffer := GVL_IO.arrStreetLamps[i].p_stCommandBuffer^);
+	
+	
+	//if at least one of ballasts indicates failure, set flag (LampFailure) to TRUE
+	arrLampFailure[i] := fbDALIV2QueryLampFailure_1.bLampFailure OR fbDALIV2QueryLampFailure_2.bLampFailure;	
+END_FOR
+		
+//convert arrLampFailure into pseudo-array in the form of a DWORD variable
+dwLampFailure.0 := arrLampFailure[1];
+dwLampFailure.1 := arrLampFailure[2];
+dwLampFailure.2 := arrLampFailure[3];
+dwLampFailure.3 := arrLampFailure[4];
+dwLampFailure.4 := arrLampFailure[5];
+dwLampFailure.5 := arrLampFailure[6];
+dwLampFailure.6 := arrLampFailure[7];
+dwLampFailure.7 := arrLampFailure[8];
+dwLampFailure.8 := arrLampFailure[9];
+dwLampFailure.9 := arrLampFailure[10];
+
+//type conversion from REAL to DWORD
+rLampFailure := DWORD_TO_REAL(dwLampFailure);
+
+//write rLampFailure to BACnet obcject present value
+//thereby keep BACnet object instance alive
+fbBACnet_AV_SL_Error(Device := Device, bEnablePV := TRUE, bNullPV := FALSE, fPV := rLampFailure);]]></ST>
+    </Implementation>
+    <LineIds Name="P_BACnet_Error">
+      <LineId Id="32" Count="0" />
+      <LineId Id="31" Count="0" />
+      <LineId Id="35" Count="6" />
+      <LineId Id="43" Count="9" />
+      <LineId Id="54" Count="0" />
+      <LineId Id="33" Count="0" />
+      <LineId Id="55" Count="0" />
+      <LineId Id="57" Count="0" />
+      <LineId Id="56" Count="0" />
+      <LineId Id="58" Count="0" />
+      <LineId Id="34" Count="0" />
+      <LineId Id="22" Count="0" />
+      <LineId Id="5" Count="0" />
+      <LineId Id="60" Count="0" />
+      <LineId Id="62" Count="8" />
+      <LineId Id="73" Count="0" />
+      <LineId Id="72" Count="0" />
+      <LineId Id="75" Count="0" />
+      <LineId Id="77" Count="1" />
+      <LineId Id="76" Count="0" />
+      <LineId Id="79" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

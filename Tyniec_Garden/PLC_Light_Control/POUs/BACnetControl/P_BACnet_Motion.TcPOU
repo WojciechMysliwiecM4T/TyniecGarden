@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.5">
+  <POU Name="P_BACnet_Motion" Id="{37b66c7f-db2a-4d9c-abd1-8561dc193161}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM P_BACnet_Motion
+VAR
+	dwMotion	: DWORD;	//pseudo-array for storing motion (BV) information
+	rMotion		: REAL;		//dwMotion converted to REAL
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[//read motion sensor's flags and combine them into DWORD (pseudo-array)
+dwMotion.0 := GVL_IO.arrStreetLamps[1].bMotionSensor;
+dwMotion.1 := GVL_IO.arrStreetLamps[2].bMotionSensor;
+dwMotion.2 := GVL_IO.arrStreetLamps[3].bMotionSensor;
+dwMotion.3 := GVL_IO.arrStreetLamps[4].bMotionSensor;
+dwMotion.4 := GVL_IO.arrStreetLamps[5].bMotionSensor;
+dwMotion.5 := GVL_IO.arrStreetLamps[6].bMotionSensor;
+dwMotion.6 := GVL_IO.arrStreetLamps[7].bMotionSensor;
+dwMotion.7 := GVL_IO.arrStreetLamps[8].bMotionSensor;
+dwMotion.8 := GVL_IO.arrStreetLamps[9].bMotionSensor;
+dwMotion.9 := GVL_IO.arrStreetLamps[10].bMotionSensor;
+
+//type conversion from DWORD to REAL
+rMotion := DWORD_TO_REAL(dwMotion);
+
+//write rMotion to BACnet obcject present value
+//thereby keep BACnet object instance alive
+fbBACnet_AV_SL_Motion(Device := Device, bEnablePV := TRUE, bNullPV := FALSE, fPV := rMotion);]]></ST>
+    </Implementation>
+    <LineIds Name="P_BACnet_Motion">
+      <LineId Id="9" Count="0" />
+      <LineId Id="14" Count="0" />
+      <LineId Id="16" Count="4" />
+      <LineId Id="15" Count="0" />
+      <LineId Id="7" Count="0" />
+      <LineId Id="21" Count="1" />
+      <LineId Id="28" Count="0" />
+      <LineId Id="27" Count="0" />
+      <LineId Id="25" Count="0" />
+      <LineId Id="30" Count="0" />
+      <LineId Id="29" Count="0" />
+      <LineId Id="31" Count="0" />
+      <LineId Id="24" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

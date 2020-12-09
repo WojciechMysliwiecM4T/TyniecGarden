@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.5">
+  <POU Name="P_BACnet_Alarm" Id="{11efe370-1957-4d2f-93d6-f1cebaa90845}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM P_BACnet_Alarm
+VAR
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[//keep BACnet object instance alive
+fbBACnet_BV_Alarm(Device := Device, bEnablePV := TRUE, bNullPV := FALSE);]]></ST>
+    </Implementation>
+    <LineIds Name="P_BACnet_Alarm">
+      <LineId Id="6" Count="0" />
+      <LineId Id="5" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

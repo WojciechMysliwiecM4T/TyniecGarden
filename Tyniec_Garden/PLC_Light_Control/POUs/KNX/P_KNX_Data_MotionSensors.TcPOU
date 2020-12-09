@@ -1,0 +1,83 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.5">
+  <POU Name="P_KNX_Data_MotionSensors" Id="{62452ce3-ce5f-45c0-b7e2-8687fd7a6c7d}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM P_KNX_Data_MotionSensors
+VAR
+	EIB_BIT_REC_1		:EIB_BIT_REC;
+	EIB_BIT_REC_2		:EIB_BIT_REC;
+	EIB_BIT_REC_3		:EIB_BIT_REC;
+	EIB_BIT_REC_4		:EIB_BIT_REC;
+	EIB_BIT_REC_5		:EIB_BIT_REC;
+	EIB_BIT_REC_6		:EIB_BIT_REC;
+	EIB_BIT_REC_7		:EIB_BIT_REC;
+	EIB_BIT_REC_8		:EIB_BIT_REC;
+	EIB_BIT_REC_9		:EIB_BIT_REC;
+	EIB_BIT_REC_10		:EIB_BIT_REC;
+	EIB_BIT_REC_11		:EIB_BIT_REC;
+	EIB_BIT_REC_12		:EIB_BIT_REC;
+	EIB_BIT_REC_13		:EIB_BIT_REC;
+	EIB_BIT_REC_14		:EIB_BIT_REC;
+	EIB_BIT_REC_15		:EIB_BIT_REC;
+	EIB_BIT_REC_16		:EIB_BIT_REC;
+	
+	Group_Address_1		: EIB_GROUP_ADDR := (MAIN := 12, SUB_MAIN := 0, NUMBER := 1);
+	Group_Address_2		: EIB_GROUP_ADDR := (MAIN := 12, SUB_MAIN := 0, NUMBER := 2);
+	Group_Address_3		: EIB_GROUP_ADDR := (MAIN := 12, SUB_MAIN := 0, NUMBER := 3);
+	Group_Address_4		: EIB_GROUP_ADDR := (MAIN := 12, SUB_MAIN := 0, NUMBER := 4);
+	Group_Address_5		: EIB_GROUP_ADDR := (MAIN := 12, SUB_MAIN := 0, NUMBER := 5);
+	Group_Address_6		: EIB_GROUP_ADDR := (MAIN := 12, SUB_MAIN := 0, NUMBER := 6);
+	Group_Address_7		: EIB_GROUP_ADDR := (MAIN := 12, SUB_MAIN := 0, NUMBER := 7);
+	Group_Address_8		: EIB_GROUP_ADDR := (MAIN := 12, SUB_MAIN := 0, NUMBER := 8);
+	Group_Address_9		: EIB_GROUP_ADDR := (MAIN := 12, SUB_MAIN := 0, NUMBER := 9);
+	Group_Address_10	: EIB_GROUP_ADDR := (MAIN := 12, SUB_MAIN := 0, NUMBER := 10);
+	Group_Address_11	: EIB_GROUP_ADDR := (MAIN := 12, SUB_MAIN := 0, NUMBER := 11);
+	Group_Address_12	: EIB_GROUP_ADDR := (MAIN := 12, SUB_MAIN := 0, NUMBER := 12);
+	Group_Address_13	: EIB_GROUP_ADDR := (MAIN := 12, SUB_MAIN := 0, NUMBER := 13);
+	Group_Address_14	: EIB_GROUP_ADDR := (MAIN := 12, SUB_MAIN := 0, NUMBER := 14);
+	Group_Address_15	: EIB_GROUP_ADDR := (MAIN := 12, SUB_MAIN := 0, NUMBER := 15);
+	Group_Address_16	: EIB_GROUP_ADDR := (MAIN := 12, SUB_MAIN := 0, NUMBER := 16);
+	
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[//EIB_BIT_REC function block initialization
+EIB_BIT_REC_1(Group_Address:=Group_Address_1, strData_Rec:=GVL_IO.str_Data_Rec);
+EIB_BIT_REC_2(Group_Address:=Group_Address_2, strData_Rec:=GVL_IO.str_Data_Rec);
+EIB_BIT_REC_3(Group_Address:=Group_Address_3, strData_Rec:=GVL_IO.str_Data_Rec);
+EIB_BIT_REC_4(Group_Address:=Group_Address_4, strData_Rec:=GVL_IO.str_Data_Rec);
+EIB_BIT_REC_5(Group_Address:=Group_Address_5, strData_Rec:=GVL_IO.str_Data_Rec);
+EIB_BIT_REC_6(Group_Address:=Group_Address_6, strData_Rec:=GVL_IO.str_Data_Rec);
+EIB_BIT_REC_7(Group_Address:=Group_Address_7, strData_Rec:=GVL_IO.str_Data_Rec);
+EIB_BIT_REC_8(Group_Address:=Group_Address_8, strData_Rec:=GVL_IO.str_Data_Rec);
+EIB_BIT_REC_9(Group_Address:=Group_Address_9, strData_Rec:=GVL_IO.str_Data_Rec);
+EIB_BIT_REC_10(Group_Address:=Group_Address_10, strData_Rec:=GVL_IO.str_Data_Rec);
+EIB_BIT_REC_11(Group_Address:=Group_Address_11, strData_Rec:=GVL_IO.str_Data_Rec);
+EIB_BIT_REC_12(Group_Address:=Group_Address_12, strData_Rec:=GVL_IO.str_Data_Rec);
+EIB_BIT_REC_13(Group_Address:=Group_Address_13, strData_Rec:=GVL_IO.str_Data_Rec);
+EIB_BIT_REC_14(Group_Address:=Group_Address_14, strData_Rec:=GVL_IO.str_Data_Rec);
+EIB_BIT_REC_15(Group_Address:=Group_Address_15, strData_Rec:=GVL_IO.str_Data_Rec);
+EIB_BIT_REC_16(Group_Address:=Group_Address_16, strData_Rec:=GVL_IO.str_Data_Rec);
+
+//Assign value to lamp motion sensor variables
+GVL_IO.arrStreetLamps[1].bMotionSensor := FALSE;
+GVL_IO.arrStreetLamps[2].bMotionSensor := EIB_BIT_REC_1.bData OR EIB_BIT_REC_2.bData;
+GVL_IO.arrStreetLamps[3].bMotionSensor := EIB_BIT_REC_3.bData OR EIB_BIT_REC_4.bData;
+GVL_IO.arrStreetLamps[4].bMotionSensor := EIB_BIT_REC_5.bData OR EIB_BIT_REC_6.bData;
+GVL_IO.arrStreetLamps[5].bMotionSensor := EIB_BIT_REC_11.bData;
+GVL_IO.arrStreetLamps[6].bMotionSensor := EIB_BIT_REC_7.bData OR EIB_BIT_REC_8.bData;
+GVL_IO.arrStreetLamps[7].bMotionSensor := EIB_BIT_REC_12.bData;
+GVL_IO.arrStreetLamps[8].bMotionSensor := EIB_BIT_REC_13.bData OR EIB_BIT_REC_14.bData;
+GVL_IO.arrStreetLamps[9].bMotionSensor := EIB_BIT_REC_15.bData OR EIB_BIT_REC_16.bData;
+GVL_IO.arrStreetLamps[10].bMotionSensor := EIB_BIT_REC_9.bData OR EIB_BIT_REC_10.bData;]]></ST>
+    </Implementation>
+    <LineIds Name="P_KNX_Data_MotionSensors">
+      <LineId Id="59" Count="0" />
+      <LineId Id="5" Count="0" />
+      <LineId Id="44" Count="14" />
+      <LineId Id="63" Count="0" />
+      <LineId Id="6" Count="0" />
+      <LineId Id="64" Count="8" />
+      <LineId Id="76" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

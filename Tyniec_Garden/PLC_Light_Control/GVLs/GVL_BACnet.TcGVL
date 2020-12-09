@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.5">
+  <GVL Name="GVL_BACnet" Id="{1ba464ed-8f1e-481d-835d-3eeef08076f4}">
+    <Declaration><![CDATA[VAR_GLOBAL
+	Device				: FB_BACnet_Device;
+	
+	// "SL" means - "Streat Lamps"
+	
+	// binary value object
+	fbBACnet_BV_Alarm			:FB_BACnet_BinaryValue;			(* ~ (BACnet_ObjectIdentifier	:  100   : NOLINK) *)
+	
+	// pseudo-arrays - multiple BVs in one BACnet AV object,
+	// bit-wise informations - each bit corresponds to particular lamp 
+	fbBACnet_AV_SL_Manual		: FB_BACnet_AnalogValue;		(* ~ (BACnet_ObjectIdentifier	: 1111   : NOLINK) *)
+	fbBACnet_AV_SL_Scene		: FB_BACnet_AnalogValue;		(* ~ (BACnet_ObjectIdentifier	: 2222   : NOLINK) *)								
+	fbBACnet_AV_SL_Motion		: FB_BACnet_AnalogValue;		(* ~ (BACnet_ObjectIdentifier	: 3333   : NOLINK) *)
+	fbBACnet_AV_SL_Error		: FB_BACnet_AnalogValue;		(* ~ (BACnet_ObjectIdentifier	: 9999   : NOLINK) *)
+	
+	// one variable one BACnet object
+	fbBACnet_AV_SL_Level_1		: FB_BACnet_AnalogValue;	(* ~ (BACnet_ObjectIdentifier	: 4001   : NOLINK) *)
+	fbBACnet_AV_SL_Level_2		: FB_BACnet_AnalogValue;	(* ~ (BACnet_ObjectIdentifier	: 4002   : NOLINK) *)
+	fbBACnet_AV_SL_Level_3		: FB_BACnet_AnalogValue;	(* ~ (BACnet_ObjectIdentifier	: 4003   : NOLINK) *)
+	fbBACnet_AV_SL_Level_4		: FB_BACnet_AnalogValue;	(* ~ (BACnet_ObjectIdentifier	: 4004   : NOLINK) *)
+	fbBACnet_AV_SL_Level_5		: FB_BACnet_AnalogValue;	(* ~ (BACnet_ObjectIdentifier	: 4005   : NOLINK) *)
+	fbBACnet_AV_SL_Level_6		: FB_BACnet_AnalogValue;	(* ~ (BACnet_ObjectIdentifier	: 4006   : NOLINK) *)
+	fbBACnet_AV_SL_Level_7		: FB_BACnet_AnalogValue;	(* ~ (BACnet_ObjectIdentifier	: 4007   : NOLINK) *)
+	fbBACnet_AV_SL_Level_8		: FB_BACnet_AnalogValue;	(* ~ (BACnet_ObjectIdentifier	: 4008   : NOLINK) *)
+	fbBACnet_AV_SL_Level_9		: FB_BACnet_AnalogValue;	(* ~ (BACnet_ObjectIdentifier	: 4009   : NOLINK) *)
+	fbBACnet_AV_SL_Level_10		: FB_BACnet_AnalogValue;	(* ~ (BACnet_ObjectIdentifier	: 4010   : NOLINK) *)
+	
+	fbBACnet_AV_SL_ActualLevel_1		: FB_BACnet_AnalogValue;	(* ~ (BACnet_ObjectIdentifier	: 5001   : NOLINK) *)
+	fbBACnet_AV_SL_ActualLevel_2		: FB_BACnet_AnalogValue;	(* ~ (BACnet_ObjectIdentifier	: 5002   : NOLINK) *)
+	fbBACnet_AV_SL_ActualLevel_3		: FB_BACnet_AnalogValue;	(* ~ (BACnet_ObjectIdentifier	: 5003   : NOLINK) *)
+	fbBACnet_AV_SL_ActualLevel_4		: FB_BACnet_AnalogValue;	(* ~ (BACnet_ObjectIdentifier	: 5004   : NOLINK) *)
+	fbBACnet_AV_SL_ActualLevel_5		: FB_BACnet_AnalogValue;	(* ~ (BACnet_ObjectIdentifier	: 5005   : NOLINK) *)
+	fbBACnet_AV_SL_ActualLevel_6		: FB_BACnet_AnalogValue;	(* ~ (BACnet_ObjectIdentifier	: 5006   : NOLINK) *)
+	fbBACnet_AV_SL_ActualLevel_7		: FB_BACnet_AnalogValue;	(* ~ (BACnet_ObjectIdentifier	: 5007   : NOLINK) *)
+	fbBACnet_AV_SL_ActualLevel_8		: FB_BACnet_AnalogValue;	(* ~ (BACnet_ObjectIdentifier	: 5008   : NOLINK) *)
+	fbBACnet_AV_SL_ActualLevel_9		: FB_BACnet_AnalogValue;	(* ~ (BACnet_ObjectIdentifier	: 5009   : NOLINK) *)
+	fbBACnet_AV_SL_ActualLevel_10		: FB_BACnet_AnalogValue;	(* ~ (BACnet_ObjectIdentifier	: 5010   : NOLINK) *)
+							
+END_VAR]]></Declaration>
+  </GVL>
+</TcPlcObject>

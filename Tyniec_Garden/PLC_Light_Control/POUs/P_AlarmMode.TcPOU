@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.5">
+  <POU Name="P_AlarmMode" Id="{1a51715d-33ec-403e-9050-1f3ea69afa82}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM P_AlarmMode
+VAR
+	rtAlarm		: R_TRIG;
+	ftAlarm		: F_TRIG;
+	
+	fbPBL		: FB_PBL;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[//init rising and falling edge detection
+rtAlarm(CLK := fbBACnet_BV_Alarm.bPresentValue);
+ftAlarm(CLK := fbBACnet_BV_Alarm.bPresentValue);
+
+//if rising edge occured
+IF rtAlarm.Q THEN
+	//save present brightness levels
+	fbPBL(bSave := TRUE);
+	//reset executive input
+	fbPBL(bSave := FALSE);
+	
+	//then set street lamp levels to c_byBrightness_Alarm level
+	fbBACnet_AV_SL_Level_1(Device := Device, bEnablePV := TRUE, bNullPV := FALSE, fPV := c_byBrightness_Alarm);
+	fbBACnet_AV_SL_Level_2(Device := Device, bEnablePV := TRUE, bNullPV := FALSE, fPV := c_byBrightness_Alarm);
+	fbBACnet_AV_SL_Level_3(Device := Device, bEnablePV := TRUE, bNullPV := FALSE, fPV := c_byBrightness_Alarm);
+	fbBACnet_AV_SL_Level_4(Device := Device, bEnablePV := TRUE, bNullPV := FALSE, fPV := c_byBrightness_Alarm);
+	fbBACnet_AV_SL_Level_5(Device := Device, bEnablePV := TRUE, bNullPV := FALSE, fPV := c_byBrightness_Alarm);
+	fbBACnet_AV_SL_Level_6(Device := Device, bEnablePV := TRUE, bNullPV := FALSE, fPV := c_byBrightness_Alarm);
+	fbBACnet_AV_SL_Level_7(Device := Device, bEnablePV := TRUE, bNullPV := FALSE, fPV := c_byBrightness_Alarm);
+	fbBACnet_AV_SL_Level_8(Device := Device, bEnablePV := TRUE, bNullPV := FALSE, fPV := c_byBrightness_Alarm);
+	fbBACnet_AV_SL_Level_9(Device := Device, bEnablePV := TRUE, bNullPV := FALSE, fPV := c_byBrightness_Alarm);
+	fbBACnet_AV_SL_Level_10(Device := Device, bEnablePV := TRUE, bNullPV := FALSE, fPV := c_byBrightness_Alarm);
+	
+END_IF
+
+//if falling edge occured
+IF ftAlarm.Q THEN
+	//retrieve present brightness levels from memory
+	fbPBL(bRetrieve := TRUE);
+	//reset executive input
+	fbPBL(bRetrieve := FALSE);
+END_IF]]></ST>
+    </Implementation>
+    <LineIds Name="P_AlarmMode">
+      <LineId Id="10" Count="0" />
+      <LineId Id="12" Count="2" />
+      <LineId Id="11" Count="0" />
+      <LineId Id="18" Count="1" />
+      <LineId Id="5" Count="0" />
+      <LineId Id="20" Count="14" />
+      <LineId Id="15" Count="0" />
+      <LineId Id="36" Count="0" />
+      <LineId Id="35" Count="0" />
+      <LineId Id="37" Count="0" />
+      <LineId Id="40" Count="2" />
+      <LineId Id="38" Count="1" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

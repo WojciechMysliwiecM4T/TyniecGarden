@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.5">
+  <POU Name="P_BACnet_Manual" Id="{17a4fc6b-b4bf-46ca-a744-d8b1a41d2cba}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM P_BACnet_Manual
+VAR
+	dwManual		: DWORD;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[//keep BACnet object instance alive
+fbBACnet_AV_SL_Manual(Device := Device);
+
+//read REAL data from BACnet object
+//and convert them to DWORD
+dwManual := REAL_TO_DWORD(fbBACnet_AV_SL_Manual.fPresentValue);
+
+//assign manual control flags
+GVL_IO.arrStreetLamps[1].bManualCtrl := dwManual.0;
+GVL_IO.arrStreetLamps[2].bManualCtrl := dwManual.1;
+GVL_IO.arrStreetLamps[3].bManualCtrl := dwManual.2;
+GVL_IO.arrStreetLamps[4].bManualCtrl := dwManual.3;
+GVL_IO.arrStreetLamps[5].bManualCtrl := dwManual.4;
+GVL_IO.arrStreetLamps[6].bManualCtrl := dwManual.5;
+GVL_IO.arrStreetLamps[7].bManualCtrl := dwManual.6;
+GVL_IO.arrStreetLamps[8].bManualCtrl := dwManual.7;
+GVL_IO.arrStreetLamps[9].bManualCtrl := dwManual.8;
+GVL_IO.arrStreetLamps[10].bManualCtrl := dwManual.9;
+
+
+]]></ST>
+    </Implementation>
+    <LineIds Name="P_BACnet_Manual">
+      <LineId Id="41" Count="0" />
+      <LineId Id="39" Count="0" />
+      <LineId Id="36" Count="0" />
+      <LineId Id="5" Count="0" />
+      <LineId Id="38" Count="0" />
+      <LineId Id="7" Count="0" />
+      <LineId Id="22" Count="0" />
+      <LineId Id="16" Count="0" />
+      <LineId Id="18" Count="0" />
+      <LineId Id="15" Count="0" />
+      <LineId Id="23" Count="7" />
+      <LineId Id="11" Count="0" />
+      <LineId Id="10" Count="0" />
+      <LineId Id="9" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

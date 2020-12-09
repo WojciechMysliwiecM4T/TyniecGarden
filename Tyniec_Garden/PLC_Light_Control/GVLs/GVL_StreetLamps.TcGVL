@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.5">
+  <GVL Name="GVL_StreetLamps" Id="{f94085f6-9ebf-46a5-8f57-4309c4dc614f}">
+    <Declaration><![CDATA[{attribute 'qualified_only'}
+VAR_GLOBAL
+	
+	//Addres Short
+	bSetDimmValue					: BOOL := FALSE;
+	                            	
+	tSwitchOverTime					: TIME := T#400MS;
+	bMemoryModeOn					: BOOL := FALSE;
+	nOnValueWithoutMemoryMode		: BYTE := 254;
+	nMasterDevAddr              	: BYTE := 0;
+	tCycleActualLevelMasterDev  	: TIME := T#0S;
+	
+	//Addres Broadcast
+	bSetDimmValue_B					: BOOL := FALSE;
+	nDimmValue_B					: BYTE;
+	                            	
+	tSwitchOverTime_B				: TIME := T#400MS;
+	bMemoryModeOn_B					: BOOL := FALSE;
+	nOnValueWithoutMemoryMode_B		: BYTE := 254;
+	nMasterDevAddr_B              	: BYTE := 0;
+	tCycleActualLevelMasterDev_B 	: TIME := T#0S;
+END_VAR]]></Declaration>
+  </GVL>
+</TcPlcObject>

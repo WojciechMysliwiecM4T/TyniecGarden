@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.5">
+  <POU Name="FB_PBL" Id="{40ae1703-ac37-4d64-8ca5-1032590bd7c2}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_PBL
+VAR_INPUT
+	bSave		: BOOL;	// when rising edge occures, save current street lamp levels to arr_byPBL
+	bRetrieve	: BOOL; // when rising edge occures, retrieve lamp levels from arr_byPBL
+END_VAR
+VAR_OUTPUT
+END_VAR
+VAR
+	rtSave		: R_TRIG; // detects rising edge on bSave
+	rtRetrieve	: R_TRIG; // detects rising edge on bRetrieve
+	
+	i			: INT;	// for loop iterator
+	arr_byPBL	: ARRAY [1..byStreetLampsCount] OF BYTE;	// array of previous brightness levels
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[//init rising edge detection
+rtSave(CLK := bSave);
+rtRetrieve(CLK := bRetrieve);
+
+//if rising edge occures on bSave
+IF rtSave.Q THEN
+	//iterate through street lamps and
+	FOR i := 1 TO byStreetLampsCount BY 1 DO
+		//save actual brightness levels to arr_byPBL
+		arr_byPBL[i] := GVL_IO.arrStreetLamps[i].nLevel;
+	END_FOR	
+END_IF
+
+//if rising edge occures on bRetrieve
+IF rtRetrieve.Q THEN
+	//retrive data from arr_byPBL and set lamps to those levels
+	fbBACnet_AV_SL_Level_1(Device := Device, bEnablePV := TRUE, bNullPV := FALSE, fPV := arr_byPBL[1]);
+    fbBACnet_AV_SL_Level_2(Device := Device, bEnablePV := TRUE, bNullPV := FALSE, fPV := arr_byPBL[2]);
+    fbBACnet_AV_SL_Level_3(Device := Device, bEnablePV := TRUE, bNullPV := FALSE, fPV := arr_byPBL[3]);
+    fbBACnet_AV_SL_Level_4(Device := Device, bEnablePV := TRUE, bNullPV := FALSE, fPV := arr_byPBL[4]);
+    fbBACnet_AV_SL_Level_5(Device := Device, bEnablePV := TRUE, bNullPV := FALSE, fPV := arr_byPBL[5]);
+    fbBACnet_AV_SL_Level_6(Device := Device, bEnablePV := TRUE, bNullPV := FALSE, fPV := arr_byPBL[6]);
+    fbBACnet_AV_SL_Level_7(Device := Device, bEnablePV := TRUE, bNullPV := FALSE, fPV := arr_byPBL[7]);
+    fbBACnet_AV_SL_Level_8(Device := Device, bEnablePV := TRUE, bNullPV := FALSE, fPV := arr_byPBL[8]);
+    fbBACnet_AV_SL_Level_9(Device := Device, bEnablePV := TRUE, bNullPV := FALSE, fPV := arr_byPBL[9]);
+    fbBACnet_AV_SL_Level_10(Device := Device, bEnablePV := TRUE, bNullPV := FALSE, fPV := arr_byPBL[10]);
+END_IF]]></ST>
+    </Implementation>
+    <LineIds Name="FB_PBL">
+      <LineId Id="31" Count="0" />
+      <LineId Id="33" Count="2" />
+      <LineId Id="32" Count="0" />
+      <LineId Id="36" Count="1" />
+      <LineId Id="41" Count="0" />
+      <LineId Id="44" Count="1" />
+      <LineId Id="43" Count="0" />
+      <LineId Id="38" Count="0" />
+      <LineId Id="46" Count="0" />
+      <LineId Id="39" Count="0" />
+      <LineId Id="48" Count="0" />
+      <LineId Id="63" Count="0" />
+      <LineId Id="49" Count="0" />
+      <LineId Id="52" Count="8" />
+      <LineId Id="50" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>
