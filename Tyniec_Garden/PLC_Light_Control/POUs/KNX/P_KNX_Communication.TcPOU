@@ -8,10 +8,12 @@ VAR
 	bActivate             : BOOL := TRUE;
 	idx                   : INT := 1;
 	EIB_PHYS_ADDR         : EIB_PHYS_ADDR := (Area := 1, Line := 6, Device := 150);
-	EIB_GROUP_FILTER      : ARRAY [1..8] OF EIB_GROUP_FILTER := [(
-																	GROUP_ADDR := (MAIN := 12, SUB_MAIN := 0, NUMBER := 0),
-																	GROUP_LEN  := 63
-																)];
+	EIB_GROUP_FILTER      : ARRAY [1..8] OF EIB_GROUP_FILTER := [
+																	(GROUP_ADDR := (MAIN := 12, SUB_MAIN := 0, NUMBER := 0),
+																	 GROUP_LEN  := 63),
+																	(GROUP_ADDR := (MAIN := 12, SUB_MAIN := 1, NUMBER := 0),
+																	 GROUP_LEN  := 63)
+																];
 	iMode                 : INT := 0;
 	tTimeout              : TIME := T#5S;
 	
@@ -947,7 +949,7 @@ END_VAR
                         <v n="X">14</v>
                         <v n="Y">11</v>
                         <v n="IsJoint">false</v>
-                        <v n="Flags">100</v>
+                        <v n="Flags">68</v>
                       </o>
                       <o>
                         <v n="X">17</v>
@@ -1072,8 +1074,8 @@ END_VAR
                 </d2>
               </o>
               <v n="AutoSizeCanvas">true</v>
-              <v n="CanvasWidth">52</v>
-              <v n="CanvasHeight">15</v>
+              <v n="CanvasWidth">51</v>
+              <v n="CanvasHeight">14</v>
             </o>
           </Data>
           <TypeList>

@@ -21,9 +21,9 @@ FOR i := 1 TO byStreetLampsCount BY 1 DO
 			nAddr:= GVL_IO.arrStreetLamps[i].nAddrShort1, 
 			eAddrType:= eDALIV2AddrTypeShort, 
 			eCommandPriority:= eDALIV2CommandPriorityLow,  
-			stCommandBuffer:= GVL_IO.arrStreetLamps[i].p_stCommandBuffer^);
+			stCommandBuffer:= GVL_IO.arrStreetLamps[i].ref_stCommandBuffer);
 	//reset the block
-	fbDALIV2QueryLampFailure_1(bStart := FALSE, stCommandBuffer := GVL_IO.arrStreetLamps[i].p_stCommandBuffer^);
+	fbDALIV2QueryLampFailure_1(bStart := FALSE, stCommandBuffer := GVL_IO.arrStreetLamps[i].ref_stCommandBuffer);
 
 	//query second half of the lamp
 	fbDALIV2QueryLampFailure_2(
@@ -31,9 +31,9 @@ FOR i := 1 TO byStreetLampsCount BY 1 DO
 			nAddr:= GVL_IO.arrStreetLamps[i].nAddrShort2, 
 			eAddrType:= eDALIV2AddrTypeShort, 
 			eCommandPriority:= eDALIV2CommandPriorityLow,  
-			stCommandBuffer:= GVL_IO.arrStreetLamps[i].p_stCommandBuffer^);
+			stCommandBuffer:= GVL_IO.arrStreetLamps[i].ref_stCommandBuffer);
 	//reset the block
-	fbDALIV2QueryLampFailure_2(bStart := FALSE, stCommandBuffer := GVL_IO.arrStreetLamps[i].p_stCommandBuffer^);
+	fbDALIV2QueryLampFailure_2(bStart := FALSE, stCommandBuffer := GVL_IO.arrStreetLamps[i].ref_stCommandBuffer);
 	
 	
 	//if at least one of ballasts indicates failure, set flag (LampFailure) to TRUE

@@ -57,7 +57,11 @@ CASE iSelector OF
 			fbBACnet_AV_SL_Level_8(Device := Device, bEnablePV := TRUE, bNullPV := FALSE, fPV := GVL_IO.arrScenesStreetLampsLevels[bySceneID, 8]);
 			fbBACnet_AV_SL_Level_9(Device := Device, bEnablePV := TRUE, bNullPV := FALSE, fPV := GVL_IO.arrScenesStreetLampsLevels[bySceneID, 9]);
 			fbBACnet_AV_SL_Level_10(Device := Device, bEnablePV := TRUE, bNullPV := FALSE, fPV := GVL_IO.arrScenesStreetLampsLevels[bySceneID, 10]);
-		
+			
+			//set all lamps to manual mode
+			//by pushing 2#1111111111
+			//to BACnet object
+			fbBACnet_AV_SL_Manual(Device := Device, bEnablePV := TRUE, bNullPV := FALSE, fPV := DWORD_TO_REAL(2#1111111111));
 			
 			iSelector := 0;		//after rewriting data go back to idle
 			bBusy := FALSE;		//indicate that this FB is no longer busy
@@ -136,6 +140,10 @@ END_CASE
       <LineId Id="187" Count="8" />
       <LineId Id="184" Count="0" />
       <LineId Id="81" Count="0" />
+      <LineId Id="247" Count="0" />
+      <LineId Id="249" Count="0" />
+      <LineId Id="251" Count="0" />
+      <LineId Id="248" Count="0" />
       <LineId Id="143" Count="2" />
       <LineId Id="90" Count="0" />
       <LineId Id="146" Count="0" />

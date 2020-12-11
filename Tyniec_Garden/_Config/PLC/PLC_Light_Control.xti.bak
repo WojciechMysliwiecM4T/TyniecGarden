@@ -97,6 +97,10 @@
 					<Type>WORD</Type>
 				</Var>
 				<Var>
+					<Name>GVL_BACnet.fbBACnet_BV_Alarm._StatusFlags</Name>
+					<Type>WORD</Type>
+				</Var>
+				<Var>
 					<Name>GVL_BACnet.fbBACnet_AV_SL_Manual._StatusFlags</Name>
 					<Type>WORD</Type>
 				</Var>
@@ -110,6 +114,14 @@
 				</Var>
 				<Var>
 					<Name>GVL_BACnet.fbBACnet_AV_SL_Scene._PresentValue</Name>
+					<Type>REAL</Type>
+				</Var>
+				<Var>
+					<Name>GVL_BACnet.fbBACnet_AV_SL_Motion._StatusFlags</Name>
+					<Type>WORD</Type>
+				</Var>
+				<Var>
+					<Name>GVL_BACnet.fbBACnet_AV_SL_Motion._PresentValue</Name>
 					<Type>REAL</Type>
 				</Var>
 				<Var>
@@ -338,6 +350,10 @@
 					<Type>DWORD</Type>
 				</Var>
 				<Var>
+					<Name>GVL_BACnet.fbBACnet_AV_SL_Motion._PresentValue_Priority12</Name>
+					<Type>DWORD</Type>
+				</Var>
+				<Var>
 					<Name>GVL_BACnet.fbBACnet_AV_SL_Level_1._PresentValue_Priority12</Name>
 					<Type>DWORD</Type>
 				</Var>
@@ -428,11 +444,15 @@ therefore it is controlled via digital output (DO)]]></Comment>
 			<Vars VarGrpType="1" ContextId="2" AreaNo="32">
 				<Name>CommunicationTask Inputs</Name>
 				<Var>
-					<Name>GVL_BACnet.fbBACnet_AV_SL_Motion._StatusFlags</Name>
+					<Name>GVL_BACnet.fbBACnet_BV_Alarm._PresentValue</Name>
 					<Type>WORD</Type>
 				</Var>
 				<Var>
-					<Name>GVL_BACnet.fbBACnet_AV_SL_Motion._PresentValue</Name>
+					<Name>GVL_BACnet.fbBACnet_AV_Gates._StatusFlags</Name>
+					<Type>WORD</Type>
+				</Var>
+				<Var>
+					<Name>GVL_BACnet.fbBACnet_AV_Gates._PresentValue</Name>
 					<Type>REAL</Type>
 				</Var>
 				<Var>
@@ -469,7 +489,11 @@ KL6301]]></Comment>
 			<Vars VarGrpType="2" ContextId="2" AreaNo="33">
 				<Name>CommunicationTask Outputs</Name>
 				<Var>
-					<Name>GVL_BACnet.fbBACnet_AV_SL_Motion._PresentValue_Priority12</Name>
+					<Name>GVL_BACnet.fbBACnet_BV_Alarm._PresentValue_Priority12</Name>
+					<Type>WORD</Type>
+				</Var>
+				<Var>
+					<Name>GVL_BACnet.fbBACnet_AV_Gates._PresentValue_Priority12</Name>
 					<Type>DWORD</Type>
 				</Var>
 				<Var>
@@ -613,140 +637,6 @@ KL6301]]></Comment>
 				<Link VarA="CommunicationTask Outputs^GVL_IO.stKL6821OutData_RB3" VarB="Term 6 (KL6821)^Channel 1^Data Out 1" Size="8" OffsA="24"/>
 				<Link VarA="CommunicationTask Outputs^GVL_IO.stKL6821OutData_RB3" VarB="Term 6 (KL6821)^Channel 1^Data Out 2" Size="8" OffsA="32"/>
 				<Link VarA="CommunicationTask Outputs^GVL_IO.stKL6821OutData_RB3" VarB="Term 6 (KL6821)^Channel 1^Data Out 3" Size="8" OffsA="40"/>
-			</OwnerB>
-			<OwnerB Name="TIID^Device 3 (BACnet IP)">
-				<Link VarA="PlcTask Inputs^Tc2_BACnetRev12.BACnet_Globals.fbBACnet_Adapter._AmsNetId" VarB="Inputs^AmsNetId"/>
-				<Link VarA="PlcTask Inputs^Tc2_BACnetRev12.BACnet_Globals.fbBACnet_Adapter._DeviceStatus" VarB="Inputs^Device Status"/>
-			</OwnerB>
-			<OwnerB Name="TIID^Device 3 (BACnet IP)^Beckhoff_0 (BACnet Server)">
-				<Link VarA="PlcTask Inputs^GVL_BACnet.Device._ServerStatus" VarB="Inputs^Server Status"/>
-				<Link VarA="PlcTask Outputs^GVL_BACnet.Device._ServerControl" VarB="Outputs^Server Control"/>
-			</OwnerB>
-			<OwnerB Name="TIID^Device 3 (BACnet IP)^Beckhoff_0 (BACnet Server)^Beckhoff_0 (BACnet Device Object)">
-				<Link VarA="PlcTask Inputs^GVL_BACnet.Device._LocalDate" VarB="Inputs^LocalDate"/>
-				<Link VarA="PlcTask Inputs^GVL_BACnet.Device._LocalTime" VarB="Inputs^LocalTime"/>
-				<Link VarA="PlcTask Inputs^GVL_BACnet.Device._ObjectId" VarB="Inputs^ObjectIdentifier"/>
-				<Link VarA="PlcTask Inputs^GVL_BACnet.Device._SystemStatus" VarB="Inputs^SystemStatus"/>
-			</OwnerB>
-			<OwnerB Name="TIID^Device 3 (BACnet IP)^Beckhoff_0 (BACnet Server)^GVL_BACnet (BACnet Structured View Object)^fbBACnet_AV_SL_ActualLevel_1 (BACnet Analog Value Object)">
-				<Link VarA="PlcTask Inputs^GVL_BACnet.fbBACnet_AV_SL_ActualLevel_1._PresentValue" VarB="Inputs^PresentValue"/>
-				<Link VarA="PlcTask Inputs^GVL_BACnet.fbBACnet_AV_SL_ActualLevel_1._StatusFlags" VarB="Inputs^StatusFlags"/>
-				<Link VarA="PlcTask Outputs^GVL_BACnet.fbBACnet_AV_SL_ActualLevel_1._PresentValue_Priority12" VarB="Outputs^PresentValue_Priority12"/>
-			</OwnerB>
-			<OwnerB Name="TIID^Device 3 (BACnet IP)^Beckhoff_0 (BACnet Server)^GVL_BACnet (BACnet Structured View Object)^fbBACnet_AV_SL_ActualLevel_10 (BACnet Analog Value Object)">
-				<Link VarA="PlcTask Inputs^GVL_BACnet.fbBACnet_AV_SL_ActualLevel_10._PresentValue" VarB="Inputs^PresentValue"/>
-				<Link VarA="PlcTask Inputs^GVL_BACnet.fbBACnet_AV_SL_ActualLevel_10._StatusFlags" VarB="Inputs^StatusFlags"/>
-				<Link VarA="PlcTask Outputs^GVL_BACnet.fbBACnet_AV_SL_ActualLevel_10._PresentValue_Priority12" VarB="Outputs^PresentValue_Priority12"/>
-			</OwnerB>
-			<OwnerB Name="TIID^Device 3 (BACnet IP)^Beckhoff_0 (BACnet Server)^GVL_BACnet (BACnet Structured View Object)^fbBACnet_AV_SL_ActualLevel_2 (BACnet Analog Value Object)">
-				<Link VarA="PlcTask Inputs^GVL_BACnet.fbBACnet_AV_SL_ActualLevel_2._PresentValue" VarB="Inputs^PresentValue"/>
-				<Link VarA="PlcTask Inputs^GVL_BACnet.fbBACnet_AV_SL_ActualLevel_2._StatusFlags" VarB="Inputs^StatusFlags"/>
-				<Link VarA="PlcTask Outputs^GVL_BACnet.fbBACnet_AV_SL_ActualLevel_2._PresentValue_Priority12" VarB="Outputs^PresentValue_Priority12"/>
-			</OwnerB>
-			<OwnerB Name="TIID^Device 3 (BACnet IP)^Beckhoff_0 (BACnet Server)^GVL_BACnet (BACnet Structured View Object)^fbBACnet_AV_SL_ActualLevel_3 (BACnet Analog Value Object)">
-				<Link VarA="PlcTask Inputs^GVL_BACnet.fbBACnet_AV_SL_ActualLevel_3._PresentValue" VarB="Inputs^PresentValue"/>
-				<Link VarA="PlcTask Inputs^GVL_BACnet.fbBACnet_AV_SL_ActualLevel_3._StatusFlags" VarB="Inputs^StatusFlags"/>
-				<Link VarA="PlcTask Outputs^GVL_BACnet.fbBACnet_AV_SL_ActualLevel_3._PresentValue_Priority12" VarB="Outputs^PresentValue_Priority12"/>
-			</OwnerB>
-			<OwnerB Name="TIID^Device 3 (BACnet IP)^Beckhoff_0 (BACnet Server)^GVL_BACnet (BACnet Structured View Object)^fbBACnet_AV_SL_ActualLevel_4 (BACnet Analog Value Object)">
-				<Link VarA="PlcTask Inputs^GVL_BACnet.fbBACnet_AV_SL_ActualLevel_4._PresentValue" VarB="Inputs^PresentValue"/>
-				<Link VarA="PlcTask Inputs^GVL_BACnet.fbBACnet_AV_SL_ActualLevel_4._StatusFlags" VarB="Inputs^StatusFlags"/>
-				<Link VarA="PlcTask Outputs^GVL_BACnet.fbBACnet_AV_SL_ActualLevel_4._PresentValue_Priority12" VarB="Outputs^PresentValue_Priority12"/>
-			</OwnerB>
-			<OwnerB Name="TIID^Device 3 (BACnet IP)^Beckhoff_0 (BACnet Server)^GVL_BACnet (BACnet Structured View Object)^fbBACnet_AV_SL_ActualLevel_5 (BACnet Analog Value Object)">
-				<Link VarA="PlcTask Inputs^GVL_BACnet.fbBACnet_AV_SL_ActualLevel_5._PresentValue" VarB="Inputs^PresentValue"/>
-				<Link VarA="PlcTask Inputs^GVL_BACnet.fbBACnet_AV_SL_ActualLevel_5._StatusFlags" VarB="Inputs^StatusFlags"/>
-				<Link VarA="PlcTask Outputs^GVL_BACnet.fbBACnet_AV_SL_ActualLevel_5._PresentValue_Priority12" VarB="Outputs^PresentValue_Priority12"/>
-			</OwnerB>
-			<OwnerB Name="TIID^Device 3 (BACnet IP)^Beckhoff_0 (BACnet Server)^GVL_BACnet (BACnet Structured View Object)^fbBACnet_AV_SL_ActualLevel_6 (BACnet Analog Value Object)">
-				<Link VarA="PlcTask Inputs^GVL_BACnet.fbBACnet_AV_SL_ActualLevel_6._PresentValue" VarB="Inputs^PresentValue"/>
-				<Link VarA="PlcTask Inputs^GVL_BACnet.fbBACnet_AV_SL_ActualLevel_6._StatusFlags" VarB="Inputs^StatusFlags"/>
-				<Link VarA="PlcTask Outputs^GVL_BACnet.fbBACnet_AV_SL_ActualLevel_6._PresentValue_Priority12" VarB="Outputs^PresentValue_Priority12"/>
-			</OwnerB>
-			<OwnerB Name="TIID^Device 3 (BACnet IP)^Beckhoff_0 (BACnet Server)^GVL_BACnet (BACnet Structured View Object)^fbBACnet_AV_SL_ActualLevel_7 (BACnet Analog Value Object)">
-				<Link VarA="PlcTask Inputs^GVL_BACnet.fbBACnet_AV_SL_ActualLevel_7._PresentValue" VarB="Inputs^PresentValue"/>
-				<Link VarA="PlcTask Inputs^GVL_BACnet.fbBACnet_AV_SL_ActualLevel_7._StatusFlags" VarB="Inputs^StatusFlags"/>
-				<Link VarA="PlcTask Outputs^GVL_BACnet.fbBACnet_AV_SL_ActualLevel_7._PresentValue_Priority12" VarB="Outputs^PresentValue_Priority12"/>
-			</OwnerB>
-			<OwnerB Name="TIID^Device 3 (BACnet IP)^Beckhoff_0 (BACnet Server)^GVL_BACnet (BACnet Structured View Object)^fbBACnet_AV_SL_ActualLevel_8 (BACnet Analog Value Object)">
-				<Link VarA="PlcTask Inputs^GVL_BACnet.fbBACnet_AV_SL_ActualLevel_8._PresentValue" VarB="Inputs^PresentValue"/>
-				<Link VarA="PlcTask Inputs^GVL_BACnet.fbBACnet_AV_SL_ActualLevel_8._StatusFlags" VarB="Inputs^StatusFlags"/>
-				<Link VarA="PlcTask Outputs^GVL_BACnet.fbBACnet_AV_SL_ActualLevel_8._PresentValue_Priority12" VarB="Outputs^PresentValue_Priority12"/>
-			</OwnerB>
-			<OwnerB Name="TIID^Device 3 (BACnet IP)^Beckhoff_0 (BACnet Server)^GVL_BACnet (BACnet Structured View Object)^fbBACnet_AV_SL_ActualLevel_9 (BACnet Analog Value Object)">
-				<Link VarA="PlcTask Inputs^GVL_BACnet.fbBACnet_AV_SL_ActualLevel_9._PresentValue" VarB="Inputs^PresentValue"/>
-				<Link VarA="PlcTask Inputs^GVL_BACnet.fbBACnet_AV_SL_ActualLevel_9._StatusFlags" VarB="Inputs^StatusFlags"/>
-				<Link VarA="PlcTask Outputs^GVL_BACnet.fbBACnet_AV_SL_ActualLevel_9._PresentValue_Priority12" VarB="Outputs^PresentValue_Priority12"/>
-			</OwnerB>
-			<OwnerB Name="TIID^Device 3 (BACnet IP)^Beckhoff_0 (BACnet Server)^GVL_BACnet (BACnet Structured View Object)^fbBACnet_AV_SL_Error (BACnet Analog Value Object)">
-				<Link VarA="CommunicationTask Inputs^GVL_BACnet.fbBACnet_AV_SL_Error._PresentValue" VarB="Inputs^PresentValue"/>
-				<Link VarA="CommunicationTask Inputs^GVL_BACnet.fbBACnet_AV_SL_Error._StatusFlags" VarB="Inputs^StatusFlags"/>
-				<Link VarA="CommunicationTask Outputs^GVL_BACnet.fbBACnet_AV_SL_Error._PresentValue_Priority12" VarB="Outputs^PresentValue_Priority12"/>
-			</OwnerB>
-			<OwnerB Name="TIID^Device 3 (BACnet IP)^Beckhoff_0 (BACnet Server)^GVL_BACnet (BACnet Structured View Object)^fbBACnet_AV_SL_Level_1 (BACnet Analog Value Object)">
-				<Link VarA="PlcTask Inputs^GVL_BACnet.fbBACnet_AV_SL_Level_1._PresentValue" VarB="Inputs^PresentValue"/>
-				<Link VarA="PlcTask Inputs^GVL_BACnet.fbBACnet_AV_SL_Level_1._StatusFlags" VarB="Inputs^StatusFlags"/>
-				<Link VarA="PlcTask Outputs^GVL_BACnet.fbBACnet_AV_SL_Level_1._PresentValue_Priority12" VarB="Outputs^PresentValue_Priority12"/>
-			</OwnerB>
-			<OwnerB Name="TIID^Device 3 (BACnet IP)^Beckhoff_0 (BACnet Server)^GVL_BACnet (BACnet Structured View Object)^fbBACnet_AV_SL_Level_10 (BACnet Analog Value Object)">
-				<Link VarA="PlcTask Inputs^GVL_BACnet.fbBACnet_AV_SL_Level_10._PresentValue" VarB="Inputs^PresentValue"/>
-				<Link VarA="PlcTask Inputs^GVL_BACnet.fbBACnet_AV_SL_Level_10._StatusFlags" VarB="Inputs^StatusFlags"/>
-				<Link VarA="PlcTask Outputs^GVL_BACnet.fbBACnet_AV_SL_Level_10._PresentValue_Priority12" VarB="Outputs^PresentValue_Priority12"/>
-			</OwnerB>
-			<OwnerB Name="TIID^Device 3 (BACnet IP)^Beckhoff_0 (BACnet Server)^GVL_BACnet (BACnet Structured View Object)^fbBACnet_AV_SL_Level_2 (BACnet Analog Value Object)">
-				<Link VarA="PlcTask Inputs^GVL_BACnet.fbBACnet_AV_SL_Level_2._PresentValue" VarB="Inputs^PresentValue"/>
-				<Link VarA="PlcTask Inputs^GVL_BACnet.fbBACnet_AV_SL_Level_2._StatusFlags" VarB="Inputs^StatusFlags"/>
-				<Link VarA="PlcTask Outputs^GVL_BACnet.fbBACnet_AV_SL_Level_2._PresentValue_Priority12" VarB="Outputs^PresentValue_Priority12"/>
-			</OwnerB>
-			<OwnerB Name="TIID^Device 3 (BACnet IP)^Beckhoff_0 (BACnet Server)^GVL_BACnet (BACnet Structured View Object)^fbBACnet_AV_SL_Level_3 (BACnet Analog Value Object)">
-				<Link VarA="PlcTask Inputs^GVL_BACnet.fbBACnet_AV_SL_Level_3._PresentValue" VarB="Inputs^PresentValue"/>
-				<Link VarA="PlcTask Inputs^GVL_BACnet.fbBACnet_AV_SL_Level_3._StatusFlags" VarB="Inputs^StatusFlags"/>
-				<Link VarA="PlcTask Outputs^GVL_BACnet.fbBACnet_AV_SL_Level_3._PresentValue_Priority12" VarB="Outputs^PresentValue_Priority12"/>
-			</OwnerB>
-			<OwnerB Name="TIID^Device 3 (BACnet IP)^Beckhoff_0 (BACnet Server)^GVL_BACnet (BACnet Structured View Object)^fbBACnet_AV_SL_Level_4 (BACnet Analog Value Object)">
-				<Link VarA="PlcTask Inputs^GVL_BACnet.fbBACnet_AV_SL_Level_4._PresentValue" VarB="Inputs^PresentValue"/>
-				<Link VarA="PlcTask Inputs^GVL_BACnet.fbBACnet_AV_SL_Level_4._StatusFlags" VarB="Inputs^StatusFlags"/>
-				<Link VarA="PlcTask Outputs^GVL_BACnet.fbBACnet_AV_SL_Level_4._PresentValue_Priority12" VarB="Outputs^PresentValue_Priority12"/>
-			</OwnerB>
-			<OwnerB Name="TIID^Device 3 (BACnet IP)^Beckhoff_0 (BACnet Server)^GVL_BACnet (BACnet Structured View Object)^fbBACnet_AV_SL_Level_5 (BACnet Analog Value Object)">
-				<Link VarA="PlcTask Inputs^GVL_BACnet.fbBACnet_AV_SL_Level_5._PresentValue" VarB="Inputs^PresentValue"/>
-				<Link VarA="PlcTask Inputs^GVL_BACnet.fbBACnet_AV_SL_Level_5._StatusFlags" VarB="Inputs^StatusFlags"/>
-				<Link VarA="PlcTask Outputs^GVL_BACnet.fbBACnet_AV_SL_Level_5._PresentValue_Priority12" VarB="Outputs^PresentValue_Priority12"/>
-			</OwnerB>
-			<OwnerB Name="TIID^Device 3 (BACnet IP)^Beckhoff_0 (BACnet Server)^GVL_BACnet (BACnet Structured View Object)^fbBACnet_AV_SL_Level_6 (BACnet Analog Value Object)">
-				<Link VarA="PlcTask Inputs^GVL_BACnet.fbBACnet_AV_SL_Level_6._PresentValue" VarB="Inputs^PresentValue"/>
-				<Link VarA="PlcTask Inputs^GVL_BACnet.fbBACnet_AV_SL_Level_6._StatusFlags" VarB="Inputs^StatusFlags"/>
-				<Link VarA="PlcTask Outputs^GVL_BACnet.fbBACnet_AV_SL_Level_6._PresentValue_Priority12" VarB="Outputs^PresentValue_Priority12"/>
-			</OwnerB>
-			<OwnerB Name="TIID^Device 3 (BACnet IP)^Beckhoff_0 (BACnet Server)^GVL_BACnet (BACnet Structured View Object)^fbBACnet_AV_SL_Level_7 (BACnet Analog Value Object)">
-				<Link VarA="PlcTask Inputs^GVL_BACnet.fbBACnet_AV_SL_Level_7._PresentValue" VarB="Inputs^PresentValue"/>
-				<Link VarA="PlcTask Inputs^GVL_BACnet.fbBACnet_AV_SL_Level_7._StatusFlags" VarB="Inputs^StatusFlags"/>
-				<Link VarA="PlcTask Outputs^GVL_BACnet.fbBACnet_AV_SL_Level_7._PresentValue_Priority12" VarB="Outputs^PresentValue_Priority12"/>
-			</OwnerB>
-			<OwnerB Name="TIID^Device 3 (BACnet IP)^Beckhoff_0 (BACnet Server)^GVL_BACnet (BACnet Structured View Object)^fbBACnet_AV_SL_Level_8 (BACnet Analog Value Object)">
-				<Link VarA="PlcTask Inputs^GVL_BACnet.fbBACnet_AV_SL_Level_8._PresentValue" VarB="Inputs^PresentValue"/>
-				<Link VarA="PlcTask Inputs^GVL_BACnet.fbBACnet_AV_SL_Level_8._StatusFlags" VarB="Inputs^StatusFlags"/>
-				<Link VarA="PlcTask Outputs^GVL_BACnet.fbBACnet_AV_SL_Level_8._PresentValue_Priority12" VarB="Outputs^PresentValue_Priority12"/>
-			</OwnerB>
-			<OwnerB Name="TIID^Device 3 (BACnet IP)^Beckhoff_0 (BACnet Server)^GVL_BACnet (BACnet Structured View Object)^fbBACnet_AV_SL_Level_9 (BACnet Analog Value Object)">
-				<Link VarA="PlcTask Inputs^GVL_BACnet.fbBACnet_AV_SL_Level_9._PresentValue" VarB="Inputs^PresentValue"/>
-				<Link VarA="PlcTask Inputs^GVL_BACnet.fbBACnet_AV_SL_Level_9._StatusFlags" VarB="Inputs^StatusFlags"/>
-				<Link VarA="PlcTask Outputs^GVL_BACnet.fbBACnet_AV_SL_Level_9._PresentValue_Priority12" VarB="Outputs^PresentValue_Priority12"/>
-			</OwnerB>
-			<OwnerB Name="TIID^Device 3 (BACnet IP)^Beckhoff_0 (BACnet Server)^GVL_BACnet (BACnet Structured View Object)^fbBACnet_AV_SL_Manual (BACnet Analog Value Object)">
-				<Link VarA="PlcTask Inputs^GVL_BACnet.fbBACnet_AV_SL_Manual._PresentValue" VarB="Inputs^PresentValue"/>
-				<Link VarA="PlcTask Inputs^GVL_BACnet.fbBACnet_AV_SL_Manual._StatusFlags" VarB="Inputs^StatusFlags"/>
-				<Link VarA="PlcTask Outputs^GVL_BACnet.fbBACnet_AV_SL_Manual._PresentValue_Priority12" VarB="Outputs^PresentValue_Priority12"/>
-			</OwnerB>
-			<OwnerB Name="TIID^Device 3 (BACnet IP)^Beckhoff_0 (BACnet Server)^GVL_BACnet (BACnet Structured View Object)^fbBACnet_AV_SL_Motion (BACnet Analog Value Object)">
-				<Link VarA="CommunicationTask Inputs^GVL_BACnet.fbBACnet_AV_SL_Motion._PresentValue" VarB="Inputs^PresentValue"/>
-				<Link VarA="CommunicationTask Inputs^GVL_BACnet.fbBACnet_AV_SL_Motion._StatusFlags" VarB="Inputs^StatusFlags"/>
-				<Link VarA="CommunicationTask Outputs^GVL_BACnet.fbBACnet_AV_SL_Motion._PresentValue_Priority12" VarB="Outputs^PresentValue_Priority12"/>
-			</OwnerB>
-			<OwnerB Name="TIID^Device 3 (BACnet IP)^Beckhoff_0 (BACnet Server)^GVL_BACnet (BACnet Structured View Object)^fbBACnet_AV_SL_Scene (BACnet Analog Value Object)">
-				<Link VarA="PlcTask Inputs^GVL_BACnet.fbBACnet_AV_SL_Scene._PresentValue" VarB="Inputs^PresentValue"/>
-				<Link VarA="PlcTask Inputs^GVL_BACnet.fbBACnet_AV_SL_Scene._StatusFlags" VarB="Inputs^StatusFlags"/>
-				<Link VarA="PlcTask Outputs^GVL_BACnet.fbBACnet_AV_SL_Scene._PresentValue_Priority12" VarB="Outputs^PresentValue_Priority12"/>
 			</OwnerB>
 		</OwnerA>
 	</Mappings>

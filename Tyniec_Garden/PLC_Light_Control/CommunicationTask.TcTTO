@@ -19,6 +19,9 @@
     <PouCall>
       <Name>P_KNX_Data_MotionSensors</Name>
     </PouCall>
+    <PouCall>
+      <Name>P_KNX_Data_GatesANDAlarm</Name>
+    </PouCall>
     <TaskFBGuid>{a46b79c5-7a08-4a37-ab59-dbc0b5751537}</TaskFBGuid>
     <Fb_init>{332bdca8-9eba-4432-9bb3-9bd7c7c3452b}</Fb_init>
     <Fb_exit>{cea55c41-94de-4e3c-96b6-425daaeb574e}</Fb_exit>

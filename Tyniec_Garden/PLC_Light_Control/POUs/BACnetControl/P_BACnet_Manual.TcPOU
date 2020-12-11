@@ -8,7 +8,7 @@ END_VAR
 ]]></Declaration>
     <Implementation>
       <ST><![CDATA[//keep BACnet object instance alive
-fbBACnet_AV_SL_Manual(Device := Device);
+fbBACnet_AV_SL_Manual(Device := Device, bEnablePV := TRUE, bNullPV := FALSE);
 
 //read REAL data from BACnet object
 //and convert them to DWORD

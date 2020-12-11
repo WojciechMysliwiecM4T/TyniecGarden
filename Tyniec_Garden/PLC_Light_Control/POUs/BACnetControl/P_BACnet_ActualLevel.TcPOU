@@ -8,67 +8,144 @@ VAR
 	
 	fbDALIV2QueryActualLevel_1	 	: FB_DALIV2QueryActualLevel;
 	fbDALIV2QueryActualLevel_2	 	: FB_DALIV2QueryActualLevel;
+	fbDALIV2QueryActualLevel_3	 	: FB_DALIV2QueryActualLevel;
+	fbDALIV2QueryActualLevel_4	 	: FB_DALIV2QueryActualLevel;
+	fbDALIV2QueryActualLevel_5	 	: FB_DALIV2QueryActualLevel;
+	fbDALIV2QueryActualLevel_6	 	: FB_DALIV2QueryActualLevel;
+	fbDALIV2QueryActualLevel_7	 	: FB_DALIV2QueryActualLevel;
+	fbDALIV2QueryActualLevel_8	 	: FB_DALIV2QueryActualLevel;
+	fbDALIV2QueryActualLevel_9	 	: FB_DALIV2QueryActualLevel;
+	fbDALIV2QueryActualLevel_10	 	: FB_DALIV2QueryActualLevel;
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[//iterate through DALI ballasts reading actual levels
-FOR i := 1 TO byStreetLampsCount BY 1 DO
+      <ST><![CDATA[
+fbDALIV2QueryActualLevel_1(
+	bStart:= TRUE, 
+	nAddr:= GVL_IO.arrStreetLamps[1].nAddrShort1, 
+	eAddrType:= eDALIV2AddrTypeShort, 
+	eCommandPriority:= eDALIV2CommandPriorityLow,  
+	stCommandBuffer:= GVL_IO.stCommandBuffer_RB1);
+fbDALIV2QueryActualLevel_1(bStart:= FALSE, stCommandBuffer:= GVL_IO.stCommandBuffer_RB1);
 
-	//query first half of the lamp
-	fbDALIV2QueryActualLevel_1(
-		bStart:= TRUE, 
-		nAddr:= GVL_IO.arrStreetLamps[i].nAddrShort1, 
-		eAddrType:= eDALIV2AddrTypeShort, 
-		eCommandPriority:= eDALIV2CommandPriorityLow,  
-		stCommandBuffer:= GVL_IO.arrStreetLamps[i].p_stCommandBuffer^);
-		
-	//multiplying by 1000 to do an offset in REAL primitive
-	//example: 234128 means that first half of the lamp level is 234, second is 128
-	arrActualLevel[i] := 1000 * fbDALIV2QueryActualLevel_1.nActualLevel;
-	//reset the block
-	fbDALIV2QueryActualLevel_1(bStart:= FALSE, stCommandBuffer:= GVL_IO.arrStreetLamps[i].p_stCommandBuffer^);
+fbDALIV2QueryActualLevel_2(
+	bStart:= TRUE, 
+	nAddr:= GVL_IO.arrStreetLamps[2].nAddrShort1, 
+	eAddrType:= eDALIV2AddrTypeShort, 
+	eCommandPriority:= eDALIV2CommandPriorityLow,  
+	stCommandBuffer:= GVL_IO.stCommandBuffer_RB1);
+fbDALIV2QueryActualLevel_2(bStart:= FALSE, stCommandBuffer:= GVL_IO.stCommandBuffer_RB1);
 
-	 //query second half of the lamp
-	fbDALIV2QueryActualLevel_2(
-		bStart:= TRUE, 
-		nAddr:= GVL_IO.arrStreetLamps[i].nAddrShort2, 
-		eAddrType:= eDALIV2AddrTypeShort, 
-		eCommandPriority:= eDALIV2CommandPriorityLow,  
-		stCommandBuffer:= GVL_IO.arrStreetLamps[i].p_stCommandBuffer^);
-		
-	//no offset
-	arrActualLevel[i] := arrActualLevel[i] + fbDALIV2QueryActualLevel_2.nActualLevel;
-	//reset the block
-	fbDALIV2QueryActualLevel_2(bStart:= FALSE, stCommandBuffer:= GVL_IO.arrStreetLamps[i].p_stCommandBuffer^);
+fbDALIV2QueryActualLevel_3(
+	bStart:= TRUE, 
+	nAddr:= GVL_IO.arrStreetLamps[3].nAddrShort1, 
+	eAddrType:= eDALIV2AddrTypeShort, 
+	eCommandPriority:= eDALIV2CommandPriorityLow,  
+	stCommandBuffer:= GVL_IO.stCommandBuffer_RB1);
+fbDALIV2QueryActualLevel_3(bStart:= FALSE, stCommandBuffer:= GVL_IO.stCommandBuffer_RB1);
 
-END_FOR
+fbDALIV2QueryActualLevel_4(
+	bStart:= TRUE, 
+	nAddr:= GVL_IO.arrStreetLamps[4].nAddrShort1, 
+	eAddrType:= eDALIV2AddrTypeShort, 
+	eCommandPriority:= eDALIV2CommandPriorityLow,  
+	stCommandBuffer:= GVL_IO.stCommandBuffer_RB2);
+fbDALIV2QueryActualLevel_4(bStart:= FALSE, stCommandBuffer:= GVL_IO.stCommandBuffer_RB2);
+
+fbDALIV2QueryActualLevel_5(
+	bStart:= TRUE, 
+	nAddr:= GVL_IO.arrStreetLamps[5].nAddrShort1, 
+	eAddrType:= eDALIV2AddrTypeShort, 
+	eCommandPriority:= eDALIV2CommandPriorityLow,  
+	stCommandBuffer:= GVL_IO.stCommandBuffer_RB2);
+fbDALIV2QueryActualLevel_5(bStart:= FALSE, stCommandBuffer:= GVL_IO.stCommandBuffer_RB2);
+
+fbDALIV2QueryActualLevel_6(
+	bStart:= TRUE, 
+	nAddr:= GVL_IO.arrStreetLamps[6].nAddrShort1, 
+	eAddrType:= eDALIV2AddrTypeShort, 
+	eCommandPriority:= eDALIV2CommandPriorityLow,  
+	stCommandBuffer:= GVL_IO.stCommandBuffer_RB2);
+fbDALIV2QueryActualLevel_6(bStart:= FALSE, stCommandBuffer:= GVL_IO.stCommandBuffer_RB2);
+
+fbDALIV2QueryActualLevel_7(
+	bStart:= TRUE, 
+	nAddr:= GVL_IO.arrStreetLamps[7].nAddrShort1, 
+	eAddrType:= eDALIV2AddrTypeShort, 
+	eCommandPriority:= eDALIV2CommandPriorityLow,  
+	stCommandBuffer:= GVL_IO.stCommandBuffer_RB2);
+fbDALIV2QueryActualLevel_7(bStart:= FALSE, stCommandBuffer:= GVL_IO.stCommandBuffer_RB2);
+
+fbDALIV2QueryActualLevel_8(
+	bStart:= TRUE, 
+	nAddr:= GVL_IO.arrStreetLamps[8].nAddrShort1, 
+	eAddrType:= eDALIV2AddrTypeShort, 
+	eCommandPriority:= eDALIV2CommandPriorityLow,  
+	stCommandBuffer:= GVL_IO.stCommandBuffer_RB3);
+fbDALIV2QueryActualLevel_8(bStart:= FALSE, stCommandBuffer:= GVL_IO.stCommandBuffer_RB3);
+
+fbDALIV2QueryActualLevel_9(
+	bStart:= TRUE, 
+	nAddr:= GVL_IO.arrStreetLamps[9].nAddrShort1, 
+	eAddrType:= eDALIV2AddrTypeShort, 
+	eCommandPriority:= eDALIV2CommandPriorityLow,  
+	stCommandBuffer:= GVL_IO.stCommandBuffer_RB3);
+fbDALIV2QueryActualLevel_9(bStart:= FALSE, stCommandBuffer:= GVL_IO.stCommandBuffer_RB3);
+
+fbDALIV2QueryActualLevel_10(
+	bStart:= TRUE, 
+	nAddr:= GVL_IO.arrStreetLamps[10].nAddrShort1, 
+	eAddrType:= eDALIV2AddrTypeShort, 
+	eCommandPriority:= eDALIV2CommandPriorityLow,  
+	stCommandBuffer:= GVL_IO.stCommandBuffer_RB3);
+fbDALIV2QueryActualLevel_10(bStart:= FALSE, stCommandBuffer:= GVL_IO.stCommandBuffer_RB3);
+
 
 //rewrite data to BACnet objects
-fbBACnet_AV_SL_ActualLevel_1(Device := Device, bEnablePV := TRUE, bNullPV := FALSE, fPV := arrActualLevel[1]);
-fbBACnet_AV_SL_ActualLevel_2(Device := Device, bEnablePV := TRUE, bNullPV := FALSE, fPV := arrActualLevel[2]);
-fbBACnet_AV_SL_ActualLevel_3(Device := Device, bEnablePV := TRUE, bNullPV := FALSE, fPV := arrActualLevel[3]);
-fbBACnet_AV_SL_ActualLevel_4(Device := Device, bEnablePV := TRUE, bNullPV := FALSE, fPV := arrActualLevel[4]);
-fbBACnet_AV_SL_ActualLevel_5(Device := Device, bEnablePV := TRUE, bNullPV := FALSE, fPV := arrActualLevel[5]);
-fbBACnet_AV_SL_ActualLevel_6(Device := Device, bEnablePV := TRUE, bNullPV := FALSE, fPV := arrActualLevel[6]);
-fbBACnet_AV_SL_ActualLevel_7(Device := Device, bEnablePV := TRUE, bNullPV := FALSE, fPV := arrActualLevel[7]);
-fbBACnet_AV_SL_ActualLevel_8(Device := Device, bEnablePV := TRUE, bNullPV := FALSE, fPV := arrActualLevel[8]);
-fbBACnet_AV_SL_ActualLevel_9(Device := Device, bEnablePV := TRUE, bNullPV := FALSE, fPV := arrActualLevel[9]);
-fbBACnet_AV_SL_ActualLevel_10(Device := Device, bEnablePV := TRUE, bNullPV := FALSE, fPV := arrActualLevel[10]);]]></ST>
+fbBACnet_AV_SL_ActualLevel_1(Device := Device, bEnablePV := TRUE, bNullPV := FALSE, fPV := fbDALIV2QueryActualLevel_1.nActualLevel);
+fbBACnet_AV_SL_ActualLevel_2(Device := Device, bEnablePV := TRUE, bNullPV := FALSE, fPV := fbDALIV2QueryActualLevel_2.nActualLevel);
+fbBACnet_AV_SL_ActualLevel_3(Device := Device, bEnablePV := TRUE, bNullPV := FALSE, fPV := fbDALIV2QueryActualLevel_3.nActualLevel);
+fbBACnet_AV_SL_ActualLevel_4(Device := Device, bEnablePV := TRUE, bNullPV := FALSE, fPV := fbDALIV2QueryActualLevel_4.nActualLevel);
+fbBACnet_AV_SL_ActualLevel_5(Device := Device, bEnablePV := TRUE, bNullPV := FALSE, fPV := fbDALIV2QueryActualLevel_5.nActualLevel);
+fbBACnet_AV_SL_ActualLevel_6(Device := Device, bEnablePV := TRUE, bNullPV := FALSE, fPV := fbDALIV2QueryActualLevel_6.nActualLevel);
+fbBACnet_AV_SL_ActualLevel_7(Device := Device, bEnablePV := TRUE, bNullPV := FALSE, fPV := fbDALIV2QueryActualLevel_7.nActualLevel);
+fbBACnet_AV_SL_ActualLevel_8(Device := Device, bEnablePV := TRUE, bNullPV := FALSE, fPV := fbDALIV2QueryActualLevel_8.nActualLevel);
+fbBACnet_AV_SL_ActualLevel_9(Device := Device, bEnablePV := TRUE, bNullPV := FALSE, fPV := fbDALIV2QueryActualLevel_9.nActualLevel);
+fbBACnet_AV_SL_ActualLevel_10(Device := Device, bEnablePV := TRUE, bNullPV := FALSE, fPV := fbDALIV2QueryActualLevel_10.nActualLevel);]]></ST>
     </Implementation>
     <LineIds Name="P_BACnet_ActualLevel">
-      <LineId Id="18" Count="0" />
-      <LineId Id="24" Count="1" />
       <LineId Id="44" Count="0" />
       <LineId Id="29" Count="3" />
       <LineId Id="37" Count="0" />
       <LineId Id="26" Count="0" />
-      <LineId Id="39" Count="1" />
-      <LineId Id="75" Count="0" />
-      <LineId Id="27" Count="0" />
-      <LineId Id="43" Count="0" />
-      <LineId Id="41" Count="0" />
-      <LineId Id="50" Count="12" />
-      <LineId Id="49" Count="0" />
+      <LineId Id="62" Count="0" />
+      <LineId Id="92" Count="0" />
+      <LineId Id="94" Count="5" />
+      <LineId Id="93" Count="0" />
+      <LineId Id="100" Count="0" />
+      <LineId Id="102" Count="5" />
+      <LineId Id="101" Count="0" />
+      <LineId Id="108" Count="0" />
+      <LineId Id="110" Count="5" />
+      <LineId Id="109" Count="0" />
+      <LineId Id="116" Count="0" />
+      <LineId Id="118" Count="5" />
+      <LineId Id="117" Count="0" />
+      <LineId Id="124" Count="0" />
+      <LineId Id="126" Count="5" />
+      <LineId Id="125" Count="0" />
+      <LineId Id="132" Count="0" />
+      <LineId Id="134" Count="5" />
+      <LineId Id="133" Count="0" />
+      <LineId Id="140" Count="0" />
+      <LineId Id="142" Count="5" />
+      <LineId Id="141" Count="0" />
+      <LineId Id="148" Count="0" />
+      <LineId Id="150" Count="5" />
+      <LineId Id="149" Count="0" />
+      <LineId Id="156" Count="0" />
+      <LineId Id="158" Count="5" />
+      <LineId Id="157" Count="0" />
       <LineId Id="22" Count="0" />
       <LineId Id="63" Count="0" />
       <LineId Id="65" Count="0" />

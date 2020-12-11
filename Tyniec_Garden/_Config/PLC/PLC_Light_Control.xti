@@ -97,6 +97,10 @@
 					<Type>WORD</Type>
 				</Var>
 				<Var>
+					<Name>GVL_BACnet.fbBACnet_BV_Alarm._StatusFlags</Name>
+					<Type>WORD</Type>
+				</Var>
+				<Var>
 					<Name>GVL_BACnet.fbBACnet_AV_SL_Manual._StatusFlags</Name>
 					<Type>WORD</Type>
 				</Var>
@@ -118,14 +122,6 @@
 				</Var>
 				<Var>
 					<Name>GVL_BACnet.fbBACnet_AV_SL_Motion._PresentValue</Name>
-					<Type>REAL</Type>
-				</Var>
-				<Var>
-					<Name>GVL_BACnet.fbBACnet_AV_SL_Error._StatusFlags</Name>
-					<Type>WORD</Type>
-				</Var>
-				<Var>
-					<Name>GVL_BACnet.fbBACnet_AV_SL_Error._PresentValue</Name>
 					<Type>REAL</Type>
 				</Var>
 				<Var>
@@ -338,14 +334,6 @@
 					<Comment><![CDATA[if TRUE, motion has been detected]]></Comment>
 					<Type>BOOL</Type>
 				</Var>
-				<Var>
-					<Name>GVL_BACnet.fbBACnet_BV_Alarm._StatusFlags</Name>
-					<Type>WORD</Type>
-				</Var>
-				<Var>
-					<Name>GVL_BACnet.fbBACnet_BV_Alarm._PresentValue</Name>
-					<Type>WORD</Type>
-				</Var>
 			</Vars>
 			<Vars VarGrpType="2" AreaNo="1">
 				<Name>PlcTask Outputs</Name>
@@ -363,10 +351,6 @@
 				</Var>
 				<Var>
 					<Name>GVL_BACnet.fbBACnet_AV_SL_Motion._PresentValue_Priority12</Name>
-					<Type>DWORD</Type>
-				</Var>
-				<Var>
-					<Name>GVL_BACnet.fbBACnet_AV_SL_Error._PresentValue_Priority12</Name>
 					<Type>DWORD</Type>
 				</Var>
 				<Var>
@@ -456,13 +440,29 @@ street lamp that has no DALI
 therefore it is controlled via digital output (DO)]]></Comment>
 					<Type>BOOL</Type>
 				</Var>
-				<Var>
-					<Name>GVL_BACnet.fbBACnet_BV_Alarm._PresentValue_Priority12</Name>
-					<Type>WORD</Type>
-				</Var>
 			</Vars>
 			<Vars VarGrpType="1" ContextId="2" AreaNo="32">
 				<Name>CommunicationTask Inputs</Name>
+				<Var>
+					<Name>GVL_BACnet.fbBACnet_BV_Alarm._PresentValue</Name>
+					<Type>WORD</Type>
+				</Var>
+				<Var>
+					<Name>GVL_BACnet.fbBACnet_AV_Gates._StatusFlags</Name>
+					<Type>WORD</Type>
+				</Var>
+				<Var>
+					<Name>GVL_BACnet.fbBACnet_AV_Gates._PresentValue</Name>
+					<Type>REAL</Type>
+				</Var>
+				<Var>
+					<Name>GVL_BACnet.fbBACnet_AV_SL_Error._StatusFlags</Name>
+					<Type>WORD</Type>
+				</Var>
+				<Var>
+					<Name>GVL_BACnet.fbBACnet_AV_SL_Error._PresentValue</Name>
+					<Type>REAL</Type>
+				</Var>
 				<Var>
 					<Name>GVL_IO.stKL6821InData_RB1</Name>
 					<Comment><![CDATA[DALI Communication variables
@@ -488,6 +488,18 @@ KL6301]]></Comment>
 			</Vars>
 			<Vars VarGrpType="2" ContextId="2" AreaNo="33">
 				<Name>CommunicationTask Outputs</Name>
+				<Var>
+					<Name>GVL_BACnet.fbBACnet_BV_Alarm._PresentValue_Priority12</Name>
+					<Type>WORD</Type>
+				</Var>
+				<Var>
+					<Name>GVL_BACnet.fbBACnet_AV_Gates._PresentValue_Priority12</Name>
+					<Type>DWORD</Type>
+				</Var>
+				<Var>
+					<Name>GVL_BACnet.fbBACnet_AV_SL_Error._PresentValue_Priority12</Name>
+					<Type>DWORD</Type>
+				</Var>
 				<Var>
 					<Name>GVL_IO.stKL6821OutData_RB1</Name>
 					<Type GUID="{28438AA5-8F49-4E98-5C6F-4C901181A54A}" Namespace="Tc2_DALI">ST_KL6821OutData</Type>
@@ -640,6 +652,11 @@ KL6301]]></Comment>
 				<Link VarA="PlcTask Inputs^GVL_BACnet.Device._ObjectId" VarB="Inputs^ObjectIdentifier"/>
 				<Link VarA="PlcTask Inputs^GVL_BACnet.Device._SystemStatus" VarB="Inputs^SystemStatus"/>
 			</OwnerB>
+			<OwnerB Name="TIID^Device 3 (BACnet IP)^Beckhoff_0 (BACnet Server)^GVL_BACnet (BACnet Structured View Object)^fbBACnet_AV_Gates (BACnet Analog Value Object)">
+				<Link VarA="CommunicationTask Inputs^GVL_BACnet.fbBACnet_AV_Gates._PresentValue" VarB="Inputs^PresentValue"/>
+				<Link VarA="CommunicationTask Inputs^GVL_BACnet.fbBACnet_AV_Gates._StatusFlags" VarB="Inputs^StatusFlags"/>
+				<Link VarA="CommunicationTask Outputs^GVL_BACnet.fbBACnet_AV_Gates._PresentValue_Priority12" VarB="Outputs^PresentValue_Priority12"/>
+			</OwnerB>
 			<OwnerB Name="TIID^Device 3 (BACnet IP)^Beckhoff_0 (BACnet Server)^GVL_BACnet (BACnet Structured View Object)^fbBACnet_AV_SL_ActualLevel_1 (BACnet Analog Value Object)">
 				<Link VarA="PlcTask Inputs^GVL_BACnet.fbBACnet_AV_SL_ActualLevel_1._PresentValue" VarB="Inputs^PresentValue"/>
 				<Link VarA="PlcTask Inputs^GVL_BACnet.fbBACnet_AV_SL_ActualLevel_1._StatusFlags" VarB="Inputs^StatusFlags"/>
@@ -691,9 +708,9 @@ KL6301]]></Comment>
 				<Link VarA="PlcTask Outputs^GVL_BACnet.fbBACnet_AV_SL_ActualLevel_9._PresentValue_Priority12" VarB="Outputs^PresentValue_Priority12"/>
 			</OwnerB>
 			<OwnerB Name="TIID^Device 3 (BACnet IP)^Beckhoff_0 (BACnet Server)^GVL_BACnet (BACnet Structured View Object)^fbBACnet_AV_SL_Error (BACnet Analog Value Object)">
-				<Link VarA="PlcTask Inputs^GVL_BACnet.fbBACnet_AV_SL_Error._PresentValue" VarB="Inputs^PresentValue"/>
-				<Link VarA="PlcTask Inputs^GVL_BACnet.fbBACnet_AV_SL_Error._StatusFlags" VarB="Inputs^StatusFlags"/>
-				<Link VarA="PlcTask Outputs^GVL_BACnet.fbBACnet_AV_SL_Error._PresentValue_Priority12" VarB="Outputs^PresentValue_Priority12"/>
+				<Link VarA="CommunicationTask Inputs^GVL_BACnet.fbBACnet_AV_SL_Error._PresentValue" VarB="Inputs^PresentValue"/>
+				<Link VarA="CommunicationTask Inputs^GVL_BACnet.fbBACnet_AV_SL_Error._StatusFlags" VarB="Inputs^StatusFlags"/>
+				<Link VarA="CommunicationTask Outputs^GVL_BACnet.fbBACnet_AV_SL_Error._PresentValue_Priority12" VarB="Outputs^PresentValue_Priority12"/>
 			</OwnerB>
 			<OwnerB Name="TIID^Device 3 (BACnet IP)^Beckhoff_0 (BACnet Server)^GVL_BACnet (BACnet Structured View Object)^fbBACnet_AV_SL_Level_1 (BACnet Analog Value Object)">
 				<Link VarA="PlcTask Inputs^GVL_BACnet.fbBACnet_AV_SL_Level_1._PresentValue" VarB="Inputs^PresentValue"/>
@@ -759,6 +776,11 @@ KL6301]]></Comment>
 				<Link VarA="PlcTask Inputs^GVL_BACnet.fbBACnet_AV_SL_Scene._PresentValue" VarB="Inputs^PresentValue"/>
 				<Link VarA="PlcTask Inputs^GVL_BACnet.fbBACnet_AV_SL_Scene._StatusFlags" VarB="Inputs^StatusFlags"/>
 				<Link VarA="PlcTask Outputs^GVL_BACnet.fbBACnet_AV_SL_Scene._PresentValue_Priority12" VarB="Outputs^PresentValue_Priority12"/>
+			</OwnerB>
+			<OwnerB Name="TIID^Device 3 (BACnet IP)^Beckhoff_0 (BACnet Server)^GVL_BACnet (BACnet Structured View Object)^fbBACnet_BV_Alarm (BACnet Binary Value Object)">
+				<Link VarA="CommunicationTask Inputs^GVL_BACnet.fbBACnet_BV_Alarm._PresentValue" VarB="Inputs^PresentValue"/>
+				<Link VarA="CommunicationTask Outputs^GVL_BACnet.fbBACnet_BV_Alarm._PresentValue_Priority12" VarB="Outputs^PresentValue_Priority12"/>
+				<Link VarA="PlcTask Inputs^GVL_BACnet.fbBACnet_BV_Alarm._StatusFlags" VarB="Inputs^StatusFlags"/>
 			</OwnerB>
 		</OwnerA>
 	</Mappings>

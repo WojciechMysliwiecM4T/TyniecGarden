@@ -52,9 +52,6 @@
     <Compile Include="POUs\BACnetControl\P_BACnet_ActualLevel.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\BACnetControl\P_BACnet_Alarm.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="POUs\BACnetControl\P_BACnet_Error.TcPOU">
       <SubType>Code</SubType>
     </Compile>
@@ -98,6 +95,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\KNX\P_KNX_Communication.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\KNX\P_KNX_Data_GatesANDAlarm.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\KNX\P_KNX_Data_MotionSensors.TcPOU">

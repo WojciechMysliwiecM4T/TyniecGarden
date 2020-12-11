@@ -1,0 +1,79 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.5">
+  <POU Name="P_KNX_Data_GatesANDAlarm" Id="{9e644140-ef97-4ea1-93be-96151ae07f57}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM P_KNX_Data_GatesANDAlarm
+VAR
+	EIB_BIT_SEND_1		:EIB_BIT_SEND;
+	EIB_BIT_SEND_2		:EIB_BIT_SEND;
+	EIB_BIT_SEND_3		:EIB_BIT_SEND;
+	EIB_BIT_SEND_4		:EIB_BIT_SEND;
+	EIB_BIT_SEND_5		:EIB_BIT_SEND;
+	EIB_BIT_SEND_6		:EIB_BIT_SEND;
+	EIB_BIT_SEND_7		:EIB_BIT_SEND;
+	EIB_BIT_SEND_8		:EIB_BIT_SEND;
+	EIB_BIT_REC_9		:EIB_BIT_REC;
+	
+	Group_Address_1		: EIB_GROUP_ADDR := (MAIN := 12, SUB_MAIN := 1, NUMBER := 0);	//barrier
+	Group_Address_2		: EIB_GROUP_ADDR := (MAIN := 12, SUB_MAIN := 1, NUMBER := 1);	//main gate
+	Group_Address_3		: EIB_GROUP_ADDR := (MAIN := 12, SUB_MAIN := 1, NUMBER := 2);	//gateway and barrier
+	Group_Address_4		: EIB_GROUP_ADDR := (MAIN := 12, SUB_MAIN := 1, NUMBER := 3);	//garage door
+	Group_Address_5		: EIB_GROUP_ADDR := (MAIN := 12, SUB_MAIN := 1, NUMBER := 4);	//left curtain
+	Group_Address_6		: EIB_GROUP_ADDR := (MAIN := 12, SUB_MAIN := 1, NUMBER := 5);	//right curtain
+	Group_Address_7		: EIB_GROUP_ADDR := (MAIN := 12, SUB_MAIN := 1, NUMBER := 9);	//rear gate
+	Group_Address_8		: EIB_GROUP_ADDR := (MAIN := 12, SUB_MAIN := 1, NUMBER := 10);	//rear gateway
+	Group_Address_9		: EIB_GROUP_ADDR := (MAIN := 12, SUB_MAIN := 1, NUMBER := 37);	//intrusion alarm
+	
+	dwGates				: DWORD;
+	rGates				: REAL;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[//keep BACnet object instance alive
+fbBACnet_AV_Gates(Device := Device);
+//read gates values from BACnet object
+rGates := fbBACnet_AV_Gates.fPresentValue;
+//convert REAL to DWORD
+dwGates := REAL_TO_DWORD(rGates);
+
+
+//EIB_BIT_SEND function block initialization
+//with data write from BACnet object
+EIB_BIT_SEND_1(Group_Address:=Group_Address_1, bData := dwGates.0 , str_Rec:=GVL_IO.str_Data_Rec);
+EIB_BIT_SEND_2(Group_Address:=Group_Address_2, bData := dwGates.1 , str_Rec:=GVL_IO.str_Data_Rec);
+EIB_BIT_SEND_3(Group_Address:=Group_Address_3, bData := dwGates.2 , str_Rec:=GVL_IO.str_Data_Rec);
+EIB_BIT_SEND_4(Group_Address:=Group_Address_4, bData := dwGates.3 , str_Rec:=GVL_IO.str_Data_Rec);
+EIB_BIT_SEND_5(Group_Address:=Group_Address_5, bData := dwGates.4 , str_Rec:=GVL_IO.str_Data_Rec);
+EIB_BIT_SEND_6(Group_Address:=Group_Address_6, bData := dwGates.5 , str_Rec:=GVL_IO.str_Data_Rec);
+EIB_BIT_SEND_7(Group_Address:=Group_Address_7, bData := dwGates.6 , str_Rec:=GVL_IO.str_Data_Rec);
+EIB_BIT_SEND_8(Group_Address:=Group_Address_8, bData := dwGates.7 , str_Rec:=GVL_IO.str_Data_Rec);
+//EIB_BIT_REC function block initialization
+EIB_BIT_REC_9(Group_Address:=Group_Address_9, strData_Rec:=GVL_IO.str_Data_Rec);
+
+
+//keep BACnet object instance alive
+//assign alarm value to BACnet object
+fbBACnet_BV_Alarm(Device := Device, bEnablePV := TRUE, bNullPV := EIB_BIT_REC_9.bData);
+
+]]></ST>
+    </Implementation>
+    <LineIds Name="P_KNX_Data_GatesANDAlarm">
+      <LineId Id="78" Count="0" />
+      <LineId Id="81" Count="0" />
+      <LineId Id="79" Count="0" />
+      <LineId Id="82" Count="1" />
+      <LineId Id="68" Count="0" />
+      <LineId Id="85" Count="0" />
+      <LineId Id="76" Count="0" />
+      <LineId Id="25" Count="0" />
+      <LineId Id="86" Count="0" />
+      <LineId Id="26" Count="7" />
+      <LineId Id="59" Count="0" />
+      <LineId Id="5" Count="0" />
+      <LineId Id="58" Count="0" />
+      <LineId Id="35" Count="2" />
+      <LineId Id="34" Count="0" />
+      <LineId Id="41" Count="0" />
+      <LineId Id="50" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>
