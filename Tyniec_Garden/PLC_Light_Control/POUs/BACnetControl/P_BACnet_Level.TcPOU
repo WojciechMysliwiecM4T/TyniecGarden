@@ -8,16 +8,16 @@ END_VAR
 ]]></Declaration>
     <Implementation>
       <ST><![CDATA[//keep BACnet object alive
-fbBACnet_AV_SL_Level_1(Device := Device);
-fbBACnet_AV_SL_Level_2(Device := Device);
-fbBACnet_AV_SL_Level_3(Device := Device);
-fbBACnet_AV_SL_Level_4(Device := Device);
-fbBACnet_AV_SL_Level_5(Device := Device);
-fbBACnet_AV_SL_Level_6(Device := Device);
-fbBACnet_AV_SL_Level_7(Device := Device);
-fbBACnet_AV_SL_Level_8(Device := Device);
-fbBACnet_AV_SL_Level_9(Device := Device);
-fbBACnet_AV_SL_Level_10(Device := Device);
+fbBACnet_AV_SL_Level_1(Device := Device, bEnablePV := TRUE, bNullPV := FALSE);
+fbBACnet_AV_SL_Level_2(Device := Device, bEnablePV := TRUE, bNullPV := FALSE);
+fbBACnet_AV_SL_Level_3(Device := Device, bEnablePV := TRUE, bNullPV := FALSE);
+fbBACnet_AV_SL_Level_4(Device := Device, bEnablePV := TRUE, bNullPV := FALSE);
+fbBACnet_AV_SL_Level_5(Device := Device, bEnablePV := TRUE, bNullPV := FALSE);
+fbBACnet_AV_SL_Level_6(Device := Device, bEnablePV := TRUE, bNullPV := FALSE);
+fbBACnet_AV_SL_Level_7(Device := Device, bEnablePV := TRUE, bNullPV := FALSE);
+fbBACnet_AV_SL_Level_8(Device := Device, bEnablePV := TRUE, bNullPV := FALSE);
+fbBACnet_AV_SL_Level_9(Device := Device, bEnablePV := TRUE, bNullPV := FALSE);
+fbBACnet_AV_SL_Level_10(Device := Device, bEnablePV := TRUE, bNullPV := FALSE);
 
 //if Reset was not called
 IF NOT bBACnet_ResetManual THEN

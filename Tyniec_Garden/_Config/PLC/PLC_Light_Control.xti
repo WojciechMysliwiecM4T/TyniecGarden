@@ -414,6 +414,13 @@ KL6301]]></Comment>
 			<Vars VarGrpType="2" ContextId="2" AreaNo="33">
 				<Name>PlcTask Outputs</Name>
 				<Var>
+					<Name>GVL_IO.bStreetLamp_DO1</Name>
+					<Comment><![CDATA[Other
+street lamp that has no DALI
+therefore it is controlled via digital output (DO)]]></Comment>
+					<Type>BOOL</Type>
+				</Var>
+				<Var>
 					<Name>GVL_BACnet.fbBACnet_AV_SL_Manual._PresentValue_Priority12</Name>
 					<Type>DWORD</Type>
 				</Var>
@@ -508,13 +515,6 @@ KL6301]]></Comment>
 				<Var>
 					<Name>GVL_BACnet.fbBACnet_AV_SL_ActualLevel_10._PresentValue_Priority12</Name>
 					<Type>DWORD</Type>
-				</Var>
-				<Var>
-					<Name>GVL_IO.bStreetLamp_DO1</Name>
-					<Comment><![CDATA[Other
-street lamp that has no DALI
-therefore it is controlled via digital output (DO)]]></Comment>
-					<Type>BOOL</Type>
 				</Var>
 			</Vars>
 			<Contexts>

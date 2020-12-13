@@ -10,7 +10,7 @@ END_VAR
 VAR_GLOBAL CONSTANT
 	
 	byStreetLampsCount			: BYTE := 10;
-	byStreetLampsScenesNumber	: BYTE := 40;
+	byStreetLampsScenesNumber	: BYTE := 127;
 	
 	//Standard Brightness
 	
