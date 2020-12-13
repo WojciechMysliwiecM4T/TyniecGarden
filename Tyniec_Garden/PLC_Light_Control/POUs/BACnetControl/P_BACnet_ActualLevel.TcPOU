@@ -21,7 +21,7 @@ VAR
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[ton_Execute(IN := NOT ton_Execute.Q, PT := T#100MS);
+      <ST><![CDATA[ton_Execute(IN := NOT ton_Execute.Q, PT := T#50MS);
 
 fbDALIV2QueryActualLevel_1(
 	bStart:= ton_Execute.Q, 

@@ -4,9 +4,8 @@
     <Declaration><![CDATA[PROGRAM P_BACnet_Manual
 VAR
 	dwManual		: DWORD;
-	
 	rtReset			: R_TRIG;
-	iSelector		: INT := 0;
+	iSelReset		: INT := 0;
 	
 	ton_DelayForBACnet	: TON;
 END_VAR
@@ -15,20 +14,22 @@ END_VAR
       <ST><![CDATA[//keep BACnet object instance alive
 fbBACnet_AV_SL_Manual(Device := Device, bEnablePV := TRUE, bNullPV := FALSE);
 
-//init rising edge initialization
+//init rising edge detection
 rtReset(CLK := bBACnet_ResetManual);
+
 //if rising edge occures
-IF rtReset.Q THEN
+IF rtReset.Q 	THEN 
 	//set selector to 10
-	iSelector := 10;
+	iSelReset := 10;	
 END_IF
 
-CASE iSelector OF
+
+CASE iSelReset OF
 	0:	//idle
 		;	//do nothing
 	10:
 		fbBACnet_AV_SL_Manual.fPV := DWORD_TO_REAL(2#0001000000000000);
-		iSelector := 20;
+		iSelReset := 20;
 	20:
 		//dalay for BACnet to catch up PLC
 		ton_DelayForBACnet(IN := NOT ton_DelayForBACnet.Q, PT := T#100MS);
@@ -39,7 +40,7 @@ CASE iSelector OF
 				fbBACnet_AV_SL_Manual.fPV := fbBACnet_AV_SL_Manual.fPV + DWORD_TO_REAL(2#0001000000000000);
 			ELSE
 				bBACnet_ResetManual := FALSE;
-				iSelector := 0;
+				iSelReset := 0;
 			END_IF
 		END_IF
 END_CASE
@@ -60,8 +61,6 @@ GVL_IO.arrStreetLamps[7].bManualCtrl := dwManual.6;
 GVL_IO.arrStreetLamps[8].bManualCtrl := dwManual.7;
 GVL_IO.arrStreetLamps[9].bManualCtrl := dwManual.8;
 GVL_IO.arrStreetLamps[10].bManualCtrl := dwManual.9;
-
-
 ]]></ST>
     </Implementation>
     <LineIds Name="P_BACnet_Manual">
@@ -70,10 +69,13 @@ GVL_IO.arrStreetLamps[10].bManualCtrl := dwManual.9;
       <LineId Id="79" Count="0" />
       <LineId Id="75" Count="0" />
       <LineId Id="81" Count="0" />
+      <LineId Id="178" Count="0" />
       <LineId Id="85" Count="0" />
       <LineId Id="82" Count="0" />
-      <LineId Id="86" Count="0" />
-      <LineId Id="83" Count="1" />
+      <LineId Id="180" Count="0" />
+      <LineId Id="179" Count="0" />
+      <LineId Id="181" Count="0" />
+      <LineId Id="163" Count="0" />
       <LineId Id="80" Count="0" />
       <LineId Id="54" Count="0" />
       <LineId Id="76" Count="0" />
@@ -101,8 +103,6 @@ GVL_IO.arrStreetLamps[10].bManualCtrl := dwManual.9;
       <LineId Id="18" Count="0" />
       <LineId Id="15" Count="0" />
       <LineId Id="23" Count="7" />
-      <LineId Id="11" Count="0" />
-      <LineId Id="10" Count="0" />
       <LineId Id="9" Count="0" />
     </LineIds>
   </POU>

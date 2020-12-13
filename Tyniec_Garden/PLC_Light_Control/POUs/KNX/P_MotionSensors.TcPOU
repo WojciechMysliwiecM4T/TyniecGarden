@@ -48,32 +48,32 @@ IF bEnable AND F_IsNight() THEN
 				//depending on a lamp, the sensor belongs to
 				CASE i OF
 					//turn the lamp in c_byBrightness_Motion mode
-					1: fbBACnet_AV_SL_Level_1.fPV  := c_byBrightness_Motion;
-					2: fbBACnet_AV_SL_Level_2.fPV  := c_byBrightness_Motion;
-					3: fbBACnet_AV_SL_Level_3.fPV  := c_byBrightness_Motion;
-					4: fbBACnet_AV_SL_Level_4.fPV  := c_byBrightness_Motion;
-					5: fbBACnet_AV_SL_Level_5.fPV  := c_byBrightness_Motion;
-					6: fbBACnet_AV_SL_Level_6.fPV  := c_byBrightness_Motion;
-					7: fbBACnet_AV_SL_Level_7.fPV  := c_byBrightness_Motion;
-					8: fbBACnet_AV_SL_Level_8.fPV  := c_byBrightness_Motion;
-					9: fbBACnet_AV_SL_Level_9.fPV  := c_byBrightness_Motion;
-					10:fbBACnet_AV_SL_Level_10.fPV := c_byBrightness_Motion;
+					1: GVL_IO.arrStreetLamps[1].nLevel  := c_byBrightness_Motion;
+					2: GVL_IO.arrStreetLamps[2].nLevel  := c_byBrightness_Motion;
+					3: GVL_IO.arrStreetLamps[3].nLevel  := c_byBrightness_Motion;
+					4: GVL_IO.arrStreetLamps[4].nLevel  := c_byBrightness_Motion;
+					5: GVL_IO.arrStreetLamps[5].nLevel  := c_byBrightness_Motion;
+					6: GVL_IO.arrStreetLamps[6].nLevel  := c_byBrightness_Motion;
+					7: GVL_IO.arrStreetLamps[7].nLevel  := c_byBrightness_Motion;
+					8: GVL_IO.arrStreetLamps[8].nLevel  := c_byBrightness_Motion;
+					9: GVL_IO.arrStreetLamps[9].nLevel  := c_byBrightness_Motion;
+					10:GVL_IO.arrStreetLamps[10].nLevel := c_byBrightness_Motion;
 				END_CASE
 			//else if a falling edge at arrTOF output occured
 			ELSIF arrF_TRIG[i].Q THEN
 				//depending on a lamp, the sensor belongs to
 				CASE i OF
 					//turn the lamp in c_byBrightness_Night mode
-					1: fbBACnet_AV_SL_Level_1.fPV  := c_byBrightness_Night;
-					2: fbBACnet_AV_SL_Level_2.fPV  := c_byBrightness_Night;
-					3: fbBACnet_AV_SL_Level_3.fPV  := c_byBrightness_Night;
-					4: fbBACnet_AV_SL_Level_4.fPV  := c_byBrightness_Night;
-					5: fbBACnet_AV_SL_Level_5.fPV  := c_byBrightness_Night;
-					6: fbBACnet_AV_SL_Level_6.fPV  := c_byBrightness_Night;
-					7: fbBACnet_AV_SL_Level_7.fPV  := c_byBrightness_Night;
-					8: fbBACnet_AV_SL_Level_8.fPV  := c_byBrightness_Night;
-					9: fbBACnet_AV_SL_Level_9.fPV  := c_byBrightness_Night;
-					10:fbBACnet_AV_SL_Level_10.fPV := c_byBrightness_Night;
+					1: GVL_IO.arrStreetLamps[1].nLevel  := c_byBrightness_Night;
+					2: GVL_IO.arrStreetLamps[2].nLevel  := c_byBrightness_Night;
+					3: GVL_IO.arrStreetLamps[3].nLevel  := c_byBrightness_Night;
+					4: GVL_IO.arrStreetLamps[4].nLevel  := c_byBrightness_Night;
+					5: GVL_IO.arrStreetLamps[5].nLevel  := c_byBrightness_Night;
+					6: GVL_IO.arrStreetLamps[6].nLevel  := c_byBrightness_Night;
+					7: GVL_IO.arrStreetLamps[7].nLevel  := c_byBrightness_Night;
+					8: GVL_IO.arrStreetLamps[8].nLevel  := c_byBrightness_Night;
+					9: GVL_IO.arrStreetLamps[9].nLevel  := c_byBrightness_Night;
+					10:GVL_IO.arrStreetLamps[10].nLevel := c_byBrightness_Night;
 				END_CASE
 			END_IF
 		END_IF

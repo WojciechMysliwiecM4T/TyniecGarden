@@ -16,12 +16,12 @@ tonCycle(IN := NOT tonCycle.Q, PT:=T#1M, Q=>GVL_StreetLamps.bSetDimmValue);
 //assign DALI addresses at the begining of the program
 P_AddrAssignment();
 
-//P_BACnet_ActualLevel();
-//P_BACnet_Error();
-//P_BACnet_Level();
-//P_BACnet_Manual();
-//P_BACnet_Motion();
-//P_BACnet_Scene();
+P_BACnet_ActualLevel();
+P_BACnet_Error();
+P_BACnet_Level();
+P_BACnet_Manual();
+P_BACnet_Motion();
+P_BACnet_Scene();
 
 //KNX motion sensors activated
 P_MotionSensors(bEnable := TRUE);

@@ -44,16 +44,16 @@ CASE iSelector OF
 		bySceneID := INT_TO_BYTE(iSelector);
 		
 		//rewrite power levels from memory buffer to BACnet objects
-		fbBACnet_AV_SL_Level_1.fPV  := GVL_IO.arrScenesStreetLampsLevels[bySceneID, 1];
-		fbBACnet_AV_SL_Level_2.fPV  := GVL_IO.arrScenesStreetLampsLevels[bySceneID, 2];
-		fbBACnet_AV_SL_Level_3.fPV  := GVL_IO.arrScenesStreetLampsLevels[bySceneID, 3];
-		fbBACnet_AV_SL_Level_4.fPV  := GVL_IO.arrScenesStreetLampsLevels[bySceneID, 4];
-		fbBACnet_AV_SL_Level_5.fPV  := GVL_IO.arrScenesStreetLampsLevels[bySceneID, 5];
-		fbBACnet_AV_SL_Level_6.fPV  := GVL_IO.arrScenesStreetLampsLevels[bySceneID, 6];
-		fbBACnet_AV_SL_Level_7.fPV  := GVL_IO.arrScenesStreetLampsLevels[bySceneID, 7];
-		fbBACnet_AV_SL_Level_8.fPV  := GVL_IO.arrScenesStreetLampsLevels[bySceneID, 8];
-		fbBACnet_AV_SL_Level_9.fPV  := GVL_IO.arrScenesStreetLampsLevels[bySceneID, 9];
-		fbBACnet_AV_SL_Level_10.fPV := GVL_IO.arrScenesStreetLampsLevels[bySceneID, 10];
+		GVL_IO.arrStreetLamps[1].nLevel  := GVL_IO.arrScenesStreetLampsLevels[bySceneID, 1];
+		GVL_IO.arrStreetLamps[2].nLevel  := GVL_IO.arrScenesStreetLampsLevels[bySceneID, 2];
+		GVL_IO.arrStreetLamps[3].nLevel  := GVL_IO.arrScenesStreetLampsLevels[bySceneID, 3];
+		GVL_IO.arrStreetLamps[4].nLevel  := GVL_IO.arrScenesStreetLampsLevels[bySceneID, 4];
+		GVL_IO.arrStreetLamps[5].nLevel  := GVL_IO.arrScenesStreetLampsLevels[bySceneID, 5];
+		GVL_IO.arrStreetLamps[6].nLevel  := GVL_IO.arrScenesStreetLampsLevels[bySceneID, 6];
+		GVL_IO.arrStreetLamps[7].nLevel  := GVL_IO.arrScenesStreetLampsLevels[bySceneID, 7];
+		GVL_IO.arrStreetLamps[8].nLevel  := GVL_IO.arrScenesStreetLampsLevels[bySceneID, 8];
+		GVL_IO.arrStreetLamps[9].nLevel  := GVL_IO.arrScenesStreetLampsLevels[bySceneID, 9];
+		GVL_IO.arrStreetLamps[10].nLevel := GVL_IO.arrScenesStreetLampsLevels[bySceneID, 10];
 			
 		iSelector := 0;		//after rewriting data go back to idle
 		bBusy := FALSE;		//indicate that this FB is no longer busy

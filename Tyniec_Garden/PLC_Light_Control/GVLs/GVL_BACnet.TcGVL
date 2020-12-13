@@ -18,6 +18,7 @@
 	// bit-wise informations - each bit corresponds to particular lamp 
 	fbBACnet_AV_SL_Manual		: FB_BACnet_AnalogValue;		(* ~ (BACnet_ObjectIdentifier	: 1111   : NOLINK) *)
 	bBACnet_ResetManual			: BOOL;
+	bBACnet_SetManual			: BOOL;
 	
 	fbBACnet_AV_SL_Scene		: FB_BACnet_AnalogValue;		(* ~ (BACnet_ObjectIdentifier	: 2222   : NOLINK) *)								
 	fbBACnet_AV_SL_Motion		: FB_BACnet_AnalogValue;		(* ~ (BACnet_ObjectIdentifier	: 3333   : NOLINK) *)

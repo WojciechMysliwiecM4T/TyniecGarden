@@ -43,16 +43,16 @@ END_IF
 IF rtIsNight.Q THEN
 	//turn lights ON
 	//if they are not in manual mode	
-	IF NOT GVL_IO.arrStreetLamps[1].bManualCtrl  THEN fbBACnet_AV_SL_Level_1.fPV  := c_byBrightness_Night; END_IF
-	IF NOT GVL_IO.arrStreetLamps[2].bManualCtrl  THEN fbBACnet_AV_SL_Level_2.fPV  := c_byBrightness_Night; END_IF
-	IF NOT GVL_IO.arrStreetLamps[3].bManualCtrl  THEN fbBACnet_AV_SL_Level_3.fPV  := c_byBrightness_Night; END_IF
-	IF NOT GVL_IO.arrStreetLamps[4].bManualCtrl  THEN fbBACnet_AV_SL_Level_4.fPV  := c_byBrightness_Night; END_IF
-	IF NOT GVL_IO.arrStreetLamps[5].bManualCtrl  THEN fbBACnet_AV_SL_Level_5.fPV  := c_byBrightness_Night; END_IF
-	IF NOT GVL_IO.arrStreetLamps[6].bManualCtrl  THEN fbBACnet_AV_SL_Level_6.fPV  := c_byBrightness_Night; END_IF
-	IF NOT GVL_IO.arrStreetLamps[7].bManualCtrl  THEN fbBACnet_AV_SL_Level_7.fPV  := c_byBrightness_Night; END_IF
-	IF NOT GVL_IO.arrStreetLamps[8].bManualCtrl  THEN fbBACnet_AV_SL_Level_8.fPV  := c_byBrightness_Night; END_IF
-	IF NOT GVL_IO.arrStreetLamps[9].bManualCtrl  THEN fbBACnet_AV_SL_Level_9.fPV  := c_byBrightness_Night; END_IF
-	IF NOT GVL_IO.arrStreetLamps[10].bManualCtrl THEN fbBACnet_AV_SL_Level_10.fPV := c_byBrightness_Night; END_IF
+	IF NOT GVL_IO.arrStreetLamps[1].bManualCtrl  THEN GVL_IO.arrStreetLamps[1].nLevel  := c_byBrightness_Night; END_IF
+	IF NOT GVL_IO.arrStreetLamps[2].bManualCtrl  THEN GVL_IO.arrStreetLamps[2].nLevel  := c_byBrightness_Night; END_IF
+	IF NOT GVL_IO.arrStreetLamps[3].bManualCtrl  THEN GVL_IO.arrStreetLamps[3].nLevel  := c_byBrightness_Night; END_IF
+	IF NOT GVL_IO.arrStreetLamps[4].bManualCtrl  THEN GVL_IO.arrStreetLamps[4].nLevel  := c_byBrightness_Night; END_IF
+	IF NOT GVL_IO.arrStreetLamps[5].bManualCtrl  THEN GVL_IO.arrStreetLamps[5].nLevel  := c_byBrightness_Night; END_IF
+	IF NOT GVL_IO.arrStreetLamps[6].bManualCtrl  THEN GVL_IO.arrStreetLamps[6].nLevel  := c_byBrightness_Night; END_IF
+	IF NOT GVL_IO.arrStreetLamps[7].bManualCtrl  THEN GVL_IO.arrStreetLamps[7].nLevel  := c_byBrightness_Night; END_IF
+	IF NOT GVL_IO.arrStreetLamps[8].bManualCtrl  THEN GVL_IO.arrStreetLamps[8].nLevel  := c_byBrightness_Night; END_IF
+	IF NOT GVL_IO.arrStreetLamps[9].bManualCtrl  THEN GVL_IO.arrStreetLamps[9].nLevel  := c_byBrightness_Night; END_IF
+	IF NOT GVL_IO.arrStreetLamps[10].bManualCtrl THEN GVL_IO.arrStreetLamps[10].nLevel := c_byBrightness_Night; END_IF
 
 	//turn one street lamp ON
 	GVL_IO.bStreetLamp_DO1 := TRUE;
@@ -60,23 +60,25 @@ END_IF
 
 //if a day has come
 IF rtIsDay.Q THEN
+	
+	//and disable manual mode
+	bBACnet_ResetManual := TRUE;
+	
 	//turn all lights OFF
-	fbBACnet_AV_SL_Level_1.fPV  := c_byBrightness_Day;
-	fbBACnet_AV_SL_Level_2.fPV  := c_byBrightness_Day;
-	fbBACnet_AV_SL_Level_3.fPV  := c_byBrightness_Day;
-	fbBACnet_AV_SL_Level_4.fPV  := c_byBrightness_Day;
-	fbBACnet_AV_SL_Level_5.fPV  := c_byBrightness_Day;
-	fbBACnet_AV_SL_Level_6.fPV  := c_byBrightness_Day;
-	fbBACnet_AV_SL_Level_7.fPV  := c_byBrightness_Day;
-	fbBACnet_AV_SL_Level_8.fPV  := c_byBrightness_Day;
-	fbBACnet_AV_SL_Level_9.fPV  := c_byBrightness_Day;
-	fbBACnet_AV_SL_Level_10.fPV := c_byBrightness_Day;
+	GVL_IO.arrStreetLamps[1].nLevel  := c_byBrightness_Day;
+	GVL_IO.arrStreetLamps[2].nLevel  := c_byBrightness_Day;
+	GVL_IO.arrStreetLamps[3].nLevel  := c_byBrightness_Day;
+	GVL_IO.arrStreetLamps[4].nLevel  := c_byBrightness_Day;
+	GVL_IO.arrStreetLamps[5].nLevel  := c_byBrightness_Day;
+	GVL_IO.arrStreetLamps[6].nLevel  := c_byBrightness_Day;
+	GVL_IO.arrStreetLamps[7].nLevel  := c_byBrightness_Day;
+	GVL_IO.arrStreetLamps[8].nLevel  := c_byBrightness_Day;
+	GVL_IO.arrStreetLamps[9].nLevel  := c_byBrightness_Day;
+	GVL_IO.arrStreetLamps[10].nLevel := c_byBrightness_Day;
 	
 	//turn one street lamp OFF
 	GVL_IO.bStreetLamp_DO1 := FALSE;
 	
-	//and disable manual mode
-	bBACnet_ResetManual := TRUE;
 END_IF
 
 //special case - exit manual mode
@@ -92,30 +94,30 @@ FOR i := 1 TO byStreetLampsCount BY 1 DO
 		//in the night to c_byBrightness_Night
 		IF F_IsNight() THEN
 			CASE i OF
-				1: 	fbBACnet_AV_SL_Level_1.fPV  := c_byBrightness_Night;
-				2: 	fbBACnet_AV_SL_Level_2.fPV  := c_byBrightness_Night;
-				3: 	fbBACnet_AV_SL_Level_3.fPV  := c_byBrightness_Night;
-				4: 	fbBACnet_AV_SL_Level_4.fPV  := c_byBrightness_Night;
-				5: 	fbBACnet_AV_SL_Level_5.fPV  := c_byBrightness_Night;
-				6: 	fbBACnet_AV_SL_Level_6.fPV  := c_byBrightness_Night;
-				7: 	fbBACnet_AV_SL_Level_7.fPV  := c_byBrightness_Night;
-				8: 	fbBACnet_AV_SL_Level_8.fPV  := c_byBrightness_Night;
-				9: 	fbBACnet_AV_SL_Level_9.fPV  := c_byBrightness_Night;
-				10:	fbBACnet_AV_SL_Level_10.fPV := c_byBrightness_Night;
+				1: 	GVL_IO.arrStreetLamps[1].nLevel  := c_byBrightness_Night;
+				2: 	GVL_IO.arrStreetLamps[2].nLevel  := c_byBrightness_Night;
+				3: 	GVL_IO.arrStreetLamps[3].nLevel  := c_byBrightness_Night;
+				4: 	GVL_IO.arrStreetLamps[4].nLevel  := c_byBrightness_Night;
+				5: 	GVL_IO.arrStreetLamps[5].nLevel  := c_byBrightness_Night;
+				6: 	GVL_IO.arrStreetLamps[6].nLevel  := c_byBrightness_Night;
+				7: 	GVL_IO.arrStreetLamps[7].nLevel  := c_byBrightness_Night;
+				8: 	GVL_IO.arrStreetLamps[8].nLevel  := c_byBrightness_Night;
+				9: 	GVL_IO.arrStreetLamps[9].nLevel  := c_byBrightness_Night;
+				10:	GVL_IO.arrStreetLamps[10].nLevel := c_byBrightness_Night;
 			END_CASE
 		ELSE
 		//at the daylight to c_byBrightness_Day
 			CASE i OF
-				1: 	fbBACnet_AV_SL_Level_1.fPV  := c_byBrightness_Day;
-				2: 	fbBACnet_AV_SL_Level_2.fPV  := c_byBrightness_Day;
-				3: 	fbBACnet_AV_SL_Level_3.fPV  := c_byBrightness_Day;
-				4: 	fbBACnet_AV_SL_Level_4.fPV  := c_byBrightness_Day;
-				5: 	fbBACnet_AV_SL_Level_5.fPV  := c_byBrightness_Day;
-				6: 	fbBACnet_AV_SL_Level_6.fPV  := c_byBrightness_Day;
-				7: 	fbBACnet_AV_SL_Level_7.fPV  := c_byBrightness_Day;
-				8: 	fbBACnet_AV_SL_Level_8.fPV  := c_byBrightness_Day;
-				9: 	fbBACnet_AV_SL_Level_9.fPV  := c_byBrightness_Day;
-				10:	fbBACnet_AV_SL_Level_10.fPV := c_byBrightness_Day;
+				1: 	GVL_IO.arrStreetLamps[1].nLevel  := c_byBrightness_Day;
+				2: 	GVL_IO.arrStreetLamps[2].nLevel  := c_byBrightness_Day;
+				3: 	GVL_IO.arrStreetLamps[3].nLevel  := c_byBrightness_Day;
+				4: 	GVL_IO.arrStreetLamps[4].nLevel  := c_byBrightness_Day;
+				5: 	GVL_IO.arrStreetLamps[5].nLevel  := c_byBrightness_Day;
+				6: 	GVL_IO.arrStreetLamps[6].nLevel  := c_byBrightness_Day;
+				7: 	GVL_IO.arrStreetLamps[7].nLevel  := c_byBrightness_Day;
+				8: 	GVL_IO.arrStreetLamps[8].nLevel  := c_byBrightness_Day;
+				9: 	GVL_IO.arrStreetLamps[9].nLevel  := c_byBrightness_Day;
+				10:	GVL_IO.arrStreetLamps[10].nLevel := c_byBrightness_Day;
 			END_CASE
 		END_IF
 	END_IF
@@ -155,12 +157,15 @@ END_FOR
       <LineId Id="141" Count="0" />
       <LineId Id="128" Count="0" />
       <LineId Id="127" Count="0" />
+      <LineId Id="337" Count="0" />
+      <LineId Id="339" Count="0" />
+      <LineId Id="338" Count="0" />
+      <LineId Id="340" Count="0" />
       <LineId Id="129" Count="0" />
       <LineId Id="154" Count="0" />
       <LineId Id="234" Count="9" />
-      <LineId Id="171" Count="2" />
-      <LineId Id="155" Count="0" />
-      <LineId Id="291" Count="0" />
+      <LineId Id="171" Count="1" />
+      <LineId Id="341" Count="0" />
       <LineId Id="130" Count="0" />
       <LineId Id="187" Count="0" />
       <LineId Id="186" Count="0" />
