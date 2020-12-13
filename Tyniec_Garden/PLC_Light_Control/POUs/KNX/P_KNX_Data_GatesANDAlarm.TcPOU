@@ -52,7 +52,7 @@ EIB_BIT_REC_9(Group_Address:=Group_Address_9, strData_Rec:=GVL_IO.str_Data_Rec);
 
 //keep BACnet object instance alive
 //assign alarm value to BACnet object
-fbBACnet_BV_Alarm(Device := Device, bEnablePV := TRUE, bNullPV := EIB_BIT_REC_9.bData);
+fbBACnet_BV_Alarm(Device := Device, bEnablePV := TRUE, bNullPV := FALSE, bPV := EIB_BIT_REC_9.bData);
 
 ]]></ST>
     </Implementation>

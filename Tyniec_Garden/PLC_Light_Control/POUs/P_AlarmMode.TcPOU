@@ -16,10 +16,6 @@ ftAlarm(CLK := fbBACnet_BV_Alarm.bPresentValue);
 
 //if rising edge occured
 IF rtAlarm.Q THEN
-	//save present brightness levels
-	fbPBL(bSave := TRUE);
-	//reset executive input
-	fbPBL(bSave := FALSE);
 	
 	//reset manual mode
 	bBACnet_ResetManual := TRUE;
@@ -40,28 +36,51 @@ END_IF
 
 //if falling edge occured
 IF ftAlarm.Q THEN
-	//retrieve present brightness levels from memory
-	fbPBL(bRetrieve := TRUE);
-	//reset executive input
-	fbPBL(bRetrieve := FALSE);
+	IF F_IsNight() THEN
+		fbBACnet_AV_SL_Level_1.fPV  := c_byBrightness_Night;
+		fbBACnet_AV_SL_Level_2.fPV  := c_byBrightness_Night;
+		fbBACnet_AV_SL_Level_3.fPV  := c_byBrightness_Night;
+		fbBACnet_AV_SL_Level_4.fPV  := c_byBrightness_Night;
+		fbBACnet_AV_SL_Level_5.fPV  := c_byBrightness_Night;
+		fbBACnet_AV_SL_Level_6.fPV  := c_byBrightness_Night;
+		fbBACnet_AV_SL_Level_7.fPV  := c_byBrightness_Night;
+		fbBACnet_AV_SL_Level_8.fPV  := c_byBrightness_Night;
+		fbBACnet_AV_SL_Level_9.fPV  := c_byBrightness_Night;
+		fbBACnet_AV_SL_Level_10.fPV := c_byBrightness_Night;
+	ELSE
+		fbBACnet_AV_SL_Level_1.fPV  := c_byBrightness_Day;
+		fbBACnet_AV_SL_Level_2.fPV  := c_byBrightness_Day;
+		fbBACnet_AV_SL_Level_3.fPV  := c_byBrightness_Day;
+		fbBACnet_AV_SL_Level_4.fPV  := c_byBrightness_Day;
+		fbBACnet_AV_SL_Level_5.fPV  := c_byBrightness_Day;
+		fbBACnet_AV_SL_Level_6.fPV  := c_byBrightness_Day;
+		fbBACnet_AV_SL_Level_7.fPV  := c_byBrightness_Day;
+		fbBACnet_AV_SL_Level_8.fPV  := c_byBrightness_Day;
+		fbBACnet_AV_SL_Level_9.fPV  := c_byBrightness_Day;
+		fbBACnet_AV_SL_Level_10.fPV := c_byBrightness_Day;
+	END_IF
 END_IF]]></ST>
     </Implementation>
     <LineIds Name="P_AlarmMode">
       <LineId Id="10" Count="0" />
       <LineId Id="12" Count="2" />
       <LineId Id="11" Count="0" />
-      <LineId Id="18" Count="1" />
-      <LineId Id="5" Count="0" />
-      <LineId Id="20" Count="1" />
-      <LineId Id="52" Count="2" />
+      <LineId Id="18" Count="0" />
+      <LineId Id="62" Count="0" />
+      <LineId Id="53" Count="1" />
       <LineId Id="51" Count="0" />
       <LineId Id="23" Count="11" />
       <LineId Id="15" Count="0" />
       <LineId Id="36" Count="0" />
       <LineId Id="35" Count="0" />
-      <LineId Id="37" Count="0" />
-      <LineId Id="40" Count="2" />
-      <LineId Id="38" Count="1" />
+      <LineId Id="37" Count="1" />
+      <LineId Id="67" Count="8" />
+      <LineId Id="65" Count="0" />
+      <LineId Id="76" Count="0" />
+      <LineId Id="85" Count="8" />
+      <LineId Id="77" Count="0" />
+      <LineId Id="66" Count="0" />
+      <LineId Id="84" Count="0" />
     </LineIds>
   </POU>
 </TcPlcObject>
