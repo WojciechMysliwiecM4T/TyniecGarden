@@ -4,11 +4,46 @@
     <Declaration><![CDATA[PROGRAM P_BACnet_Manual
 VAR
 	dwManual		: DWORD;
+	
+	rtReset			: R_TRIG;
+	iSelector		: INT := 0;
+	
+	ton_DelayForBACnet	: TON;
 END_VAR
 ]]></Declaration>
     <Implementation>
       <ST><![CDATA[//keep BACnet object instance alive
 fbBACnet_AV_SL_Manual(Device := Device, bEnablePV := TRUE, bNullPV := FALSE);
+
+//init rising edge initialization
+rtReset(CLK := bBACnet_ResetManual);
+//if rising edge occures
+IF rtReset.Q THEN
+	//set selector to 10
+	iSelector := 10;
+END_IF
+
+CASE iSelector OF
+	0:	//idle
+		;	//do nothing
+	10:
+		fbBACnet_AV_SL_Manual.fPV := DWORD_TO_REAL(2#0001000000000000);
+		iSelector := 20;
+	20:
+		//dalay for BACnet to catch up PLC
+		ton_DelayForBACnet(IN := NOT ton_DelayForBACnet.Q, PT := T#100MS);
+		IF ton_DelayForBACnet.Q THEN
+			//if fPresentValue and fPV are different
+			IF fbBACnet_AV_SL_Manual.fPresentValue <> fbBACnet_AV_SL_Manual.fPV THEN
+				//increment fPV by 2#0001000000000000 to force the change of fPresentValue
+				fbBACnet_AV_SL_Manual.fPV := fbBACnet_AV_SL_Manual.fPV + DWORD_TO_REAL(2#0001000000000000);
+			ELSE
+				bBACnet_ResetManual := FALSE;
+				iSelector := 0;
+			END_IF
+		END_IF
+END_CASE
+
 
 //read REAL data from BACnet object
 //and convert them to DWORD
@@ -30,7 +65,32 @@ GVL_IO.arrStreetLamps[10].bManualCtrl := dwManual.9;
 ]]></ST>
     </Implementation>
     <LineIds Name="P_BACnet_Manual">
-      <LineId Id="41" Count="0" />
+      <LineId Id="57" Count="0" />
+      <LineId Id="56" Count="0" />
+      <LineId Id="79" Count="0" />
+      <LineId Id="75" Count="0" />
+      <LineId Id="81" Count="0" />
+      <LineId Id="85" Count="0" />
+      <LineId Id="82" Count="0" />
+      <LineId Id="86" Count="0" />
+      <LineId Id="83" Count="1" />
+      <LineId Id="80" Count="0" />
+      <LineId Id="54" Count="0" />
+      <LineId Id="76" Count="0" />
+      <LineId Id="87" Count="2" />
+      <LineId Id="91" Count="0" />
+      <LineId Id="90" Count="0" />
+      <LineId Id="108" Count="1" />
+      <LineId Id="107" Count="0" />
+      <LineId Id="99" Count="0" />
+      <LineId Id="92" Count="1" />
+      <LineId Id="97" Count="0" />
+      <LineId Id="95" Count="0" />
+      <LineId Id="113" Count="0" />
+      <LineId Id="96" Count="0" />
+      <LineId Id="94" Count="0" />
+      <LineId Id="110" Count="0" />
+      <LineId Id="77" Count="0" />
       <LineId Id="39" Count="0" />
       <LineId Id="36" Count="0" />
       <LineId Id="5" Count="0" />

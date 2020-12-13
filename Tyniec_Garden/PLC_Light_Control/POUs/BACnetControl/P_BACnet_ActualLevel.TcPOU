@@ -6,6 +6,8 @@ VAR
 	i					: INT := 0;		//for loop counter
 	arrActualLevel		: ARRAY [1..10] OF REAL;
 	
+	ton_Execute			: TON;
+	
 	fbDALIV2QueryActualLevel_1	 	: FB_DALIV2QueryActualLevel;
 	fbDALIV2QueryActualLevel_2	 	: FB_DALIV2QueryActualLevel;
 	fbDALIV2QueryActualLevel_3	 	: FB_DALIV2QueryActualLevel;
@@ -19,88 +21,79 @@ VAR
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[
+      <ST><![CDATA[ton_Execute(IN := NOT ton_Execute.Q, PT := T#100MS);
+
 fbDALIV2QueryActualLevel_1(
-	bStart:= TRUE, 
+	bStart:= ton_Execute.Q, 
 	nAddr:= GVL_IO.arrStreetLamps[1].nAddrShort1, 
 	eAddrType:= eDALIV2AddrTypeShort, 
 	eCommandPriority:= eDALIV2CommandPriorityLow,  
 	stCommandBuffer:= GVL_IO.stCommandBuffer_RB1);
-fbDALIV2QueryActualLevel_1(bStart:= FALSE, stCommandBuffer:= GVL_IO.stCommandBuffer_RB1);
 
 fbDALIV2QueryActualLevel_2(
-	bStart:= TRUE, 
+	bStart:= ton_Execute.Q, 
 	nAddr:= GVL_IO.arrStreetLamps[2].nAddrShort1, 
 	eAddrType:= eDALIV2AddrTypeShort, 
 	eCommandPriority:= eDALIV2CommandPriorityLow,  
 	stCommandBuffer:= GVL_IO.stCommandBuffer_RB1);
-fbDALIV2QueryActualLevel_2(bStart:= FALSE, stCommandBuffer:= GVL_IO.stCommandBuffer_RB1);
 
 fbDALIV2QueryActualLevel_3(
-	bStart:= TRUE, 
+	bStart:= ton_Execute.Q, 
 	nAddr:= GVL_IO.arrStreetLamps[3].nAddrShort1, 
 	eAddrType:= eDALIV2AddrTypeShort, 
 	eCommandPriority:= eDALIV2CommandPriorityLow,  
 	stCommandBuffer:= GVL_IO.stCommandBuffer_RB1);
-fbDALIV2QueryActualLevel_3(bStart:= FALSE, stCommandBuffer:= GVL_IO.stCommandBuffer_RB1);
 
 fbDALIV2QueryActualLevel_4(
-	bStart:= TRUE, 
+	bStart:= ton_Execute.Q, 
 	nAddr:= GVL_IO.arrStreetLamps[4].nAddrShort1, 
 	eAddrType:= eDALIV2AddrTypeShort, 
 	eCommandPriority:= eDALIV2CommandPriorityLow,  
 	stCommandBuffer:= GVL_IO.stCommandBuffer_RB2);
-fbDALIV2QueryActualLevel_4(bStart:= FALSE, stCommandBuffer:= GVL_IO.stCommandBuffer_RB2);
 
 fbDALIV2QueryActualLevel_5(
-	bStart:= TRUE, 
+	bStart:= ton_Execute.Q, 
 	nAddr:= GVL_IO.arrStreetLamps[5].nAddrShort1, 
 	eAddrType:= eDALIV2AddrTypeShort, 
 	eCommandPriority:= eDALIV2CommandPriorityLow,  
 	stCommandBuffer:= GVL_IO.stCommandBuffer_RB2);
-fbDALIV2QueryActualLevel_5(bStart:= FALSE, stCommandBuffer:= GVL_IO.stCommandBuffer_RB2);
 
 fbDALIV2QueryActualLevel_6(
-	bStart:= TRUE, 
+	bStart:= ton_Execute.Q, 
 	nAddr:= GVL_IO.arrStreetLamps[6].nAddrShort1, 
 	eAddrType:= eDALIV2AddrTypeShort, 
 	eCommandPriority:= eDALIV2CommandPriorityLow,  
 	stCommandBuffer:= GVL_IO.stCommandBuffer_RB2);
-fbDALIV2QueryActualLevel_6(bStart:= FALSE, stCommandBuffer:= GVL_IO.stCommandBuffer_RB2);
 
 fbDALIV2QueryActualLevel_7(
-	bStart:= TRUE, 
+	bStart:= ton_Execute.Q, 
 	nAddr:= GVL_IO.arrStreetLamps[7].nAddrShort1, 
 	eAddrType:= eDALIV2AddrTypeShort, 
 	eCommandPriority:= eDALIV2CommandPriorityLow,  
 	stCommandBuffer:= GVL_IO.stCommandBuffer_RB2);
-fbDALIV2QueryActualLevel_7(bStart:= FALSE, stCommandBuffer:= GVL_IO.stCommandBuffer_RB2);
 
 fbDALIV2QueryActualLevel_8(
-	bStart:= TRUE, 
+	bStart:= ton_Execute.Q, 
 	nAddr:= GVL_IO.arrStreetLamps[8].nAddrShort1, 
 	eAddrType:= eDALIV2AddrTypeShort, 
 	eCommandPriority:= eDALIV2CommandPriorityLow,  
 	stCommandBuffer:= GVL_IO.stCommandBuffer_RB3);
-fbDALIV2QueryActualLevel_8(bStart:= FALSE, stCommandBuffer:= GVL_IO.stCommandBuffer_RB3);
 
 fbDALIV2QueryActualLevel_9(
-	bStart:= TRUE, 
+	bStart:= ton_Execute.Q, 
 	nAddr:= GVL_IO.arrStreetLamps[9].nAddrShort1, 
 	eAddrType:= eDALIV2AddrTypeShort, 
 	eCommandPriority:= eDALIV2CommandPriorityLow,  
 	stCommandBuffer:= GVL_IO.stCommandBuffer_RB3);
-fbDALIV2QueryActualLevel_9(bStart:= FALSE, stCommandBuffer:= GVL_IO.stCommandBuffer_RB3);
 
 fbDALIV2QueryActualLevel_10(
-	bStart:= TRUE, 
+	bStart:= ton_Execute.Q, 
 	nAddr:= GVL_IO.arrStreetLamps[10].nAddrShort1, 
 	eAddrType:= eDALIV2AddrTypeShort, 
 	eCommandPriority:= eDALIV2CommandPriorityLow,  
 	stCommandBuffer:= GVL_IO.stCommandBuffer_RB3);
-fbDALIV2QueryActualLevel_10(bStart:= FALSE, stCommandBuffer:= GVL_IO.stCommandBuffer_RB3);
 
-
+	
 //rewrite data to BACnet objects
 fbBACnet_AV_SL_ActualLevel_1(Device := Device, bEnablePV := TRUE, bNullPV := FALSE, fPV := fbDALIV2QueryActualLevel_1.nActualLevel);
 fbBACnet_AV_SL_ActualLevel_2(Device := Device, bEnablePV := TRUE, bNullPV := FALSE, fPV := fbDALIV2QueryActualLevel_2.nActualLevel);
@@ -111,46 +104,31 @@ fbBACnet_AV_SL_ActualLevel_6(Device := Device, bEnablePV := TRUE, bNullPV := FAL
 fbBACnet_AV_SL_ActualLevel_7(Device := Device, bEnablePV := TRUE, bNullPV := FALSE, fPV := fbDALIV2QueryActualLevel_7.nActualLevel);
 fbBACnet_AV_SL_ActualLevel_8(Device := Device, bEnablePV := TRUE, bNullPV := FALSE, fPV := fbDALIV2QueryActualLevel_8.nActualLevel);
 fbBACnet_AV_SL_ActualLevel_9(Device := Device, bEnablePV := TRUE, bNullPV := FALSE, fPV := fbDALIV2QueryActualLevel_9.nActualLevel);
-fbBACnet_AV_SL_ActualLevel_10(Device := Device, bEnablePV := TRUE, bNullPV := FALSE, fPV := fbDALIV2QueryActualLevel_10.nActualLevel);]]></ST>
+fbBACnet_AV_SL_ActualLevel_10(Device := Device, bEnablePV := TRUE, bNullPV := FALSE, fPV := fbDALIV2QueryActualLevel_10.nActualLevel);
+]]></ST>
     </Implementation>
     <LineIds Name="P_BACnet_ActualLevel">
       <LineId Id="44" Count="0" />
+      <LineId Id="182" Count="0" />
       <LineId Id="29" Count="3" />
       <LineId Id="37" Count="0" />
       <LineId Id="26" Count="0" />
-      <LineId Id="62" Count="0" />
       <LineId Id="92" Count="0" />
-      <LineId Id="94" Count="5" />
-      <LineId Id="93" Count="0" />
-      <LineId Id="100" Count="0" />
-      <LineId Id="102" Count="5" />
-      <LineId Id="101" Count="0" />
-      <LineId Id="108" Count="0" />
-      <LineId Id="110" Count="5" />
-      <LineId Id="109" Count="0" />
-      <LineId Id="116" Count="0" />
-      <LineId Id="118" Count="5" />
-      <LineId Id="117" Count="0" />
-      <LineId Id="124" Count="0" />
-      <LineId Id="126" Count="5" />
-      <LineId Id="125" Count="0" />
-      <LineId Id="132" Count="0" />
-      <LineId Id="134" Count="5" />
-      <LineId Id="133" Count="0" />
-      <LineId Id="140" Count="0" />
-      <LineId Id="142" Count="5" />
-      <LineId Id="141" Count="0" />
-      <LineId Id="148" Count="0" />
-      <LineId Id="150" Count="5" />
-      <LineId Id="149" Count="0" />
-      <LineId Id="156" Count="0" />
+      <LineId Id="94" Count="6" />
+      <LineId Id="102" Count="6" />
+      <LineId Id="110" Count="6" />
+      <LineId Id="118" Count="6" />
+      <LineId Id="126" Count="6" />
+      <LineId Id="134" Count="6" />
+      <LineId Id="142" Count="6" />
+      <LineId Id="150" Count="6" />
       <LineId Id="158" Count="5" />
-      <LineId Id="157" Count="0" />
-      <LineId Id="22" Count="0" />
+      <LineId Id="184" Count="0" />
       <LineId Id="63" Count="0" />
       <LineId Id="65" Count="0" />
       <LineId Id="64" Count="0" />
       <LineId Id="66" Count="8" />
+      <LineId Id="183" Count="0" />
     </LineIds>
   </POU>
 </TcPlcObject>

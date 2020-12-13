@@ -8,49 +8,210 @@ VAR
 	dwLampFailure		: DWORD;
 	rLampFailure		: REAL;
 	
+	ton_Execute			: TON;
+	
 	fbDALIV2QueryLampFailure_1		: FB_DALIV2QueryLampFailure;
 	fbDALIV2QueryLampFailure_2		: FB_DALIV2QueryLampFailure;
+	fbDALIV2QueryLampFailure_3		: FB_DALIV2QueryLampFailure;
+	fbDALIV2QueryLampFailure_4		: FB_DALIV2QueryLampFailure;
+	fbDALIV2QueryLampFailure_5		: FB_DALIV2QueryLampFailure;
+	fbDALIV2QueryLampFailure_6		: FB_DALIV2QueryLampFailure;
+	fbDALIV2QueryLampFailure_7		: FB_DALIV2QueryLampFailure;
+	fbDALIV2QueryLampFailure_8		: FB_DALIV2QueryLampFailure;
+	fbDALIV2QueryLampFailure_9		: FB_DALIV2QueryLampFailure;
+	fbDALIV2QueryLampFailure_10		: FB_DALIV2QueryLampFailure;
+	
+	fbDALIV2QueryLampFailure_1_2		: FB_DALIV2QueryLampFailure;
+	fbDALIV2QueryLampFailure_2_2		: FB_DALIV2QueryLampFailure;
+	fbDALIV2QueryLampFailure_3_2		: FB_DALIV2QueryLampFailure;
+	fbDALIV2QueryLampFailure_4_2		: FB_DALIV2QueryLampFailure;
+	fbDALIV2QueryLampFailure_5_2		: FB_DALIV2QueryLampFailure;
+	fbDALIV2QueryLampFailure_6_2		: FB_DALIV2QueryLampFailure;
+	fbDALIV2QueryLampFailure_7_2		: FB_DALIV2QueryLampFailure;
+	fbDALIV2QueryLampFailure_8_2		: FB_DALIV2QueryLampFailure;
+	fbDALIV2QueryLampFailure_9_2		: FB_DALIV2QueryLampFailure;
+	fbDALIV2QueryLampFailure_10_2		: FB_DALIV2QueryLampFailure;
+	
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[//iterate through DALI ballasts reading lamp failure information
-FOR i := 1 TO byStreetLampsCount BY 1 DO
-	//query first half of the lamp
-	fbDALIV2QueryLampFailure_1(
-			bStart:= TRUE, 
-			nAddr:= GVL_IO.arrStreetLamps[i].nAddrShort1, 
-			eAddrType:= eDALIV2AddrTypeShort, 
-			eCommandPriority:= eDALIV2CommandPriorityLow,  
-			stCommandBuffer:= GVL_IO.arrStreetLamps[i].ref_stCommandBuffer);
-	//reset the block
-	fbDALIV2QueryLampFailure_1(bStart := FALSE, stCommandBuffer := GVL_IO.arrStreetLamps[i].ref_stCommandBuffer);
+      <ST><![CDATA[//init ton timer
+ton_Execute(IN := NOT ton_Execute.Q, PT := T#100MS);
 
-	//query second half of the lamp
-	fbDALIV2QueryLampFailure_2(
-			bStart:= TRUE, 
-			nAddr:= GVL_IO.arrStreetLamps[i].nAddrShort2, 
-			eAddrType:= eDALIV2AddrTypeShort, 
-			eCommandPriority:= eDALIV2CommandPriorityLow,  
-			stCommandBuffer:= GVL_IO.arrStreetLamps[i].ref_stCommandBuffer);
-	//reset the block
-	fbDALIV2QueryLampFailure_2(bStart := FALSE, stCommandBuffer := GVL_IO.arrStreetLamps[i].ref_stCommandBuffer);
-	
-	
-	//if at least one of ballasts indicates failure, set flag (LampFailure) to TRUE
-	arrLampFailure[i] := fbDALIV2QueryLampFailure_1.bLampFailure OR fbDALIV2QueryLampFailure_2.bLampFailure;	
-END_FOR
+//query first half of the lamp
+fbDALIV2QueryLampFailure_1(
+		bStart:= ton_Execute.Q, 
+		nAddr:= GVL_IO.arrStreetLamps[1].nAddrShort1, 
+		eAddrType:= eDALIV2AddrTypeShort, 
+		eCommandPriority:= eDALIV2CommandPriorityLow,  
+		stCommandBuffer:= GVL_IO.stCommandBuffer_RB1);
+
+//query second half of the lamp
+fbDALIV2QueryLampFailure_1_2(
+		bStart:= ton_Execute.Q, 
+		nAddr:= GVL_IO.arrStreetLamps[1].nAddrShort2, 
+		eAddrType:= eDALIV2AddrTypeShort, 
+		eCommandPriority:= eDALIV2CommandPriorityLow,  
+		stCommandBuffer:= GVL_IO.stCommandBuffer_RB1);
 		
+		//query first half of the lamp
+fbDALIV2QueryLampFailure_2(
+		bStart:= ton_Execute.Q, 
+		nAddr:= GVL_IO.arrStreetLamps[2].nAddrShort1, 
+		eAddrType:= eDALIV2AddrTypeShort, 
+		eCommandPriority:= eDALIV2CommandPriorityLow,  
+		stCommandBuffer:= GVL_IO.stCommandBuffer_RB1);
+
+//query second half of the lamp
+fbDALIV2QueryLampFailure_2_2(
+		bStart:= ton_Execute.Q, 
+		nAddr:= GVL_IO.arrStreetLamps[2].nAddrShort2, 
+		eAddrType:= eDALIV2AddrTypeShort, 
+		eCommandPriority:= eDALIV2CommandPriorityLow,  
+		stCommandBuffer:= GVL_IO.stCommandBuffer_RB1);
+		
+		//query first half of the lamp
+fbDALIV2QueryLampFailure_3(
+		bStart:= ton_Execute.Q, 
+		nAddr:= GVL_IO.arrStreetLamps[3].nAddrShort1, 
+		eAddrType:= eDALIV2AddrTypeShort, 
+		eCommandPriority:= eDALIV2CommandPriorityLow,  
+		stCommandBuffer:= GVL_IO.stCommandBuffer_RB1);
+
+//query second half of the lamp
+fbDALIV2QueryLampFailure_3_2(
+		bStart:= ton_Execute.Q, 
+		nAddr:= GVL_IO.arrStreetLamps[3].nAddrShort2, 
+		eAddrType:= eDALIV2AddrTypeShort, 
+		eCommandPriority:= eDALIV2CommandPriorityLow,  
+		stCommandBuffer:= GVL_IO.stCommandBuffer_RB1);
+		
+		//query first half of the lamp
+fbDALIV2QueryLampFailure_4(
+		bStart:= ton_Execute.Q, 
+		nAddr:= GVL_IO.arrStreetLamps[4].nAddrShort1, 
+		eAddrType:= eDALIV2AddrTypeShort, 
+		eCommandPriority:= eDALIV2CommandPriorityLow,  
+		stCommandBuffer:= GVL_IO.stCommandBuffer_RB2);
+
+//query second half of the lamp
+fbDALIV2QueryLampFailure_4_2(
+		bStart:= ton_Execute.Q, 
+		nAddr:= GVL_IO.arrStreetLamps[4].nAddrShort2, 
+		eAddrType:= eDALIV2AddrTypeShort, 
+		eCommandPriority:= eDALIV2CommandPriorityLow,  
+		stCommandBuffer:= GVL_IO.stCommandBuffer_RB2);
+		
+		//query first half of the lamp
+fbDALIV2QueryLampFailure_5(
+		bStart:= ton_Execute.Q, 
+		nAddr:= GVL_IO.arrStreetLamps[5].nAddrShort1, 
+		eAddrType:= eDALIV2AddrTypeShort, 
+		eCommandPriority:= eDALIV2CommandPriorityLow,  
+		stCommandBuffer:= GVL_IO.stCommandBuffer_RB2);
+
+//query second half of the lamp
+fbDALIV2QueryLampFailure_5_2(
+		bStart:= ton_Execute.Q, 
+		nAddr:= GVL_IO.arrStreetLamps[5].nAddrShort2, 
+		eAddrType:= eDALIV2AddrTypeShort, 
+		eCommandPriority:= eDALIV2CommandPriorityLow,  
+		stCommandBuffer:= GVL_IO.stCommandBuffer_RB2);
+		
+		//query first half of the lamp
+fbDALIV2QueryLampFailure_6(
+		bStart:= ton_Execute.Q, 
+		nAddr:= GVL_IO.arrStreetLamps[6].nAddrShort1, 
+		eAddrType:= eDALIV2AddrTypeShort, 
+		eCommandPriority:= eDALIV2CommandPriorityLow,  
+		stCommandBuffer:= GVL_IO.stCommandBuffer_RB2);
+
+//query second half of the lamp
+fbDALIV2QueryLampFailure_6_2(
+		bStart:= ton_Execute.Q, 
+		nAddr:= GVL_IO.arrStreetLamps[6].nAddrShort2, 
+		eAddrType:= eDALIV2AddrTypeShort, 
+		eCommandPriority:= eDALIV2CommandPriorityLow,  
+		stCommandBuffer:= GVL_IO.stCommandBuffer_RB2);
+		
+		//query first half of the lamp
+fbDALIV2QueryLampFailure_7(
+		bStart:= ton_Execute.Q, 
+		nAddr:= GVL_IO.arrStreetLamps[7].nAddrShort1, 
+		eAddrType:= eDALIV2AddrTypeShort, 
+		eCommandPriority:= eDALIV2CommandPriorityLow,  
+		stCommandBuffer:= GVL_IO.stCommandBuffer_RB2);
+
+//query second half of the lamp
+fbDALIV2QueryLampFailure_7_2(
+		bStart:= ton_Execute.Q, 
+		nAddr:= GVL_IO.arrStreetLamps[7].nAddrShort2, 
+		eAddrType:= eDALIV2AddrTypeShort, 
+		eCommandPriority:= eDALIV2CommandPriorityLow,  
+		stCommandBuffer:= GVL_IO.stCommandBuffer_RB2);
+		
+		//query first half of the lamp
+fbDALIV2QueryLampFailure_8(
+		bStart:= ton_Execute.Q, 
+		nAddr:= GVL_IO.arrStreetLamps[8].nAddrShort1, 
+		eAddrType:= eDALIV2AddrTypeShort, 
+		eCommandPriority:= eDALIV2CommandPriorityLow,  
+		stCommandBuffer:= GVL_IO.stCommandBuffer_RB3);
+
+//query second half of the lamp
+fbDALIV2QueryLampFailure_8_2(
+		bStart:= ton_Execute.Q, 
+		nAddr:= GVL_IO.arrStreetLamps[8].nAddrShort2, 
+		eAddrType:= eDALIV2AddrTypeShort, 
+		eCommandPriority:= eDALIV2CommandPriorityLow,  
+		stCommandBuffer:= GVL_IO.stCommandBuffer_RB3);
+		
+		//query first half of the lamp
+fbDALIV2QueryLampFailure_9(
+		bStart:= ton_Execute.Q, 
+		nAddr:= GVL_IO.arrStreetLamps[9].nAddrShort1, 
+		eAddrType:= eDALIV2AddrTypeShort, 
+		eCommandPriority:= eDALIV2CommandPriorityLow,  
+		stCommandBuffer:= GVL_IO.stCommandBuffer_RB3);
+
+//query second half of the lamp
+fbDALIV2QueryLampFailure_9_2(
+		bStart:= ton_Execute.Q, 
+		nAddr:= GVL_IO.arrStreetLamps[9].nAddrShort2, 
+		eAddrType:= eDALIV2AddrTypeShort, 
+		eCommandPriority:= eDALIV2CommandPriorityLow,  
+		stCommandBuffer:= GVL_IO.stCommandBuffer_RB3);
+		
+		//query first half of the lamp
+fbDALIV2QueryLampFailure_10(
+		bStart:= ton_Execute.Q, 
+		nAddr:= GVL_IO.arrStreetLamps[10].nAddrShort1, 
+		eAddrType:= eDALIV2AddrTypeShort, 
+		eCommandPriority:= eDALIV2CommandPriorityLow,  
+		stCommandBuffer:= GVL_IO.stCommandBuffer_RB3);
+
+//query second half of the lamp
+fbDALIV2QueryLampFailure_10_2(
+		bStart:= ton_Execute.Q, 
+		nAddr:= GVL_IO.arrStreetLamps[10].nAddrShort2, 
+		eAddrType:= eDALIV2AddrTypeShort, 
+		eCommandPriority:= eDALIV2CommandPriorityLow,  
+		stCommandBuffer:= GVL_IO.stCommandBuffer_RB3);
+
+
+
+	
 //convert arrLampFailure into pseudo-array in the form of a DWORD variable
-dwLampFailure.0 := arrLampFailure[1];
-dwLampFailure.1 := arrLampFailure[2];
-dwLampFailure.2 := arrLampFailure[3];
-dwLampFailure.3 := arrLampFailure[4];
-dwLampFailure.4 := arrLampFailure[5];
-dwLampFailure.5 := arrLampFailure[6];
-dwLampFailure.6 := arrLampFailure[7];
-dwLampFailure.7 := arrLampFailure[8];
-dwLampFailure.8 := arrLampFailure[9];
-dwLampFailure.9 := arrLampFailure[10];
+dwLampFailure.0 := fbDALIV2QueryLampFailure_1.bLampFailure  OR fbDALIV2QueryLampFailure_1_2.bLampFailure;
+dwLampFailure.1 := fbDALIV2QueryLampFailure_2.bLampFailure  OR fbDALIV2QueryLampFailure_2_2.bLampFailure;
+dwLampFailure.2 := fbDALIV2QueryLampFailure_3.bLampFailure  OR fbDALIV2QueryLampFailure_3_2.bLampFailure;
+dwLampFailure.3 := fbDALIV2QueryLampFailure_4.bLampFailure  OR fbDALIV2QueryLampFailure_4_2.bLampFailure;
+dwLampFailure.4 := fbDALIV2QueryLampFailure_5.bLampFailure  OR fbDALIV2QueryLampFailure_5_2.bLampFailure;
+dwLampFailure.5 := fbDALIV2QueryLampFailure_6.bLampFailure  OR fbDALIV2QueryLampFailure_6_2.bLampFailure;
+dwLampFailure.6 := fbDALIV2QueryLampFailure_7.bLampFailure  OR fbDALIV2QueryLampFailure_7_2.bLampFailure;
+dwLampFailure.7 := fbDALIV2QueryLampFailure_8.bLampFailure  OR fbDALIV2QueryLampFailure_8_2.bLampFailure;
+dwLampFailure.8 := fbDALIV2QueryLampFailure_9.bLampFailure  OR fbDALIV2QueryLampFailure_9_2.bLampFailure;
+dwLampFailure.9 := fbDALIV2QueryLampFailure_10.bLampFailure OR fbDALIV2QueryLampFailure_10_2.bLampFailure;
 
 //type conversion from REAL to DWORD
 rLampFailure := DWORD_TO_REAL(dwLampFailure);
@@ -60,18 +221,41 @@ rLampFailure := DWORD_TO_REAL(dwLampFailure);
 fbBACnet_AV_SL_Error(Device := Device, bEnablePV := TRUE, bNullPV := FALSE, fPV := rLampFailure);]]></ST>
     </Implementation>
     <LineIds Name="P_BACnet_Error">
-      <LineId Id="32" Count="0" />
-      <LineId Id="31" Count="0" />
-      <LineId Id="35" Count="6" />
-      <LineId Id="43" Count="9" />
-      <LineId Id="54" Count="0" />
-      <LineId Id="33" Count="0" />
-      <LineId Id="55" Count="0" />
-      <LineId Id="57" Count="0" />
-      <LineId Id="56" Count="0" />
-      <LineId Id="58" Count="0" />
-      <LineId Id="34" Count="0" />
+      <LineId Id="35" Count="0" />
+      <LineId Id="185" Count="1" />
+      <LineId Id="184" Count="0" />
+      <LineId Id="36" Count="4" />
+      <LineId Id="44" Count="8" />
+      <LineId Id="187" Count="0" />
+      <LineId Id="189" Count="13" />
+      <LineId Id="188" Count="0" />
+      <LineId Id="203" Count="0" />
+      <LineId Id="205" Count="13" />
+      <LineId Id="204" Count="0" />
+      <LineId Id="219" Count="0" />
+      <LineId Id="221" Count="13" />
+      <LineId Id="220" Count="0" />
+      <LineId Id="235" Count="0" />
+      <LineId Id="237" Count="13" />
+      <LineId Id="236" Count="0" />
+      <LineId Id="251" Count="0" />
+      <LineId Id="253" Count="13" />
+      <LineId Id="252" Count="0" />
+      <LineId Id="267" Count="0" />
+      <LineId Id="269" Count="13" />
+      <LineId Id="268" Count="0" />
+      <LineId Id="283" Count="0" />
+      <LineId Id="285" Count="13" />
+      <LineId Id="284" Count="0" />
+      <LineId Id="299" Count="0" />
+      <LineId Id="301" Count="13" />
+      <LineId Id="300" Count="0" />
+      <LineId Id="315" Count="0" />
+      <LineId Id="317" Count="13" />
+      <LineId Id="316" Count="0" />
+      <LineId Id="91" Count="1" />
       <LineId Id="22" Count="0" />
+      <LineId Id="161" Count="0" />
       <LineId Id="5" Count="0" />
       <LineId Id="60" Count="0" />
       <LineId Id="62" Count="8" />

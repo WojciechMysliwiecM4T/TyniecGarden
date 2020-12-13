@@ -21,17 +21,20 @@ IF rtAlarm.Q THEN
 	//reset executive input
 	fbPBL(bSave := FALSE);
 	
+	//reset manual mode
+	bBACnet_ResetManual := TRUE;
+	
 	//then set street lamp levels to c_byBrightness_Alarm level
-	fbBACnet_AV_SL_Level_1(Device := Device, bEnablePV := TRUE, bNullPV := FALSE, fPV := c_byBrightness_Alarm);
-	fbBACnet_AV_SL_Level_2(Device := Device, bEnablePV := TRUE, bNullPV := FALSE, fPV := c_byBrightness_Alarm);
-	fbBACnet_AV_SL_Level_3(Device := Device, bEnablePV := TRUE, bNullPV := FALSE, fPV := c_byBrightness_Alarm);
-	fbBACnet_AV_SL_Level_4(Device := Device, bEnablePV := TRUE, bNullPV := FALSE, fPV := c_byBrightness_Alarm);
-	fbBACnet_AV_SL_Level_5(Device := Device, bEnablePV := TRUE, bNullPV := FALSE, fPV := c_byBrightness_Alarm);
-	fbBACnet_AV_SL_Level_6(Device := Device, bEnablePV := TRUE, bNullPV := FALSE, fPV := c_byBrightness_Alarm);
-	fbBACnet_AV_SL_Level_7(Device := Device, bEnablePV := TRUE, bNullPV := FALSE, fPV := c_byBrightness_Alarm);
-	fbBACnet_AV_SL_Level_8(Device := Device, bEnablePV := TRUE, bNullPV := FALSE, fPV := c_byBrightness_Alarm);
-	fbBACnet_AV_SL_Level_9(Device := Device, bEnablePV := TRUE, bNullPV := FALSE, fPV := c_byBrightness_Alarm);
-	fbBACnet_AV_SL_Level_10(Device := Device, bEnablePV := TRUE, bNullPV := FALSE, fPV := c_byBrightness_Alarm);
+	fbBACnet_AV_SL_Level_1.fPV  := c_byBrightness_Alarm;
+	fbBACnet_AV_SL_Level_2.fPV  := c_byBrightness_Alarm;
+	fbBACnet_AV_SL_Level_3.fPV  := c_byBrightness_Alarm;
+	fbBACnet_AV_SL_Level_4.fPV  := c_byBrightness_Alarm;
+	fbBACnet_AV_SL_Level_5.fPV  := c_byBrightness_Alarm;
+	fbBACnet_AV_SL_Level_6.fPV  := c_byBrightness_Alarm;
+	fbBACnet_AV_SL_Level_7.fPV  := c_byBrightness_Alarm;
+	fbBACnet_AV_SL_Level_8.fPV  := c_byBrightness_Alarm;
+	fbBACnet_AV_SL_Level_9.fPV  := c_byBrightness_Alarm;
+	fbBACnet_AV_SL_Level_10.fPV := c_byBrightness_Alarm;
 	
 END_IF
 
@@ -49,7 +52,10 @@ END_IF]]></ST>
       <LineId Id="11" Count="0" />
       <LineId Id="18" Count="1" />
       <LineId Id="5" Count="0" />
-      <LineId Id="20" Count="14" />
+      <LineId Id="20" Count="1" />
+      <LineId Id="52" Count="2" />
+      <LineId Id="51" Count="0" />
+      <LineId Id="23" Count="11" />
       <LineId Id="15" Count="0" />
       <LineId Id="36" Count="0" />
       <LineId Id="35" Count="0" />

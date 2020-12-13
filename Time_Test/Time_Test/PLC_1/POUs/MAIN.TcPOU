@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.5">
+  <POU Name="MAIN" Id="{e8b40569-7154-4b82-b9cb-c910d5f73805}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM MAIN
+VAR
+	ntGetTime	: NT_GetTime;
+	timeST		: Tc2_Utilities.TIMESTRUCT;
+	
+	ton			: TON;
+	
+	fbLocalSystemTime	: FB_LocalSystemTime;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[ton(IN := NOT ton.Q, PT := T#100MS);
+
+ntGetTime(
+	NETID := '26.242.21.199.1.1',
+	START := ton.Q,
+	TIMESTR => timeST);
+	
+fbLocalSystemTime(
+	sNetID:= '', 
+	bEnable:= TRUE);]]></ST>
+    </Implementation>
+    <LineIds Name="MAIN">
+      <LineId Id="15" Count="1" />
+      <LineId Id="2" Count="0" />
+      <LineId Id="7" Count="2" />
+      <LineId Id="11" Count="0" />
+      <LineId Id="20" Count="1" />
+      <LineId Id="19" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

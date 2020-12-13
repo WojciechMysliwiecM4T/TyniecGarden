@@ -3,7 +3,7 @@
   <Task Name="DimmerTask" Id="{f242b34d-d7db-4cb1-8705-591b61596ff9}">
     <!--CycleTime in micro seconds.-->
     <CycleTime>10000</CycleTime>
-    <Priority>21</Priority>
+    <Priority>15</Priority>
     <PouCall>
       <Name>P_Dimmers_RB1</Name>
     </PouCall>

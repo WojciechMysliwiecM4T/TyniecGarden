@@ -33,16 +33,16 @@ END_IF
 //if rising edge occures on bRetrieve
 IF rtRetrieve.Q THEN
 	//retrive data from arr_byPBL and set lamps to those levels
-	fbBACnet_AV_SL_Level_1(Device := Device, bEnablePV := TRUE, bNullPV := FALSE, fPV := arr_byPBL[1]);
-    fbBACnet_AV_SL_Level_2(Device := Device, bEnablePV := TRUE, bNullPV := FALSE, fPV := arr_byPBL[2]);
-    fbBACnet_AV_SL_Level_3(Device := Device, bEnablePV := TRUE, bNullPV := FALSE, fPV := arr_byPBL[3]);
-    fbBACnet_AV_SL_Level_4(Device := Device, bEnablePV := TRUE, bNullPV := FALSE, fPV := arr_byPBL[4]);
-    fbBACnet_AV_SL_Level_5(Device := Device, bEnablePV := TRUE, bNullPV := FALSE, fPV := arr_byPBL[5]);
-    fbBACnet_AV_SL_Level_6(Device := Device, bEnablePV := TRUE, bNullPV := FALSE, fPV := arr_byPBL[6]);
-    fbBACnet_AV_SL_Level_7(Device := Device, bEnablePV := TRUE, bNullPV := FALSE, fPV := arr_byPBL[7]);
-    fbBACnet_AV_SL_Level_8(Device := Device, bEnablePV := TRUE, bNullPV := FALSE, fPV := arr_byPBL[8]);
-    fbBACnet_AV_SL_Level_9(Device := Device, bEnablePV := TRUE, bNullPV := FALSE, fPV := arr_byPBL[9]);
-    fbBACnet_AV_SL_Level_10(Device := Device, bEnablePV := TRUE, bNullPV := FALSE, fPV := arr_byPBL[10]);
+	fbBACnet_AV_SL_Level_1.fPV  := arr_byPBL[1];
+    fbBACnet_AV_SL_Level_2.fPV  := arr_byPBL[2];
+    fbBACnet_AV_SL_Level_3.fPV  := arr_byPBL[3];
+    fbBACnet_AV_SL_Level_4.fPV  := arr_byPBL[4];
+    fbBACnet_AV_SL_Level_5.fPV  := arr_byPBL[5];
+    fbBACnet_AV_SL_Level_6.fPV  := arr_byPBL[6];
+    fbBACnet_AV_SL_Level_7.fPV  := arr_byPBL[7];
+    fbBACnet_AV_SL_Level_8.fPV  := arr_byPBL[8];
+    fbBACnet_AV_SL_Level_9.fPV  := arr_byPBL[9];
+    fbBACnet_AV_SL_Level_10.fPV := arr_byPBL[10];
 END_IF]]></ST>
     </Implementation>
     <LineIds Name="FB_PBL">

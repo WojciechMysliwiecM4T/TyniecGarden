@@ -14,26 +14,21 @@ VAR_INPUT
 END_VAR
 VAR_OUTPUT
 	bBusy				:BOOL:=FALSE;		//when TRUE FB is busy working
-	bError				:BOOL:=FALSE;		//when TRUE Error has occured
 END_VAR
 VAR
 	bySceneID			: BYTE;		//number of scene that is being manipulated
 	iSelector			: INT := 0;	//variable used in CASE statement
 	iCounter			: INT := 0;	//for loop counter
 	
-	rtError				: R_TRIG;	//rising edge detection on bError
 	
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[//keep BACnet object alive
-fbBACnet_AV_SL_Scene(Device := Device);
-
-//edge detection intialization
-rtError(CLK:=bError);
-
-//read BACnet object
-iSelector := REAL_TO_INT(fbBACnet_AV_SL_Scene.fPresentValue);
+      <ST><![CDATA[//if FB is not busy
+IF NOT bBusy THEN
+	//read BACnet object
+	iSelector := REAL_TO_INT(fbBACnet_AV_SL_Scene.fPresentValue);
+END_IF
 
 CASE iSelector OF
 	0, 255:	//idle state
@@ -42,89 +37,54 @@ CASE iSelector OF
 	1..127:	//SceneON
 		bBusy := TRUE;	//set a flag indicating that this FB is busy
 		
-		bySceneID := INT_TO_BYTE(iSelector);
-		//if bySceneID is valid
-		IF bySceneID > 0 
-		AND bySceneID < byStreetLampsScenesNumber + 1 THEN
-			//rewrite power levels from memory buffer to BACnet objects
-			fbBACnet_AV_SL_Level_1(Device := Device, bEnablePV := TRUE, bNullPV := FALSE, fPV := GVL_IO.arrScenesStreetLampsLevels[bySceneID, 1]);
-			fbBACnet_AV_SL_Level_2(Device := Device, bEnablePV := TRUE, bNullPV := FALSE, fPV := GVL_IO.arrScenesStreetLampsLevels[bySceneID, 2]);
-			fbBACnet_AV_SL_Level_3(Device := Device, bEnablePV := TRUE, bNullPV := FALSE, fPV := GVL_IO.arrScenesStreetLampsLevels[bySceneID, 3]);
-			fbBACnet_AV_SL_Level_4(Device := Device, bEnablePV := TRUE, bNullPV := FALSE, fPV := GVL_IO.arrScenesStreetLampsLevels[bySceneID, 4]);
-			fbBACnet_AV_SL_Level_5(Device := Device, bEnablePV := TRUE, bNullPV := FALSE, fPV := GVL_IO.arrScenesStreetLampsLevels[bySceneID, 5]);
-			fbBACnet_AV_SL_Level_6(Device := Device, bEnablePV := TRUE, bNullPV := FALSE, fPV := GVL_IO.arrScenesStreetLampsLevels[bySceneID, 6]);
-			fbBACnet_AV_SL_Level_7(Device := Device, bEnablePV := TRUE, bNullPV := FALSE, fPV := GVL_IO.arrScenesStreetLampsLevels[bySceneID, 7]);
-			fbBACnet_AV_SL_Level_8(Device := Device, bEnablePV := TRUE, bNullPV := FALSE, fPV := GVL_IO.arrScenesStreetLampsLevels[bySceneID, 8]);
-			fbBACnet_AV_SL_Level_9(Device := Device, bEnablePV := TRUE, bNullPV := FALSE, fPV := GVL_IO.arrScenesStreetLampsLevels[bySceneID, 9]);
-			fbBACnet_AV_SL_Level_10(Device := Device, bEnablePV := TRUE, bNullPV := FALSE, fPV := GVL_IO.arrScenesStreetLampsLevels[bySceneID, 10]);
-			
-			//set all lamps to manual mode
-			//by pushing 2#1111111111
-			//to BACnet object
-			fbBACnet_AV_SL_Manual(Device := Device, bEnablePV := TRUE, bNullPV := FALSE, fPV := DWORD_TO_REAL(2#1111111111));
-			
-			iSelector := 0;		//after rewriting data go back to idle
-			bBusy := FALSE;		//indicate that this FB is no longer busy
+		//reset manual mode
+		bBACnet_ResetManual := TRUE;
 		
-		//if bySceneID is invalid, report an error
-		ELSE
-			iSelector := 999;
-		END_IF
+		//convert int to byte
+		bySceneID := INT_TO_BYTE(iSelector);
+		
+		//rewrite power levels from memory buffer to BACnet objects
+		fbBACnet_AV_SL_Level_1.fPV  := GVL_IO.arrScenesStreetLampsLevels[bySceneID, 1];
+		fbBACnet_AV_SL_Level_2.fPV  := GVL_IO.arrScenesStreetLampsLevels[bySceneID, 2];
+		fbBACnet_AV_SL_Level_3.fPV  := GVL_IO.arrScenesStreetLampsLevels[bySceneID, 3];
+		fbBACnet_AV_SL_Level_4.fPV  := GVL_IO.arrScenesStreetLampsLevels[bySceneID, 4];
+		fbBACnet_AV_SL_Level_5.fPV  := GVL_IO.arrScenesStreetLampsLevels[bySceneID, 5];
+		fbBACnet_AV_SL_Level_6.fPV  := GVL_IO.arrScenesStreetLampsLevels[bySceneID, 6];
+		fbBACnet_AV_SL_Level_7.fPV  := GVL_IO.arrScenesStreetLampsLevels[bySceneID, 7];
+		fbBACnet_AV_SL_Level_8.fPV  := GVL_IO.arrScenesStreetLampsLevels[bySceneID, 8];
+		fbBACnet_AV_SL_Level_9.fPV  := GVL_IO.arrScenesStreetLampsLevels[bySceneID, 9];
+		fbBACnet_AV_SL_Level_10.fPV := GVL_IO.arrScenesStreetLampsLevels[bySceneID, 10];
+			
+		iSelector := 0;		//after rewriting data go back to idle
+		bBusy := FALSE;		//indicate that this FB is no longer busy
 		
 		
 	128..254:	//SaveScene
 		bBusy := TRUE;	//set a flag indicating that this FB is busy
 		
 		bySceneID := INT_TO_BYTE(iSelector) - 127;
-		//if bySceneID is valid
-		IF bySceneID > 0
-		AND bySceneID < byStreetLampsScenesNumber + 1 THEN
-			//iterate through arrays to
-			FOR iCounter := 1 TO byStreetLampsCount BY 1 DO
-				//save current lamp's power levels to memory buffer
-				GVL_IO.arrScenesStreetLampsLevels[bySceneID, iCounter]
-					:= GVL_IO.arrStreetLamps[iCounter].nLevel;
-			END_FOR
-			
-			iSelector := 0;		//after saving data go back to idle
-			bBusy := FALSE;		//indicate that this FB is no longer busy
 		
-		//if bySceneID is invalid, report an error
-		ELSE
-			iSelector := 999;
-		END_IF
+		//iterate through arrays to
+		FOR iCounter := 1 TO byStreetLampsCount BY 1 DO
+			//save current lamp's power levels to memory buffer
+			GVL_IO.arrScenesStreetLampsLevels[bySceneID, iCounter]
+				:= GVL_IO.arrStreetLamps[iCounter].nLevel;
+		END_FOR
 		
-	999:
-		//acknoledge error occurence
-		bError := TRUE;
+		iSelector := 0;		//after saving data go back to idle
+		bBusy := FALSE;		//indicate that this FB is no longer busy
 		
-		//when error occures
-		IF rtError.Q THEN
-			//log an error message
-			ADSLOGDINT( msgCtrlMask := ADSLOG_MSGTYPE_ERROR,
-					msgFmtStr := 'FB_SceneController: Error Occured! Invalid scene index',
-					dintArg := -1);
-		END_IF
-		
-		//if error is reset, go to idle
-		IF bError = FALSE THEN
-			iSelector := 0;
-			bBusy := FALSE;
-		END_IF
 END_CASE
 
 
 ]]></ST>
     </Implementation>
     <LineIds Name="FB_SceneController">
-      <LineId Id="221" Count="0" />
-      <LineId Id="223" Count="0" />
-      <LineId Id="222" Count="0" />
-      <LineId Id="29" Count="0" />
-      <LineId Id="93" Count="0" />
-      <LineId Id="219" Count="0" />
+      <LineId Id="283" Count="0" />
+      <LineId Id="281" Count="0" />
       <LineId Id="27" Count="0" />
       <LineId Id="108" Count="0" />
+      <LineId Id="282" Count="0" />
       <LineId Id="180" Count="0" />
       <LineId Id="42" Count="0" />
       <LineId Id="53" Count="0" />
@@ -132,29 +92,22 @@ END_CASE
       <LineId Id="135" Count="0" />
       <LineId Id="56" Count="0" />
       <LineId Id="76" Count="1" />
-      <LineId Id="182" Count="0" />
-      <LineId Id="63" Count="0" />
-      <LineId Id="57" Count="0" />
-      <LineId Id="62" Count="0" />
+      <LineId Id="275" Count="1" />
+      <LineId Id="279" Count="0" />
+      <LineId Id="285" Count="0" />
+      <LineId Id="284" Count="0" />
+      <LineId Id="286" Count="0" />
       <LineId Id="60" Count="0" />
       <LineId Id="187" Count="8" />
       <LineId Id="184" Count="0" />
       <LineId Id="81" Count="0" />
-      <LineId Id="247" Count="0" />
-      <LineId Id="249" Count="0" />
-      <LineId Id="251" Count="0" />
-      <LineId Id="248" Count="0" />
-      <LineId Id="143" Count="2" />
+      <LineId Id="144" Count="1" />
       <LineId Id="90" Count="0" />
-      <LineId Id="146" Count="0" />
-      <LineId Id="65" Count="1" />
-      <LineId Id="61" Count="0" />
-      <LineId Id="133" Count="1" />
+      <LineId Id="134" Count="0" />
       <LineId Id="58" Count="0" />
       <LineId Id="109" Count="1" />
       <LineId Id="186" Count="0" />
-      <LineId Id="115" Count="0" />
-      <LineId Id="111" Count="1" />
+      <LineId Id="112" Count="0" />
       <LineId Id="114" Count="0" />
       <LineId Id="122" Count="0" />
       <LineId Id="125" Count="0" />
@@ -162,28 +115,7 @@ END_CASE
       <LineId Id="128" Count="0" />
       <LineId Id="123" Count="0" />
       <LineId Id="140" Count="2" />
-      <LineId Id="130" Count="0" />
-      <LineId Id="147" Count="0" />
-      <LineId Id="131" Count="0" />
-      <LineId Id="129" Count="0" />
-      <LineId Id="113" Count="0" />
-      <LineId Id="132" Count="0" />
-      <LineId Id="67" Count="0" />
-      <LineId Id="72" Count="0" />
-      <LineId Id="68" Count="0" />
-      <LineId Id="94" Count="0" />
-      <LineId Id="100" Count="0" />
-      <LineId Id="96" Count="0" />
-      <LineId Id="101" Count="0" />
-      <LineId Id="97" Count="0" />
-      <LineId Id="99" Count="0" />
-      <LineId Id="102" Count="0" />
-      <LineId Id="98" Count="0" />
-      <LineId Id="95" Count="0" />
-      <LineId Id="73" Count="0" />
-      <LineId Id="69" Count="1" />
-      <LineId Id="74" Count="0" />
-      <LineId Id="71" Count="0" />
+      <LineId Id="278" Count="0" />
       <LineId Id="54" Count="0" />
       <LineId Id="43" Count="1" />
       <LineId Id="23" Count="0" />

@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.5">
-  <POU Name="P_RB2_Communication" Id="{ad2ef548-640c-4ef8-88ad-361df1c54b66}" SpecialFunc="None">
-    <Declaration><![CDATA[PROGRAM P_RB2_Communication
+  <POU Name="P_DALI_RB2_Communication" Id="{ad2ef548-640c-4ef8-88ad-361df1c54b66}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM P_DALI_RB2_Communication
 VAR
 	//INPUTS
 	fbKL6821Communication		: FB_KL6821Communication;

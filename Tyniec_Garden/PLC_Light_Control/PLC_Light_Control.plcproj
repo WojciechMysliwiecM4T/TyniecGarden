@@ -64,6 +64,9 @@
     <Compile Include="POUs\BACnetControl\P_BACnet_Motion.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="POUs\BACnetControl\P_BACnet_Scene.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="POUs\DimmersStreetLamps\P_Dimmers_RB1.TcPOU">
       <SubType>Code</SubType>
     </Compile>
@@ -85,13 +88,13 @@
     <Compile Include="POUs\F_IsNight.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\KL6821Communication\P_RB1_Communication.TcPOU">
+    <Compile Include="POUs\KL6821Communication\P_DALI_RB1_Communication.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\KL6821Communication\P_RB2_Communication.TcPOU">
+    <Compile Include="POUs\KL6821Communication\P_DALI_RB2_Communication.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\KL6821Communication\P_RB3_Communication.TcPOU">
+    <Compile Include="POUs\KL6821Communication\P_DALI_RB3_Communication.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\KNX\P_KNX_Communication.TcPOU">

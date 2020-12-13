@@ -17,6 +17,8 @@
 	// pseudo-arrays - multiple BVs in one BACnet AV object,
 	// bit-wise informations - each bit corresponds to particular lamp 
 	fbBACnet_AV_SL_Manual		: FB_BACnet_AnalogValue;		(* ~ (BACnet_ObjectIdentifier	: 1111   : NOLINK) *)
+	bBACnet_ResetManual			: BOOL;
+	
 	fbBACnet_AV_SL_Scene		: FB_BACnet_AnalogValue;		(* ~ (BACnet_ObjectIdentifier	: 2222   : NOLINK) *)								
 	fbBACnet_AV_SL_Motion		: FB_BACnet_AnalogValue;		(* ~ (BACnet_ObjectIdentifier	: 3333   : NOLINK) *)
 	fbBACnet_AV_SL_Error		: FB_BACnet_AnalogValue;		(* ~ (BACnet_ObjectIdentifier	: 9999   : NOLINK) *)
@@ -43,17 +45,7 @@
 	fbBACnet_AV_SL_ActualLevel_8		: FB_BACnet_AnalogValue;	(* ~ (BACnet_ObjectIdentifier	: 5008   : NOLINK) *)
 	fbBACnet_AV_SL_ActualLevel_9		: FB_BACnet_AnalogValue;	(* ~ (BACnet_ObjectIdentifier	: 5009   : NOLINK) *)
 	fbBACnet_AV_SL_ActualLevel_10		: FB_BACnet_AnalogValue;	(* ~ (BACnet_ObjectIdentifier	: 5010   : NOLINK) *)
-			
-	by_AV_SL_Level_1			: BYTE;
-	by_AV_SL_Level_2			: BYTE;
-	by_AV_SL_Level_3			: BYTE;
-	by_AV_SL_Level_4			: BYTE;
-	by_AV_SL_Level_5			: BYTE;
-	by_AV_SL_Level_6			: BYTE;
-	by_AV_SL_Level_7			: BYTE;
-	by_AV_SL_Level_8			: BYTE;
-	by_AV_SL_Level_9			: BYTE;
-	by_AV_SL_Level_10			: BYTE;
+
 END_VAR]]></Declaration>
   </GVL>
 </TcPlcObject>

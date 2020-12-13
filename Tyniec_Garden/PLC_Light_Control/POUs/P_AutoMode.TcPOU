@@ -41,17 +41,18 @@ END_IF
 
 //if a night has come
 IF rtIsNight.Q THEN
-	//if lights are not in manual mode, turn them ON 	
-	IF NOT GVL_IO.arrStreetLamps[1].bManualCtrl THEN  fbBACnet_AV_SL_Level_1(Device := Device, bEnablePV := TRUE, bNullPV := FALSE, fPV := c_byBrightness_Night); END_IF
-	IF NOT GVL_IO.arrStreetLamps[2].bManualCtrl THEN  fbBACnet_AV_SL_Level_2(Device := Device, bEnablePV := TRUE, bNullPV := FALSE, fPV := c_byBrightness_Night); END_IF
-	IF NOT GVL_IO.arrStreetLamps[3].bManualCtrl THEN  fbBACnet_AV_SL_Level_3(Device := Device, bEnablePV := TRUE, bNullPV := FALSE, fPV := c_byBrightness_Night); END_IF
-	IF NOT GVL_IO.arrStreetLamps[4].bManualCtrl THEN  fbBACnet_AV_SL_Level_4(Device := Device, bEnablePV := TRUE, bNullPV := FALSE, fPV := c_byBrightness_Night); END_IF
-	IF NOT GVL_IO.arrStreetLamps[5].bManualCtrl THEN  fbBACnet_AV_SL_Level_5(Device := Device, bEnablePV := TRUE, bNullPV := FALSE, fPV := c_byBrightness_Night); END_IF
-	IF NOT GVL_IO.arrStreetLamps[6].bManualCtrl THEN  fbBACnet_AV_SL_Level_6(Device := Device, bEnablePV := TRUE, bNullPV := FALSE, fPV := c_byBrightness_Night); END_IF
-	IF NOT GVL_IO.arrStreetLamps[7].bManualCtrl THEN  fbBACnet_AV_SL_Level_7(Device := Device, bEnablePV := TRUE, bNullPV := FALSE, fPV := c_byBrightness_Night); END_IF
-	IF NOT GVL_IO.arrStreetLamps[8].bManualCtrl THEN  fbBACnet_AV_SL_Level_8(Device := Device, bEnablePV := TRUE, bNullPV := FALSE, fPV := c_byBrightness_Night); END_IF
-	IF NOT GVL_IO.arrStreetLamps[9].bManualCtrl THEN  fbBACnet_AV_SL_Level_9(Device := Device, bEnablePV := TRUE, bNullPV := FALSE, fPV := c_byBrightness_Night); END_IF
-	IF NOT GVL_IO.arrStreetLamps[10].bManualCtrl THEN fbBACnet_AV_SL_Level_10(Device := Device, bEnablePV := TRUE, bNullPV := FALSE, fPV := c_byBrightness_Night); END_IF
+	//turn lights ON
+	//if they are not in manual mode	
+	IF NOT GVL_IO.arrStreetLamps[1].bManualCtrl  THEN fbBACnet_AV_SL_Level_1.fPV  := c_byBrightness_Night; END_IF
+	IF NOT GVL_IO.arrStreetLamps[2].bManualCtrl  THEN fbBACnet_AV_SL_Level_2.fPV  := c_byBrightness_Night; END_IF
+	IF NOT GVL_IO.arrStreetLamps[3].bManualCtrl  THEN fbBACnet_AV_SL_Level_3.fPV  := c_byBrightness_Night; END_IF
+	IF NOT GVL_IO.arrStreetLamps[4].bManualCtrl  THEN fbBACnet_AV_SL_Level_4.fPV  := c_byBrightness_Night; END_IF
+	IF NOT GVL_IO.arrStreetLamps[5].bManualCtrl  THEN fbBACnet_AV_SL_Level_5.fPV  := c_byBrightness_Night; END_IF
+	IF NOT GVL_IO.arrStreetLamps[6].bManualCtrl  THEN fbBACnet_AV_SL_Level_6.fPV  := c_byBrightness_Night; END_IF
+	IF NOT GVL_IO.arrStreetLamps[7].bManualCtrl  THEN fbBACnet_AV_SL_Level_7.fPV  := c_byBrightness_Night; END_IF
+	IF NOT GVL_IO.arrStreetLamps[8].bManualCtrl  THEN fbBACnet_AV_SL_Level_8.fPV  := c_byBrightness_Night; END_IF
+	IF NOT GVL_IO.arrStreetLamps[9].bManualCtrl  THEN fbBACnet_AV_SL_Level_9.fPV  := c_byBrightness_Night; END_IF
+	IF NOT GVL_IO.arrStreetLamps[10].bManualCtrl THEN fbBACnet_AV_SL_Level_10.fPV := c_byBrightness_Night; END_IF
 
 	//turn one street lamp ON
 	GVL_IO.bStreetLamp_DO1 := TRUE;
@@ -60,50 +61,66 @@ END_IF
 //if a day has come
 IF rtIsDay.Q THEN
 	//turn all lights OFF
-	fbBACnet_AV_SL_Level_1(Device := Device, bEnablePV := TRUE, bNullPV := FALSE, fPV := c_byBrightness_Day);
-	fbBACnet_AV_SL_Level_2(Device := Device, bEnablePV := TRUE, bNullPV := FALSE, fPV := c_byBrightness_Day);
-	fbBACnet_AV_SL_Level_3(Device := Device, bEnablePV := TRUE, bNullPV := FALSE, fPV := c_byBrightness_Day);
-	fbBACnet_AV_SL_Level_4(Device := Device, bEnablePV := TRUE, bNullPV := FALSE, fPV := c_byBrightness_Day);
-	fbBACnet_AV_SL_Level_5(Device := Device, bEnablePV := TRUE, bNullPV := FALSE, fPV := c_byBrightness_Day);
-	fbBACnet_AV_SL_Level_6(Device := Device, bEnablePV := TRUE, bNullPV := FALSE, fPV := c_byBrightness_Day);
-	fbBACnet_AV_SL_Level_7(Device := Device, bEnablePV := TRUE, bNullPV := FALSE, fPV := c_byBrightness_Day);
-	fbBACnet_AV_SL_Level_8(Device := Device, bEnablePV := TRUE, bNullPV := FALSE, fPV := c_byBrightness_Day);
-	fbBACnet_AV_SL_Level_9(Device := Device, bEnablePV := TRUE, bNullPV := FALSE, fPV := c_byBrightness_Day);
-	fbBACnet_AV_SL_Level_10(Device := Device, bEnablePV := TRUE, bNullPV := FALSE, fPV := c_byBrightness_Day);
+	fbBACnet_AV_SL_Level_1.fPV  := c_byBrightness_Day;
+	fbBACnet_AV_SL_Level_2.fPV  := c_byBrightness_Day;
+	fbBACnet_AV_SL_Level_3.fPV  := c_byBrightness_Day;
+	fbBACnet_AV_SL_Level_4.fPV  := c_byBrightness_Day;
+	fbBACnet_AV_SL_Level_5.fPV  := c_byBrightness_Day;
+	fbBACnet_AV_SL_Level_6.fPV  := c_byBrightness_Day;
+	fbBACnet_AV_SL_Level_7.fPV  := c_byBrightness_Day;
+	fbBACnet_AV_SL_Level_8.fPV  := c_byBrightness_Day;
+	fbBACnet_AV_SL_Level_9.fPV  := c_byBrightness_Day;
+	fbBACnet_AV_SL_Level_10.fPV := c_byBrightness_Day;
 	
 	//turn one street lamp OFF
 	GVL_IO.bStreetLamp_DO1 := FALSE;
 	
-	//and disable manual mode - fPV = 0 sets all flags to FALSE
-	fbBACnet_AV_SL_Manual(Device := Device, bEnablePV := TRUE, bNullPV := FALSE, fPV := 0.0);
+	//and disable manual mode
+	bBACnet_ResetManual := TRUE;
 END_IF
 
 //special case - exit manual mode
-//when manual mode is turned off in the night
-//return brightness level to auto mode level
-IF F_IsNight() THEN   
-	FOR i := 1 TO byStreetLampsCount BY 1 DO
-		//init falling edge detection
-		ft_arrManual[i](CLK := GVL_IO.arrStreetLamps[i].bManualCtrl);
-		
-		//if manual mode is being turned off in the night
-		IF ft_arrManual[i].Q THEN
-			//set brightness level to auto mode on this lamp
+//when manual mode is turned off
+//return brightness level to auto mode level 
+FOR i := 1 TO byStreetLampsCount BY 1 DO
+	//init falling edge detection
+	ft_arrManual[i](CLK := GVL_IO.arrStreetLamps[i].bManualCtrl);
+	
+	//if manual mode is being turned off
+	IF ft_arrManual[i].Q THEN
+		//set brightness level to auto mode on this lamp
+		//in the night to c_byBrightness_Night
+		IF F_IsNight() THEN
 			CASE i OF
-				1: 	fbBACnet_AV_SL_Level_1(Device := Device, bEnablePV := TRUE, bNullPV := FALSE, fPV := c_byBrightness_Night); 
-				2: 	fbBACnet_AV_SL_Level_2(Device := Device, bEnablePV := TRUE, bNullPV := FALSE, fPV := c_byBrightness_Night); 
-				3: 	fbBACnet_AV_SL_Level_3(Device := Device, bEnablePV := TRUE, bNullPV := FALSE, fPV := c_byBrightness_Night); 
-				4: 	fbBACnet_AV_SL_Level_4(Device := Device, bEnablePV := TRUE, bNullPV := FALSE, fPV := c_byBrightness_Night); 
-				5: 	fbBACnet_AV_SL_Level_5(Device := Device, bEnablePV := TRUE, bNullPV := FALSE, fPV := c_byBrightness_Night); 
-				6: 	fbBACnet_AV_SL_Level_6(Device := Device, bEnablePV := TRUE, bNullPV := FALSE, fPV := c_byBrightness_Night); 
-				7: 	fbBACnet_AV_SL_Level_7(Device := Device, bEnablePV := TRUE, bNullPV := FALSE, fPV := c_byBrightness_Night); 
-				8: 	fbBACnet_AV_SL_Level_8(Device := Device, bEnablePV := TRUE, bNullPV := FALSE, fPV := c_byBrightness_Night); 
-				9: 	fbBACnet_AV_SL_Level_9(Device := Device, bEnablePV := TRUE, bNullPV := FALSE, fPV := c_byBrightness_Night); 
-				10:	fbBACnet_AV_SL_Level_10(Device := Device, bEnablePV := TRUE, bNullPV := FALSE, fPV := c_byBrightness_Night);
+				1: 	fbBACnet_AV_SL_Level_1.fPV  := c_byBrightness_Night;
+				2: 	fbBACnet_AV_SL_Level_2.fPV  := c_byBrightness_Night;
+				3: 	fbBACnet_AV_SL_Level_3.fPV  := c_byBrightness_Night;
+				4: 	fbBACnet_AV_SL_Level_4.fPV  := c_byBrightness_Night;
+				5: 	fbBACnet_AV_SL_Level_5.fPV  := c_byBrightness_Night;
+				6: 	fbBACnet_AV_SL_Level_6.fPV  := c_byBrightness_Night;
+				7: 	fbBACnet_AV_SL_Level_7.fPV  := c_byBrightness_Night;
+				8: 	fbBACnet_AV_SL_Level_8.fPV  := c_byBrightness_Night;
+				9: 	fbBACnet_AV_SL_Level_9.fPV  := c_byBrightness_Night;
+				10:	fbBACnet_AV_SL_Level_10.fPV := c_byBrightness_Night;
+			END_CASE
+		ELSE
+		//at the daylight to c_byBrightness_Day
+			CASE i OF
+				1: 	fbBACnet_AV_SL_Level_1.fPV  := c_byBrightness_Day;
+				2: 	fbBACnet_AV_SL_Level_2.fPV  := c_byBrightness_Day;
+				3: 	fbBACnet_AV_SL_Level_3.fPV  := c_byBrightness_Day;
+				4: 	fbBACnet_AV_SL_Level_4.fPV  := c_byBrightness_Day;
+				5: 	fbBACnet_AV_SL_Level_5.fPV  := c_byBrightness_Day;
+				6: 	fbBACnet_AV_SL_Level_6.fPV  := c_byBrightness_Day;
+				7: 	fbBACnet_AV_SL_Level_7.fPV  := c_byBrightness_Day;
+				8: 	fbBACnet_AV_SL_Level_8.fPV  := c_byBrightness_Day;
+				9: 	fbBACnet_AV_SL_Level_9.fPV  := c_byBrightness_Day;
+				10:	fbBACnet_AV_SL_Level_10.fPV := c_byBrightness_Day;
 			END_CASE
 		END_IF
-	END_FOR
-END_IF]]></ST>
+	END_IF
+END_FOR
+]]></ST>
     </Implementation>
     <LineIds Name="P_AutoMode">
       <LineId Id="101" Count="0" />
@@ -129,6 +146,7 @@ END_IF]]></ST>
       <LineId Id="123" Count="0" />
       <LineId Id="122" Count="0" />
       <LineId Id="124" Count="0" />
+      <LineId Id="323" Count="0" />
       <LineId Id="144" Count="9" />
       <LineId Id="169" Count="0" />
       <LineId Id="168" Count="0" />
@@ -141,14 +159,24 @@ END_IF]]></ST>
       <LineId Id="154" Count="0" />
       <LineId Id="234" Count="9" />
       <LineId Id="171" Count="2" />
-      <LineId Id="155" Count="1" />
+      <LineId Id="155" Count="0" />
+      <LineId Id="291" Count="0" />
       <LineId Id="130" Count="0" />
       <LineId Id="187" Count="0" />
       <LineId Id="186" Count="0" />
       <LineId Id="188" Count="0" />
       <LineId Id="190" Count="0" />
-      <LineId Id="227" Count="0" />
-      <LineId Id="258" Count="19" />
+      <LineId Id="258" Count="4" />
+      <LineId Id="320" Count="0" />
+      <LineId Id="264" Count="0" />
+      <LineId Id="321" Count="0" />
+      <LineId Id="305" Count="0" />
+      <LineId Id="265" Count="11" />
+      <LineId Id="306" Count="0" />
+      <LineId Id="322" Count="0" />
+      <LineId Id="309" Count="10" />
+      <LineId Id="307" Count="1" />
+      <LineId Id="277" Count="0" />
       <LineId Id="193" Count="0" />
       <LineId Id="244" Count="0" />
     </LineIds>

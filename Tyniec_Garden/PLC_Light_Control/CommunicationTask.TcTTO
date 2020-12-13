@@ -3,15 +3,15 @@
   <Task Name="CommunicationTask" Id="{0de60991-3968-4d67-81e8-5b81c6cb75e7}">
     <!--CycleTime in micro seconds.-->
     <CycleTime>2000</CycleTime>
-    <Priority>30</Priority>
+    <Priority>7</Priority>
     <PouCall>
-      <Name>P_RB1_Communication</Name>
+      <Name>P_DALI_RB1_Communication</Name>
     </PouCall>
     <PouCall>
-      <Name>P_RB2_Communication</Name>
+      <Name>P_DALI_RB2_Communication</Name>
     </PouCall>
     <PouCall>
-      <Name>P_RB3_Communication</Name>
+      <Name>P_DALI_RB3_Communication</Name>
     </PouCall>
     <PouCall>
       <Name>P_KNX_Communication</Name>

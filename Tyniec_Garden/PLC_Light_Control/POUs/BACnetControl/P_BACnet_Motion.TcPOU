@@ -9,16 +9,16 @@ END_VAR
 ]]></Declaration>
     <Implementation>
       <ST><![CDATA[//read motion sensor's flags and combine them into DWORD (pseudo-array)
-dwMotion.0 := GVL_IO.arrStreetLamps[1].bMotionSensor;
-dwMotion.1 := GVL_IO.arrStreetLamps[2].bMotionSensor;
-dwMotion.2 := GVL_IO.arrStreetLamps[3].bMotionSensor;
-dwMotion.3 := GVL_IO.arrStreetLamps[4].bMotionSensor;
-dwMotion.4 := GVL_IO.arrStreetLamps[5].bMotionSensor;
-dwMotion.5 := GVL_IO.arrStreetLamps[6].bMotionSensor;
-dwMotion.6 := GVL_IO.arrStreetLamps[7].bMotionSensor;
-dwMotion.7 := GVL_IO.arrStreetLamps[8].bMotionSensor;
-dwMotion.8 := GVL_IO.arrStreetLamps[9].bMotionSensor;
-dwMotion.9 := GVL_IO.arrStreetLamps[10].bMotionSensor;
+dwMotion.0 := GVL_IO.arrStreetLamps[1].bMotionFlag;
+dwMotion.1 := GVL_IO.arrStreetLamps[2].bMotionFlag;
+dwMotion.2 := GVL_IO.arrStreetLamps[3].bMotionFlag;
+dwMotion.3 := GVL_IO.arrStreetLamps[4].bMotionFlag;
+dwMotion.4 := GVL_IO.arrStreetLamps[5].bMotionFlag;
+dwMotion.5 := GVL_IO.arrStreetLamps[6].bMotionFlag;
+dwMotion.6 := GVL_IO.arrStreetLamps[7].bMotionFlag;
+dwMotion.7 := GVL_IO.arrStreetLamps[8].bMotionFlag;
+dwMotion.8 := GVL_IO.arrStreetLamps[9].bMotionFlag;
+dwMotion.9 := GVL_IO.arrStreetLamps[10].bMotionFlag;
 
 //type conversion from DWORD to REAL
 rMotion := DWORD_TO_REAL(dwMotion);

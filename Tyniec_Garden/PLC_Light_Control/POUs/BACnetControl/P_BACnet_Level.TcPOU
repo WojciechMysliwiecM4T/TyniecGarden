@@ -3,10 +3,11 @@
   <POU Name="P_BACnet_Level" Id="{adbf72dc-6ab6-4f9e-a501-48ed86d435f9}" SpecialFunc="None">
     <Declaration><![CDATA[PROGRAM P_BACnet_Level
 VAR
+	ton_DelayForBACnet		: TON;
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[//keep BACnet objects alive 
+      <ST><![CDATA[//assign fPV value to BACnet object if individual lamp is not in manual mode
 fbBACnet_AV_SL_Level_1(Device := Device, bEnablePV := TRUE, bNullPV := FALSE);
 fbBACnet_AV_SL_Level_2(Device := Device, bEnablePV := TRUE, bNullPV := FALSE);
 fbBACnet_AV_SL_Level_3(Device := Device, bEnablePV := TRUE, bNullPV := FALSE);
@@ -17,6 +18,22 @@ fbBACnet_AV_SL_Level_7(Device := Device, bEnablePV := TRUE, bNullPV := FALSE);
 fbBACnet_AV_SL_Level_8(Device := Device, bEnablePV := TRUE, bNullPV := FALSE);
 fbBACnet_AV_SL_Level_9(Device := Device, bEnablePV := TRUE, bNullPV := FALSE);
 fbBACnet_AV_SL_Level_10(Device := Device, bEnablePV := TRUE, bNullPV := FALSE);
+
+//dalay for BACnet to catch up PLC
+ton_DelayForBACnet(IN := NOT ton_DelayForBACnet.Q, PT := T#100MS);
+IF ton_DelayForBACnet.Q THEN
+	//if fPV does not match fPresentValue AND lamp is not in manual mode - increment fPV by 1, to force update
+	IF fbBACnet_AV_SL_Level_1.fPresentValue  <> fbBACnet_AV_SL_Level_1.fPV  AND NOT GVL_IO.arrStreetLamps[1].bManualCtrl  THEN fbBACnet_AV_SL_Level_1.fPV  := fbBACnet_AV_SL_Level_1.fPV + 1;  END_IF
+	IF fbBACnet_AV_SL_Level_2.fPresentValue  <> fbBACnet_AV_SL_Level_2.fPV  AND NOT GVL_IO.arrStreetLamps[2].bManualCtrl  THEN fbBACnet_AV_SL_Level_2.fPV  := fbBACnet_AV_SL_Level_2.fPV + 1;  END_IF
+	IF fbBACnet_AV_SL_Level_3.fPresentValue  <> fbBACnet_AV_SL_Level_3.fPV  AND NOT GVL_IO.arrStreetLamps[3].bManualCtrl  THEN fbBACnet_AV_SL_Level_3.fPV  := fbBACnet_AV_SL_Level_3.fPV + 1;  END_IF
+	IF fbBACnet_AV_SL_Level_4.fPresentValue  <> fbBACnet_AV_SL_Level_4.fPV  AND NOT GVL_IO.arrStreetLamps[4].bManualCtrl  THEN fbBACnet_AV_SL_Level_4.fPV  := fbBACnet_AV_SL_Level_4.fPV + 1;  END_IF
+	IF fbBACnet_AV_SL_Level_5.fPresentValue  <> fbBACnet_AV_SL_Level_5.fPV  AND NOT GVL_IO.arrStreetLamps[5].bManualCtrl  THEN fbBACnet_AV_SL_Level_5.fPV  := fbBACnet_AV_SL_Level_5.fPV + 1;  END_IF
+	IF fbBACnet_AV_SL_Level_6.fPresentValue  <> fbBACnet_AV_SL_Level_6.fPV  AND NOT GVL_IO.arrStreetLamps[6].bManualCtrl  THEN fbBACnet_AV_SL_Level_6.fPV  := fbBACnet_AV_SL_Level_6.fPV + 1;  END_IF
+	IF fbBACnet_AV_SL_Level_7.fPresentValue  <> fbBACnet_AV_SL_Level_7.fPV  AND NOT GVL_IO.arrStreetLamps[7].bManualCtrl  THEN fbBACnet_AV_SL_Level_7.fPV  := fbBACnet_AV_SL_Level_7.fPV + 1;  END_IF
+	IF fbBACnet_AV_SL_Level_8.fPresentValue  <> fbBACnet_AV_SL_Level_8.fPV  AND NOT GVL_IO.arrStreetLamps[8].bManualCtrl  THEN fbBACnet_AV_SL_Level_8.fPV  := fbBACnet_AV_SL_Level_8.fPV + 1;  END_IF
+	IF fbBACnet_AV_SL_Level_9.fPresentValue  <> fbBACnet_AV_SL_Level_9.fPV  AND NOT GVL_IO.arrStreetLamps[9].bManualCtrl  THEN fbBACnet_AV_SL_Level_9.fPV  := fbBACnet_AV_SL_Level_9.fPV + 1;  END_IF
+	IF fbBACnet_AV_SL_Level_10.fPresentValue <> fbBACnet_AV_SL_Level_10.fPV AND NOT GVL_IO.arrStreetLamps[10].bManualCtrl THEN fbBACnet_AV_SL_Level_10.fPV := fbBACnet_AV_SL_Level_10.fPV + 1; END_IF
+END_IF
 
 //rewrite present value to street lamp structures
  GVL_IO.arrStreetLamps[1].nLevel := REAL_TO_BYTE(fbBACnet_AV_SL_Level_1.fPresentValue);
@@ -34,7 +51,17 @@ fbBACnet_AV_SL_Level_10(Device := Device, bEnablePV := TRUE, bNullPV := FALSE);
       <LineId Id="35" Count="0" />
       <LineId Id="20" Count="8" />
       <LineId Id="31" Count="0" />
-      <LineId Id="29" Count="1" />
+      <LineId Id="63" Count="0" />
+      <LineId Id="55" Count="2" />
+      <LineId Id="39" Count="0" />
+      <LineId Id="41" Count="3" />
+      <LineId Id="48" Count="0" />
+      <LineId Id="45" Count="2" />
+      <LineId Id="40" Count="0" />
+      <LineId Id="29" Count="0" />
+      <LineId Id="49" Count="0" />
+      <LineId Id="58" Count="0" />
+      <LineId Id="30" Count="0" />
       <LineId Id="5" Count="0" />
       <LineId Id="8" Count="8" />
     </LineIds>

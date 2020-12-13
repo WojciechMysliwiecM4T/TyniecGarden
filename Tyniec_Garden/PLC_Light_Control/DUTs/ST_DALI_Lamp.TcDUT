@@ -20,7 +20,8 @@ STRUCT
 	arrAddrGroup	: ARRAY [1..4] OF BYTE;
 	
 	//sensors
-	bMotionSensor	AT%I*	: BOOL;	//if TRUE, motion has been detected
+	bMotionSensor	AT%I*	: BOOL;	//direct info from sensor, edge means movement occured
+	bMotionFlag				: BOOL;	//flag keeping info about motion as TRUE for specified period of time
 	
 END_STRUCT
 END_TYPE

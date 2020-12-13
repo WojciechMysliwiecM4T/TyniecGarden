@@ -14,24 +14,27 @@ VAR
 	
 	dtCurrentDate       	: DATE_AND_TIME;
 	todCurrent				: TOD;
+	
 END_VAR
 ]]></Declaration>
     <Implementation>
       <ST><![CDATA[//get system time 
 fbGetSystemTime(timeLoDW =>fileTime.dwLowDateTime, timeHiDW =>fileTime.dwHighDateTime);
 dtCurrentDateGMT := FILETIME_TO_DT(fileTime);
-//convert it to UTC +2
+
+//covert to UTC + 1
 dtCurrentDate := dtCurrentDateGMT + T#1H;
 todCurrent := DT_TO_TOD(dtCurrentDate);
 
 //calculating sunrise and sunset
 fbCalcSunriseSunset( fDegreeOfLongitude := 17.03,   (* Longitude of Wroclaw *)
-                     fDegreeOfLatitude := 51.1,   (* Latitude of Wroclaw *)
-                     fReferenceMeridian := 15.0,  (* Central European Time *)
-                     dCurrentDate := DT_TO_DATE(dtCurrentDate),
-                     todSunrise => todSunrise,
-                     todSunset => todSunset);
-
+					 fDegreeOfLatitude := 51.1,   (* Latitude of Wroclaw *)
+					 fReferenceMeridian := 15.0,  (* Central European Time *)
+					 dCurrentDate := DT_TO_DATE(dtCurrentDate),
+					 todSunrise => todSunrise,
+					 todSunset => todSunset);
+							 
+	
 //if it is a night
 IF todCurrent < todSunrise - T#1H OR todCurrent > todSunset THEN
 	//set return value to TRUE
@@ -40,11 +43,23 @@ IF todCurrent < todSunrise - T#1H OR todCurrent > todSunset THEN
 ELSE
 	//set return value to FALSE
 	F_IsNight := FALSE;
-END_IF]]></ST>
+END_IF
+	
+]]></ST>
     </Implementation>
     <LineIds Name="F_IsNight">
-      <LineId Id="17" Count="22" />
+      <LineId Id="17" Count="2" />
+      <LineId Id="157" Count="0" />
+      <LineId Id="121" Count="0" />
+      <LineId Id="158" Count="0" />
+      <LineId Id="84" Count="0" />
+      <LineId Id="149" Count="6" />
+      <LineId Id="130" Count="0" />
+      <LineId Id="156" Count="0" />
+      <LineId Id="86" Count="0" />
+      <LineId Id="32" Count="7" />
       <LineId Id="7" Count="0" />
+      <LineId Id="67" Count="1" />
     </LineIds>
   </POU>
 </TcPlcObject>

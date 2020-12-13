@@ -2,8 +2,9 @@
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.5">
   <GVL Name="GVL_GenSysInfo" Id="{63e19513-76f4-4564-b069-1c3f57f4ab63}">
     <Declaration><![CDATA[VAR_GLOBAL
-	tMotionSensorsTOF_PT		: TIME := T#5M;
-	todGlobalTime				: TOD;
+	tMotionSensorsTOF_PT		: TIME := T#5M;			//how long lamps stay lighten up after move ended
+	tMotionSensorsTOF_info_PT	: TIME := T#10S;		//how long motion flags stay TRUE after move ended
+	todGlobalTime				: TOD := TOD#10:0:0;
 END_VAR
 
 VAR_GLOBAL CONSTANT

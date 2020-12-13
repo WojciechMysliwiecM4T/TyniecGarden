@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.5">
-  <POU Name="P_RB3_Communication" Id="{ee861f8f-0aae-465e-8399-13496db0f2fe}" SpecialFunc="None">
-    <Declaration><![CDATA[PROGRAM P_RB3_Communication
+  <POU Name="P_DALI_RB3_Communication" Id="{ee861f8f-0aae-465e-8399-13496db0f2fe}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM P_DALI_RB3_Communication
 VAR
 	//INPUTS
 	fbKL6821Communication		: FB_KL6821Communication;
@@ -1673,7 +1673,7 @@ END_VAR
                         <v n="X">22</v>
                         <v n="Y">14</v>
                         <v n="IsJoint">false</v>
-                        <v n="Flags">100</v>
+                        <v n="Flags">68</v>
                       </o>
                       <o>
                         <v n="X">24</v>
