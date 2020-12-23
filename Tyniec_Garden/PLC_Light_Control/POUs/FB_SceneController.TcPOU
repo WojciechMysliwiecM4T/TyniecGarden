@@ -31,32 +31,56 @@ IF NOT bBusy THEN
 END_IF
 
 CASE iSelector OF
-	0, 255:	//idle state
+	0:	//idle state
 		;
 		
 	1..127:	//SceneON
 		bBusy := TRUE;	//set a flag indicating that this FB is busy
 		
-		//reset manual mode
-		bBACnet_ResetManual := TRUE;
+		//reset manual modeS
+		bBACnet_SetManual := FALSE;
 		
 		//convert int to byte
 		bySceneID := INT_TO_BYTE(iSelector);
 		
+		//disable bEnablePV on fbBACnet_AV_SL
+		fbBACnet_AV_SL_Level_1(Device := Device, bEnablePV := FALSE, fPV := 0);
+		fbBACnet_AV_SL_Level_2(Device := Device, bEnablePV := FALSE, fPV := 0);
+		fbBACnet_AV_SL_Level_3(Device := Device, bEnablePV := FALSE, fPV := 0);
+		fbBACnet_AV_SL_Level_4(Device := Device, bEnablePV := FALSE, fPV := 0);
+		fbBACnet_AV_SL_Level_5(Device := Device, bEnablePV := FALSE, fPV := 0);
+		fbBACnet_AV_SL_Level_6(Device := Device, bEnablePV := FALSE, fPV := 0);
+		fbBACnet_AV_SL_Level_7(Device := Device, bEnablePV := FALSE, fPV := 0);
+		fbBACnet_AV_SL_Level_8(Device := Device, bEnablePV := FALSE, fPV := 0);
+		fbBACnet_AV_SL_Level_9(Device := Device, bEnablePV := FALSE, fPV := 0);
+		fbBACnet_AV_SL_Level_10(Device := Device, bEnablePV := FALSE, fPV := 0);
+		
 		//rewrite power levels from memory buffer to BACnet objects
-		GVL_IO.arrStreetLamps[1].nLevel  := GVL_IO.arrScenesStreetLampsLevels[bySceneID, 1];
-		GVL_IO.arrStreetLamps[2].nLevel  := GVL_IO.arrScenesStreetLampsLevels[bySceneID, 2];
-		GVL_IO.arrStreetLamps[3].nLevel  := GVL_IO.arrScenesStreetLampsLevels[bySceneID, 3];
-		GVL_IO.arrStreetLamps[4].nLevel  := GVL_IO.arrScenesStreetLampsLevels[bySceneID, 4];
-		GVL_IO.arrStreetLamps[5].nLevel  := GVL_IO.arrScenesStreetLampsLevels[bySceneID, 5];
-		GVL_IO.arrStreetLamps[6].nLevel  := GVL_IO.arrScenesStreetLampsLevels[bySceneID, 6];
-		GVL_IO.arrStreetLamps[7].nLevel  := GVL_IO.arrScenesStreetLampsLevels[bySceneID, 7];
-		GVL_IO.arrStreetLamps[8].nLevel  := GVL_IO.arrScenesStreetLampsLevels[bySceneID, 8];
-		GVL_IO.arrStreetLamps[9].nLevel  := GVL_IO.arrScenesStreetLampsLevels[bySceneID, 9];
-		GVL_IO.arrStreetLamps[10].nLevel := GVL_IO.arrScenesStreetLampsLevels[bySceneID, 10];
+		fbBACnet_AV_SL_Level_1.fPV  := GVL_IO.arrScenesStreetLampsLevels[bySceneID, 1];
+		fbBACnet_AV_SL_Level_2.fPV  := GVL_IO.arrScenesStreetLampsLevels[bySceneID, 2];
+		fbBACnet_AV_SL_Level_3.fPV  := GVL_IO.arrScenesStreetLampsLevels[bySceneID, 3];
+		fbBACnet_AV_SL_Level_4.fPV  := GVL_IO.arrScenesStreetLampsLevels[bySceneID, 4];
+		fbBACnet_AV_SL_Level_5.fPV  := GVL_IO.arrScenesStreetLampsLevels[bySceneID, 5];
+		fbBACnet_AV_SL_Level_6.fPV  := GVL_IO.arrScenesStreetLampsLevels[bySceneID, 6];
+		fbBACnet_AV_SL_Level_7.fPV  := GVL_IO.arrScenesStreetLampsLevels[bySceneID, 7];
+		fbBACnet_AV_SL_Level_8.fPV  := GVL_IO.arrScenesStreetLampsLevels[bySceneID, 8];
+		fbBACnet_AV_SL_Level_9.fPV  := GVL_IO.arrScenesStreetLampsLevels[bySceneID, 9];
+		fbBACnet_AV_SL_Level_10.fPV := GVL_IO.arrScenesStreetLampsLevels[bySceneID, 10];
+		
+		//disable bEnablePV on fbBACnet_AV_SL
+		fbBACnet_AV_SL_Level_1(Device := Device,  bEnablePV := TRUE);
+		fbBACnet_AV_SL_Level_2(Device := Device,  bEnablePV := TRUE);
+		fbBACnet_AV_SL_Level_3(Device := Device,  bEnablePV := TRUE);
+		fbBACnet_AV_SL_Level_4(Device := Device,  bEnablePV := TRUE);
+		fbBACnet_AV_SL_Level_5(Device := Device,  bEnablePV := TRUE);
+		fbBACnet_AV_SL_Level_6(Device := Device,  bEnablePV := TRUE);
+		fbBACnet_AV_SL_Level_7(Device := Device,  bEnablePV := TRUE);
+		fbBACnet_AV_SL_Level_8(Device := Device,  bEnablePV := TRUE);
+		fbBACnet_AV_SL_Level_9(Device := Device,  bEnablePV := TRUE);
+		fbBACnet_AV_SL_Level_10(Device := Device, bEnablePV := TRUE);
+		
 			
-		iSelector := 0;		//after rewriting data go back to idle
-		bBusy := FALSE;		//indicate that this FB is no longer busy
+		iSelector := 255;		
 		
 		
 	128..254:	//SaveScene
@@ -74,6 +98,12 @@ CASE iSelector OF
 		iSelector := 0;		//after saving data go back to idle
 		bBusy := FALSE;		//indicate that this FB is no longer busy
 		
+	255:
+		bBACnet_SetManual := TRUE;
+		bBusy := FALSE;		//indicate that this FB is no longer busy
+		iSelector := 0;		//after rewriting data go back to idle
+		
+	
 END_CASE
 
 
@@ -97,11 +127,18 @@ END_CASE
       <LineId Id="285" Count="0" />
       <LineId Id="284" Count="0" />
       <LineId Id="286" Count="0" />
+      <LineId Id="308" Count="0" />
+      <LineId Id="310" Count="9" />
+      <LineId Id="309" Count="0" />
       <LineId Id="60" Count="0" />
       <LineId Id="187" Count="8" />
       <LineId Id="184" Count="0" />
+      <LineId Id="332" Count="0" />
+      <LineId Id="334" Count="9" />
+      <LineId Id="333" Count="0" />
+      <LineId Id="321" Count="0" />
       <LineId Id="81" Count="0" />
-      <LineId Id="144" Count="1" />
+      <LineId Id="144" Count="0" />
       <LineId Id="90" Count="0" />
       <LineId Id="134" Count="0" />
       <LineId Id="58" Count="0" />
@@ -116,6 +153,11 @@ END_CASE
       <LineId Id="123" Count="0" />
       <LineId Id="140" Count="2" />
       <LineId Id="278" Count="0" />
+      <LineId Id="346" Count="1" />
+      <LineId Id="350" Count="0" />
+      <LineId Id="352" Count="0" />
+      <LineId Id="348" Count="0" />
+      <LineId Id="345" Count="0" />
       <LineId Id="54" Count="0" />
       <LineId Id="43" Count="1" />
       <LineId Id="23" Count="0" />

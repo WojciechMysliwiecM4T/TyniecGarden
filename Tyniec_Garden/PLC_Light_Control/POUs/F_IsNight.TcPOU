@@ -24,7 +24,7 @@ dtCurrentDateGMT := FILETIME_TO_DT(fileTime);
 
 //covert to UTC + 1
 dtCurrentDate := dtCurrentDateGMT + T#1H;
-todCurrent := DT_TO_TOD(dtCurrentDate);
+todCurrent := DT_TO_TOD(dtCurrentDate); //DT_TO_TOD(dtCurrentDate); todGlobalTime;
 
 //calculating sunrise and sunset
 fbCalcSunriseSunset( fDegreeOfLongitude := 17.03,   (* Longitude of Wroclaw *)

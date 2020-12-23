@@ -20,7 +20,7 @@ fbBACnet_AV_SL_Level_9(Device := Device, bEnablePV := TRUE, bNullPV := FALSE);
 fbBACnet_AV_SL_Level_10(Device := Device, bEnablePV := TRUE, bNullPV := FALSE);
 
 //if Reset was not called
-IF NOT bBACnet_ResetManual THEN
+IF NOT bBACnet_ResetManual AND NOT bBACnet_SetManual THEN
 	//if lamp is in manual mode, assign BACnet fPresentValue to nLevel
 	IF GVL_IO.arrStreetLamps[1].bManualCtrl  THEN GVL_IO.arrStreetLamps[1].nLevel  := REAL_TO_BYTE(fbBACnet_AV_SL_Level_1.fPresentValue);  END_IF
 	IF GVL_IO.arrStreetLamps[2].bManualCtrl  THEN GVL_IO.arrStreetLamps[2].nLevel  := REAL_TO_BYTE(fbBACnet_AV_SL_Level_2.fPresentValue);  END_IF

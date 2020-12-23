@@ -95,16 +95,16 @@ fbDALIV2QueryActualLevel_10(
 
 	
 //rewrite data to BACnet objects
-fbBACnet_AV_SL_ActualLevel_1(Device := Device, bEnablePV := TRUE, bNullPV := FALSE, fPV := fbDALIV2QueryActualLevel_1.nActualLevel);
-fbBACnet_AV_SL_ActualLevel_2(Device := Device, bEnablePV := TRUE, bNullPV := FALSE, fPV := fbDALIV2QueryActualLevel_2.nActualLevel);
-fbBACnet_AV_SL_ActualLevel_3(Device := Device, bEnablePV := TRUE, bNullPV := FALSE, fPV := fbDALIV2QueryActualLevel_3.nActualLevel);
-fbBACnet_AV_SL_ActualLevel_4(Device := Device, bEnablePV := TRUE, bNullPV := FALSE, fPV := fbDALIV2QueryActualLevel_4.nActualLevel);
-fbBACnet_AV_SL_ActualLevel_5(Device := Device, bEnablePV := TRUE, bNullPV := FALSE, fPV := fbDALIV2QueryActualLevel_5.nActualLevel);
-fbBACnet_AV_SL_ActualLevel_6(Device := Device, bEnablePV := TRUE, bNullPV := FALSE, fPV := fbDALIV2QueryActualLevel_6.nActualLevel);
-fbBACnet_AV_SL_ActualLevel_7(Device := Device, bEnablePV := TRUE, bNullPV := FALSE, fPV := fbDALIV2QueryActualLevel_7.nActualLevel);
-fbBACnet_AV_SL_ActualLevel_8(Device := Device, bEnablePV := TRUE, bNullPV := FALSE, fPV := fbDALIV2QueryActualLevel_8.nActualLevel);
-fbBACnet_AV_SL_ActualLevel_9(Device := Device, bEnablePV := TRUE, bNullPV := FALSE, fPV := fbDALIV2QueryActualLevel_9.nActualLevel);
-fbBACnet_AV_SL_ActualLevel_10(Device := Device, bEnablePV := TRUE, bNullPV := FALSE, fPV := fbDALIV2QueryActualLevel_10.nActualLevel);
+fbBACnet_AV_SL_ActualLevel_1(Device := Device, bEnablePV := TRUE, bNullPV := FALSE, fPV :=  GVL_IO.arrStreetLamps[1].nLevel);
+fbBACnet_AV_SL_ActualLevel_2(Device := Device, bEnablePV := TRUE, bNullPV := FALSE, fPV :=  GVL_IO.arrStreetLamps[2].nLevel);
+fbBACnet_AV_SL_ActualLevel_3(Device := Device, bEnablePV := TRUE, bNullPV := FALSE, fPV :=  GVL_IO.arrStreetLamps[3].nLevel);
+fbBACnet_AV_SL_ActualLevel_4(Device := Device, bEnablePV := TRUE, bNullPV := FALSE, fPV :=  GVL_IO.arrStreetLamps[4].nLevel);
+fbBACnet_AV_SL_ActualLevel_5(Device := Device, bEnablePV := TRUE, bNullPV := FALSE, fPV :=  GVL_IO.arrStreetLamps[5].nLevel);
+fbBACnet_AV_SL_ActualLevel_6(Device := Device, bEnablePV := TRUE, bNullPV := FALSE, fPV :=  GVL_IO.arrStreetLamps[6].nLevel);
+fbBACnet_AV_SL_ActualLevel_7(Device := Device, bEnablePV := TRUE, bNullPV := FALSE, fPV :=  GVL_IO.arrStreetLamps[7].nLevel);
+fbBACnet_AV_SL_ActualLevel_8(Device := Device, bEnablePV := TRUE, bNullPV := FALSE, fPV :=  GVL_IO.arrStreetLamps[8].nLevel);
+fbBACnet_AV_SL_ActualLevel_9(Device := Device, bEnablePV := TRUE, bNullPV := FALSE, fPV :=  GVL_IO.arrStreetLamps[9].nLevel);
+fbBACnet_AV_SL_ActualLevel_10(Device := Device, bEnablePV := TRUE, bNullPV := FALSE, fPV := GVL_IO.arrStreetLamps[10].nLevel);
 ]]></ST>
     </Implementation>
     <LineIds Name="P_BACnet_ActualLevel">

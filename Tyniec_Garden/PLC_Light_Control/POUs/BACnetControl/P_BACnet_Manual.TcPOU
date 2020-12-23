@@ -4,10 +4,15 @@
     <Declaration><![CDATA[PROGRAM P_BACnet_Manual
 VAR
 	dwManual		: DWORD;
+	
+	rtSet			: R_TRIG;
 	rtReset			: R_TRIG;
+	
+	iSelSet			: INT := 0;
 	iSelReset		: INT := 0;
 	
-	ton_DelayForBACnet	: TON;
+	ton_DelayForBACnet		: TON;
+	ton_DelayForBACnet_Set	: TON;
 END_VAR
 ]]></Declaration>
     <Implementation>
@@ -15,14 +20,45 @@ END_VAR
 fbBACnet_AV_SL_Manual(Device := Device, bEnablePV := TRUE, bNullPV := FALSE);
 
 //init rising edge detection
+rtSet(CLK := bBACnet_SetManual);
 rtReset(CLK := bBACnet_ResetManual);
 
+
 //if rising edge occures
-IF rtReset.Q 	THEN 
+IF rtSet.Q AND NOT bBACnet_ResetManual AND iSelSet = 0 THEN
+	//set selector to 10
+	iSelSet := 10;
+END_IF
+IF rtReset.Q AND NOT bBACnet_SetManual AND iSelReset = 0 THEN 
 	//set selector to 10
 	iSelReset := 10;	
 END_IF
 
+CASE iSelSet OF
+	0:	//idle
+		;	//do nothing
+	10:
+		fbBACnet_AV_SL_Manual.fPV := DWORD_TO_REAL(2#0001111111111111);
+		iSelSet := 20;
+	20:
+		//dalay for BACnet to catch up PLC
+		ton_DelayForBACnet_Set(IN := NOT ton_DelayForBACnet_Set.Q, PT := T#100MS);
+		IF ton_DelayForBACnet_Set.Q THEN
+			//if fPresentValue and fPV are different
+			IF fbBACnet_AV_SL_Manual.fPresentValue <> fbBACnet_AV_SL_Manual.fPV THEN
+				//increment fPV by 2#0001000000000000 to force the change of fPresentValue
+				fbBACnet_AV_SL_Manual.fPV := fbBACnet_AV_SL_Manual.fPV + DWORD_TO_REAL(2#0001000000000000);
+			ELSE
+				iSelSet := 30;
+			END_IF
+		END_IF
+	30:
+		ton_DelayForBACnet_Set(IN := NOT ton_DelayForBACnet_Set.Q, PT := T#100MS);
+		IF ton_DelayForBACnet_Set.Q THEN
+			bBACnet_SetManual := FALSE;
+			iSelSet := 0;
+		END_IF
+END_CASE
 
 CASE iSelReset OF
 	0:	//idle
@@ -39,9 +75,14 @@ CASE iSelReset OF
 				//increment fPV by 2#0001000000000000 to force the change of fPresentValue
 				fbBACnet_AV_SL_Manual.fPV := fbBACnet_AV_SL_Manual.fPV + DWORD_TO_REAL(2#0001000000000000);
 			ELSE
-				bBACnet_ResetManual := FALSE;
-				iSelReset := 0;
+				iSelReset := 30;
 			END_IF
+		END_IF
+	30:
+		ton_DelayForBACnet(IN := NOT ton_DelayForBACnet.Q, PT := T#100MS);
+		IF ton_DelayForBACnet.Q THEN
+			bBACnet_ResetManual := FALSE;
+			iSelReset := 0;
 		END_IF
 END_CASE
 
@@ -68,14 +109,21 @@ GVL_IO.arrStreetLamps[10].bManualCtrl := dwManual.9;
       <LineId Id="56" Count="0" />
       <LineId Id="79" Count="0" />
       <LineId Id="75" Count="0" />
+      <LineId Id="201" Count="0" />
       <LineId Id="81" Count="0" />
+      <LineId Id="202" Count="0" />
       <LineId Id="178" Count="0" />
       <LineId Id="85" Count="0" />
+      <LineId Id="203" Count="1" />
+      <LineId Id="206" Count="0" />
+      <LineId Id="205" Count="0" />
       <LineId Id="82" Count="0" />
       <LineId Id="180" Count="0" />
       <LineId Id="179" Count="0" />
       <LineId Id="181" Count="0" />
-      <LineId Id="163" Count="0" />
+      <LineId Id="207" Count="0" />
+      <LineId Id="209" Count="23" />
+      <LineId Id="208" Count="0" />
       <LineId Id="80" Count="0" />
       <LineId Id="54" Count="0" />
       <LineId Id="76" Count="0" />
@@ -87,11 +135,14 @@ GVL_IO.arrStreetLamps[10].bManualCtrl := dwManual.9;
       <LineId Id="99" Count="0" />
       <LineId Id="92" Count="1" />
       <LineId Id="97" Count="0" />
-      <LineId Id="95" Count="0" />
-      <LineId Id="113" Count="0" />
-      <LineId Id="96" Count="0" />
+      <LineId Id="95" Count="1" />
       <LineId Id="94" Count="0" />
       <LineId Id="110" Count="0" />
+      <LineId Id="190" Count="0" />
+      <LineId Id="192" Count="1" />
+      <LineId Id="191" Count="0" />
+      <LineId Id="195" Count="0" />
+      <LineId Id="194" Count="0" />
       <LineId Id="77" Count="0" />
       <LineId Id="39" Count="0" />
       <LineId Id="36" Count="0" />
