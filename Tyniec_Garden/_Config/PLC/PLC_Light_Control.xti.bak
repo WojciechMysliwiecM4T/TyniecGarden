@@ -1,0 +1,787 @@
+<?xml version="1.0"?>
+<TcSmItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.beckhoff.com/schemas/2012/07/TcSmProject" TcSmVersion="1.0" TcVersion="3.1.4024.11" ClassName="CNestedPlcProjDef">
+	<DataTypes>
+		<DataType>
+			<Name GUID="{59CB7A65-AEAB-E588-EB2A-AFE112B8A9CC}" IecBaseType="true" AutoDeleteType="true">ARRAY [0..5] OF BYTE</Name>
+			<BitSize>48</BitSize>
+			<BaseType GUID="{18071995-0000-0000-0000-000000000001}">BYTE</BaseType>
+			<ArrayInfo>
+				<LBound>0</LBound>
+				<Elements>6</Elements>
+			</ArrayInfo>
+		</DataType>
+		<DataType>
+			<Name GUID="{A4B350FE-E3FC-ABC9-B813-E68EDA777C80}" Namespace="Tc2_DALI" AutoDeleteType="true">ST_KL6821InData</Name>
+			<Comment><![CDATA[ Communication interface for the KL6821]]></Comment>
+			<BitSize>48</BitSize>
+			<SubItem>
+				<Name>nStatus</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000004}">WORD</Type>
+				<BitSize>16</BitSize>
+				<BitOffs>0</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>arrData</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000001}">BYTE</Type>
+				<ArrayInfo>
+					<LBound>0</LBound>
+					<Elements>4</Elements>
+				</ArrayInfo>
+				<BitSize>32</BitSize>
+				<BitOffs>16</BitOffs>
+			</SubItem>
+		</DataType>
+		<DataType>
+			<Name GUID="{90CE8AE1-D8C1-D727-B60C-90F68839C409}" IecBaseType="true" AutoDeleteType="true">ARRAY [1..24] OF BYTE</Name>
+			<BitSize>192</BitSize>
+			<BaseType GUID="{18071995-0000-0000-0000-000000000001}">BYTE</BaseType>
+			<ArrayInfo>
+				<LBound>1</LBound>
+				<Elements>24</Elements>
+			</ArrayInfo>
+		</DataType>
+		<DataType>
+			<Name GUID="{28438AA5-8F49-4E98-5C6F-4C901181A54A}" Namespace="Tc2_DALI" AutoDeleteType="true">ST_KL6821OutData</Name>
+			<Comment><![CDATA[ Communication interface for the KL6821]]></Comment>
+			<BitSize>48</BitSize>
+			<SubItem>
+				<Name>nCtrl</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000004}">WORD</Type>
+				<BitSize>16</BitSize>
+				<BitOffs>0</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>arrData</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000001}">BYTE</Type>
+				<ArrayInfo>
+					<LBound>0</LBound>
+					<Elements>4</Elements>
+				</ArrayInfo>
+				<BitSize>32</BitSize>
+				<BitOffs>16</BitOffs>
+			</SubItem>
+		</DataType>
+	</DataTypes>
+	<Project GUID="{AC8E0F9F-080E-41BE-BD7E-F896321F4852}" Name="PLC_Light_Control" PrjFilePath="..\..\PLC_Light_Control\PLC_Light_Control.plcproj" TmcFilePath="..\..\PLC_Light_Control\PLC_Light_Control.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
+		<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="PLC_Light_Control\PLC_Light_Control.tmc">
+			<Name>PLC_Light_Control Instance</Name>
+			<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
+			<Vars VarGrpType="1">
+				<Name>CommunicationTask Inputs</Name>
+				<Var>
+					<Name>Tc2_BACnetRev12.BACnet_Globals.fbBACnet_Adapter._DeviceStatus</Name>
+					<Type>WORD</Type>
+				</Var>
+				<Var>
+					<Name>Tc2_BACnetRev12.BACnet_Globals.fbBACnet_Adapter._AmsNetId</Name>
+					<Type GUID="{59CB7A65-AEAB-E588-EB2A-AFE112B8A9CC}">ARRAY [0..5] OF BYTE</Type>
+				</Var>
+				<Var>
+					<Name>GVL_BACnet.Device._ObjectId</Name>
+					<Type>DWORD</Type>
+				</Var>
+				<Var>
+					<Name>GVL_BACnet.Device._LocalDate</Name>
+					<Type>DWORD</Type>
+				</Var>
+				<Var>
+					<Name>GVL_BACnet.Device._LocalTime</Name>
+					<Type>DWORD</Type>
+				</Var>
+				<Var>
+					<Name>GVL_BACnet.Device._SystemStatus</Name>
+					<Type>WORD</Type>
+				</Var>
+				<Var>
+					<Name>GVL_BACnet.Device._ServerStatus</Name>
+					<Type>WORD</Type>
+				</Var>
+				<Var>
+					<Name>GVL_BACnet.fbBACnet_BV_Alarm._StatusFlags</Name>
+					<Type>WORD</Type>
+				</Var>
+				<Var>
+					<Name>GVL_BACnet.fbBACnet_BV_Alarm._PresentValue</Name>
+					<Type>WORD</Type>
+				</Var>
+				<Var>
+					<Name>GVL_BACnet.fbBACnet_AV_Gates._StatusFlags</Name>
+					<Type>WORD</Type>
+				</Var>
+				<Var>
+					<Name>GVL_BACnet.fbBACnet_AV_Gates._PresentValue</Name>
+					<Type>REAL</Type>
+				</Var>
+				<Var>
+					<Name>GVL_IO.stKL6821InData_RB1</Name>
+					<Comment><![CDATA[DALI Communication variables
+RB1]]></Comment>
+					<Type GUID="{A4B350FE-E3FC-ABC9-B813-E68EDA777C80}" Namespace="Tc2_DALI">ST_KL6821InData</Type>
+				</Var>
+				<Var>
+					<Name>GVL_IO.stKL6821InData_RB2</Name>
+					<Comment><![CDATA[RB2]]></Comment>
+					<Type GUID="{A4B350FE-E3FC-ABC9-B813-E68EDA777C80}" Namespace="Tc2_DALI">ST_KL6821InData</Type>
+				</Var>
+				<Var>
+					<Name>GVL_IO.stKL6821InData_RB3</Name>
+					<Comment><![CDATA[RB3]]></Comment>
+					<Type GUID="{A4B350FE-E3FC-ABC9-B813-E68EDA777C80}" Namespace="Tc2_DALI">ST_KL6821InData</Type>
+				</Var>
+				<Var>
+					<Name>GVL_IO.KL6301_IN</Name>
+					<Comment><![CDATA[KNX Communication
+KL6301]]></Comment>
+					<Type GUID="{90CE8AE1-D8C1-D727-B60C-90F68839C409}">ARRAY [1..24] OF BYTE</Type>
+				</Var>
+				<Var>
+					<Name>GVL_IO.arrStreetLamps[1].bMotionSensor</Name>
+					<Comment><![CDATA[direct info from sensor, edge means movement occured]]></Comment>
+					<Type>BOOL</Type>
+				</Var>
+				<Var>
+					<Name>GVL_IO.arrStreetLamps[2].bMotionSensor</Name>
+					<Comment><![CDATA[direct info from sensor, edge means movement occured]]></Comment>
+					<Type>BOOL</Type>
+				</Var>
+				<Var>
+					<Name>GVL_IO.arrStreetLamps[3].bMotionSensor</Name>
+					<Comment><![CDATA[direct info from sensor, edge means movement occured]]></Comment>
+					<Type>BOOL</Type>
+				</Var>
+				<Var>
+					<Name>GVL_IO.arrStreetLamps[4].bMotionSensor</Name>
+					<Comment><![CDATA[direct info from sensor, edge means movement occured]]></Comment>
+					<Type>BOOL</Type>
+				</Var>
+				<Var>
+					<Name>GVL_IO.arrStreetLamps[5].bMotionSensor</Name>
+					<Comment><![CDATA[direct info from sensor, edge means movement occured]]></Comment>
+					<Type>BOOL</Type>
+				</Var>
+				<Var>
+					<Name>GVL_IO.arrStreetLamps[6].bMotionSensor</Name>
+					<Comment><![CDATA[direct info from sensor, edge means movement occured]]></Comment>
+					<Type>BOOL</Type>
+				</Var>
+				<Var>
+					<Name>GVL_IO.arrStreetLamps[7].bMotionSensor</Name>
+					<Comment><![CDATA[direct info from sensor, edge means movement occured]]></Comment>
+					<Type>BOOL</Type>
+				</Var>
+				<Var>
+					<Name>GVL_IO.arrStreetLamps[8].bMotionSensor</Name>
+					<Comment><![CDATA[direct info from sensor, edge means movement occured]]></Comment>
+					<Type>BOOL</Type>
+				</Var>
+				<Var>
+					<Name>GVL_IO.arrStreetLamps[9].bMotionSensor</Name>
+					<Comment><![CDATA[direct info from sensor, edge means movement occured]]></Comment>
+					<Type>BOOL</Type>
+				</Var>
+				<Var>
+					<Name>GVL_IO.arrStreetLamps[10].bMotionSensor</Name>
+					<Comment><![CDATA[direct info from sensor, edge means movement occured]]></Comment>
+					<Type>BOOL</Type>
+				</Var>
+			</Vars>
+			<Vars VarGrpType="2" AreaNo="1">
+				<Name>CommunicationTask Outputs</Name>
+				<Var>
+					<Name>GVL_BACnet.Device._ServerControl</Name>
+					<Type>WORD</Type>
+				</Var>
+				<Var>
+					<Name>GVL_BACnet.fbBACnet_BV_Alarm._PresentValue_Priority12</Name>
+					<Type>WORD</Type>
+				</Var>
+				<Var>
+					<Name>GVL_BACnet.fbBACnet_AV_Gates._PresentValue_Priority12</Name>
+					<Type>DWORD</Type>
+				</Var>
+				<Var>
+					<Name>GVL_IO.stKL6821OutData_RB1</Name>
+					<Type GUID="{28438AA5-8F49-4E98-5C6F-4C901181A54A}" Namespace="Tc2_DALI">ST_KL6821OutData</Type>
+				</Var>
+				<Var>
+					<Name>GVL_IO.stKL6821OutData_RB2</Name>
+					<Type GUID="{28438AA5-8F49-4E98-5C6F-4C901181A54A}" Namespace="Tc2_DALI">ST_KL6821OutData</Type>
+				</Var>
+				<Var>
+					<Name>GVL_IO.stKL6821OutData_RB3</Name>
+					<Type GUID="{28438AA5-8F49-4E98-5C6F-4C901181A54A}" Namespace="Tc2_DALI">ST_KL6821OutData</Type>
+				</Var>
+				<Var>
+					<Name>GVL_IO.KL6301_OUT</Name>
+					<Type GUID="{90CE8AE1-D8C1-D727-B60C-90F68839C409}">ARRAY [1..24] OF BYTE</Type>
+				</Var>
+			</Vars>
+			<Vars VarGrpType="1" ContextId="2" AreaNo="32">
+				<Name>PlcTask Inputs</Name>
+				<Var>
+					<Name>GVL_BACnet.fbBACnet_AV_SL_Manual._StatusFlags</Name>
+					<Type>WORD</Type>
+				</Var>
+				<Var>
+					<Name>GVL_BACnet.fbBACnet_AV_SL_Manual._PresentValue</Name>
+					<Type>REAL</Type>
+				</Var>
+				<Var>
+					<Name>GVL_BACnet.fbBACnet_AV_SL_Scene._StatusFlags</Name>
+					<Type>WORD</Type>
+				</Var>
+				<Var>
+					<Name>GVL_BACnet.fbBACnet_AV_SL_Scene._PresentValue</Name>
+					<Type>REAL</Type>
+				</Var>
+				<Var>
+					<Name>GVL_BACnet.fbBACnet_AV_SL_Motion._StatusFlags</Name>
+					<Type>WORD</Type>
+				</Var>
+				<Var>
+					<Name>GVL_BACnet.fbBACnet_AV_SL_Motion._PresentValue</Name>
+					<Type>REAL</Type>
+				</Var>
+				<Var>
+					<Name>GVL_BACnet.fbBACnet_AV_SL_Error._StatusFlags</Name>
+					<Type>WORD</Type>
+				</Var>
+				<Var>
+					<Name>GVL_BACnet.fbBACnet_AV_SL_Error._PresentValue</Name>
+					<Type>REAL</Type>
+				</Var>
+				<Var>
+					<Name>GVL_BACnet.fbBACnet_AV_SL_Level_1._StatusFlags</Name>
+					<Type>WORD</Type>
+				</Var>
+				<Var>
+					<Name>GVL_BACnet.fbBACnet_AV_SL_Level_1._PresentValue</Name>
+					<Type>REAL</Type>
+				</Var>
+				<Var>
+					<Name>GVL_BACnet.fbBACnet_AV_SL_Level_2._StatusFlags</Name>
+					<Type>WORD</Type>
+				</Var>
+				<Var>
+					<Name>GVL_BACnet.fbBACnet_AV_SL_Level_2._PresentValue</Name>
+					<Type>REAL</Type>
+				</Var>
+				<Var>
+					<Name>GVL_BACnet.fbBACnet_AV_SL_Level_3._StatusFlags</Name>
+					<Type>WORD</Type>
+				</Var>
+				<Var>
+					<Name>GVL_BACnet.fbBACnet_AV_SL_Level_3._PresentValue</Name>
+					<Type>REAL</Type>
+				</Var>
+				<Var>
+					<Name>GVL_BACnet.fbBACnet_AV_SL_Level_4._StatusFlags</Name>
+					<Type>WORD</Type>
+				</Var>
+				<Var>
+					<Name>GVL_BACnet.fbBACnet_AV_SL_Level_4._PresentValue</Name>
+					<Type>REAL</Type>
+				</Var>
+				<Var>
+					<Name>GVL_BACnet.fbBACnet_AV_SL_Level_5._StatusFlags</Name>
+					<Type>WORD</Type>
+				</Var>
+				<Var>
+					<Name>GVL_BACnet.fbBACnet_AV_SL_Level_5._PresentValue</Name>
+					<Type>REAL</Type>
+				</Var>
+				<Var>
+					<Name>GVL_BACnet.fbBACnet_AV_SL_Level_6._StatusFlags</Name>
+					<Type>WORD</Type>
+				</Var>
+				<Var>
+					<Name>GVL_BACnet.fbBACnet_AV_SL_Level_6._PresentValue</Name>
+					<Type>REAL</Type>
+				</Var>
+				<Var>
+					<Name>GVL_BACnet.fbBACnet_AV_SL_Level_7._StatusFlags</Name>
+					<Type>WORD</Type>
+				</Var>
+				<Var>
+					<Name>GVL_BACnet.fbBACnet_AV_SL_Level_7._PresentValue</Name>
+					<Type>REAL</Type>
+				</Var>
+				<Var>
+					<Name>GVL_BACnet.fbBACnet_AV_SL_Level_8._StatusFlags</Name>
+					<Type>WORD</Type>
+				</Var>
+				<Var>
+					<Name>GVL_BACnet.fbBACnet_AV_SL_Level_8._PresentValue</Name>
+					<Type>REAL</Type>
+				</Var>
+				<Var>
+					<Name>GVL_BACnet.fbBACnet_AV_SL_Level_9._StatusFlags</Name>
+					<Type>WORD</Type>
+				</Var>
+				<Var>
+					<Name>GVL_BACnet.fbBACnet_AV_SL_Level_9._PresentValue</Name>
+					<Type>REAL</Type>
+				</Var>
+				<Var>
+					<Name>GVL_BACnet.fbBACnet_AV_SL_Level_10._StatusFlags</Name>
+					<Type>WORD</Type>
+				</Var>
+				<Var>
+					<Name>GVL_BACnet.fbBACnet_AV_SL_Level_10._PresentValue</Name>
+					<Type>REAL</Type>
+				</Var>
+				<Var>
+					<Name>GVL_BACnet.fbBACnet_AV_SL_ActualLevel_1._StatusFlags</Name>
+					<Type>WORD</Type>
+				</Var>
+				<Var>
+					<Name>GVL_BACnet.fbBACnet_AV_SL_ActualLevel_1._PresentValue</Name>
+					<Type>REAL</Type>
+				</Var>
+				<Var>
+					<Name>GVL_BACnet.fbBACnet_AV_SL_ActualLevel_2._StatusFlags</Name>
+					<Type>WORD</Type>
+				</Var>
+				<Var>
+					<Name>GVL_BACnet.fbBACnet_AV_SL_ActualLevel_2._PresentValue</Name>
+					<Type>REAL</Type>
+				</Var>
+				<Var>
+					<Name>GVL_BACnet.fbBACnet_AV_SL_ActualLevel_3._StatusFlags</Name>
+					<Type>WORD</Type>
+				</Var>
+				<Var>
+					<Name>GVL_BACnet.fbBACnet_AV_SL_ActualLevel_3._PresentValue</Name>
+					<Type>REAL</Type>
+				</Var>
+				<Var>
+					<Name>GVL_BACnet.fbBACnet_AV_SL_ActualLevel_4._StatusFlags</Name>
+					<Type>WORD</Type>
+				</Var>
+				<Var>
+					<Name>GVL_BACnet.fbBACnet_AV_SL_ActualLevel_4._PresentValue</Name>
+					<Type>REAL</Type>
+				</Var>
+				<Var>
+					<Name>GVL_BACnet.fbBACnet_AV_SL_ActualLevel_5._StatusFlags</Name>
+					<Type>WORD</Type>
+				</Var>
+				<Var>
+					<Name>GVL_BACnet.fbBACnet_AV_SL_ActualLevel_5._PresentValue</Name>
+					<Type>REAL</Type>
+				</Var>
+				<Var>
+					<Name>GVL_BACnet.fbBACnet_AV_SL_ActualLevel_6._StatusFlags</Name>
+					<Type>WORD</Type>
+				</Var>
+				<Var>
+					<Name>GVL_BACnet.fbBACnet_AV_SL_ActualLevel_6._PresentValue</Name>
+					<Type>REAL</Type>
+				</Var>
+				<Var>
+					<Name>GVL_BACnet.fbBACnet_AV_SL_ActualLevel_7._StatusFlags</Name>
+					<Type>WORD</Type>
+				</Var>
+				<Var>
+					<Name>GVL_BACnet.fbBACnet_AV_SL_ActualLevel_7._PresentValue</Name>
+					<Type>REAL</Type>
+				</Var>
+				<Var>
+					<Name>GVL_BACnet.fbBACnet_AV_SL_ActualLevel_8._StatusFlags</Name>
+					<Type>WORD</Type>
+				</Var>
+				<Var>
+					<Name>GVL_BACnet.fbBACnet_AV_SL_ActualLevel_8._PresentValue</Name>
+					<Type>REAL</Type>
+				</Var>
+				<Var>
+					<Name>GVL_BACnet.fbBACnet_AV_SL_ActualLevel_9._StatusFlags</Name>
+					<Type>WORD</Type>
+				</Var>
+				<Var>
+					<Name>GVL_BACnet.fbBACnet_AV_SL_ActualLevel_9._PresentValue</Name>
+					<Type>REAL</Type>
+				</Var>
+				<Var>
+					<Name>GVL_BACnet.fbBACnet_AV_SL_ActualLevel_10._StatusFlags</Name>
+					<Type>WORD</Type>
+				</Var>
+				<Var>
+					<Name>GVL_BACnet.fbBACnet_AV_SL_ActualLevel_10._PresentValue</Name>
+					<Type>REAL</Type>
+				</Var>
+			</Vars>
+			<Vars VarGrpType="2" ContextId="2" AreaNo="33">
+				<Name>PlcTask Outputs</Name>
+				<Var>
+					<Name>GVL_BACnet.fbBACnet_AV_SL_Manual._PresentValue_Priority12</Name>
+					<Type>DWORD</Type>
+				</Var>
+				<Var>
+					<Name>GVL_BACnet.fbBACnet_AV_SL_Scene._PresentValue_Priority12</Name>
+					<Type>DWORD</Type>
+				</Var>
+				<Var>
+					<Name>GVL_BACnet.fbBACnet_AV_SL_Motion._PresentValue_Priority12</Name>
+					<Type>DWORD</Type>
+				</Var>
+				<Var>
+					<Name>GVL_BACnet.fbBACnet_AV_SL_Error._PresentValue_Priority12</Name>
+					<Type>DWORD</Type>
+				</Var>
+				<Var>
+					<Name>GVL_BACnet.fbBACnet_AV_SL_Level_1._PresentValue_Priority12</Name>
+					<Type>DWORD</Type>
+				</Var>
+				<Var>
+					<Name>GVL_BACnet.fbBACnet_AV_SL_Level_2._PresentValue_Priority12</Name>
+					<Type>DWORD</Type>
+				</Var>
+				<Var>
+					<Name>GVL_BACnet.fbBACnet_AV_SL_Level_3._PresentValue_Priority12</Name>
+					<Type>DWORD</Type>
+				</Var>
+				<Var>
+					<Name>GVL_BACnet.fbBACnet_AV_SL_Level_4._PresentValue_Priority12</Name>
+					<Type>DWORD</Type>
+				</Var>
+				<Var>
+					<Name>GVL_BACnet.fbBACnet_AV_SL_Level_5._PresentValue_Priority12</Name>
+					<Type>DWORD</Type>
+				</Var>
+				<Var>
+					<Name>GVL_BACnet.fbBACnet_AV_SL_Level_6._PresentValue_Priority12</Name>
+					<Type>DWORD</Type>
+				</Var>
+				<Var>
+					<Name>GVL_BACnet.fbBACnet_AV_SL_Level_7._PresentValue_Priority12</Name>
+					<Type>DWORD</Type>
+				</Var>
+				<Var>
+					<Name>GVL_BACnet.fbBACnet_AV_SL_Level_8._PresentValue_Priority12</Name>
+					<Type>DWORD</Type>
+				</Var>
+				<Var>
+					<Name>GVL_BACnet.fbBACnet_AV_SL_Level_9._PresentValue_Priority12</Name>
+					<Type>DWORD</Type>
+				</Var>
+				<Var>
+					<Name>GVL_BACnet.fbBACnet_AV_SL_Level_10._PresentValue_Priority12</Name>
+					<Type>DWORD</Type>
+				</Var>
+				<Var>
+					<Name>GVL_BACnet.fbBACnet_AV_SL_ActualLevel_1._PresentValue_Priority12</Name>
+					<Type>DWORD</Type>
+				</Var>
+				<Var>
+					<Name>GVL_BACnet.fbBACnet_AV_SL_ActualLevel_2._PresentValue_Priority12</Name>
+					<Type>DWORD</Type>
+				</Var>
+				<Var>
+					<Name>GVL_BACnet.fbBACnet_AV_SL_ActualLevel_3._PresentValue_Priority12</Name>
+					<Type>DWORD</Type>
+				</Var>
+				<Var>
+					<Name>GVL_BACnet.fbBACnet_AV_SL_ActualLevel_4._PresentValue_Priority12</Name>
+					<Type>DWORD</Type>
+				</Var>
+				<Var>
+					<Name>GVL_BACnet.fbBACnet_AV_SL_ActualLevel_5._PresentValue_Priority12</Name>
+					<Type>DWORD</Type>
+				</Var>
+				<Var>
+					<Name>GVL_BACnet.fbBACnet_AV_SL_ActualLevel_6._PresentValue_Priority12</Name>
+					<Type>DWORD</Type>
+				</Var>
+				<Var>
+					<Name>GVL_BACnet.fbBACnet_AV_SL_ActualLevel_7._PresentValue_Priority12</Name>
+					<Type>DWORD</Type>
+				</Var>
+				<Var>
+					<Name>GVL_BACnet.fbBACnet_AV_SL_ActualLevel_8._PresentValue_Priority12</Name>
+					<Type>DWORD</Type>
+				</Var>
+				<Var>
+					<Name>GVL_BACnet.fbBACnet_AV_SL_ActualLevel_9._PresentValue_Priority12</Name>
+					<Type>DWORD</Type>
+				</Var>
+				<Var>
+					<Name>GVL_BACnet.fbBACnet_AV_SL_ActualLevel_10._PresentValue_Priority12</Name>
+					<Type>DWORD</Type>
+				</Var>
+				<Var>
+					<Name>GVL_IO.bStreetLamp_DO1</Name>
+					<Comment><![CDATA[Other
+street lamp that has no DALI
+therefore it is controlled via digital output (DO)]]></Comment>
+					<Type>BOOL</Type>
+				</Var>
+			</Vars>
+			<Contexts>
+				<Context>
+					<Id NeedCalleeCall="true">0</Id>
+					<Name>CommunicationTask</Name>
+					<ManualConfig>
+						<OTCID>#x02010040</OTCID>
+					</ManualConfig>
+					<Priority>7</Priority>
+					<CycleTime>2000000</CycleTime>
+				</Context>
+				<Context>
+					<Id NeedCalleeCall="true">1</Id>
+					<Name>DimmerTask</Name>
+					<ManualConfig>
+						<OTCID>#x02010050</OTCID>
+					</ManualConfig>
+					<Priority>15</Priority>
+					<CycleTime>10000000</CycleTime>
+				</Context>
+				<Context>
+					<Id NeedCalleeCall="true">2</Id>
+					<Name>PlcTask</Name>
+					<ManualConfig>
+						<OTCID>#x02010030</OTCID>
+					</ManualConfig>
+					<Priority>20</Priority>
+					<CycleTime>10000000</CycleTime>
+				</Context>
+			</Contexts>
+			<TaskPouOids>
+				<TaskPouOid Prio="7" OTCID="#x08502003"/>
+				<TaskPouOid Prio="15" OTCID="#x08502002"/>
+				<TaskPouOid Prio="20" OTCID="#x08502001"/>
+			</TaskPouOids>
+		</Instance>
+	</Project>
+	<Mappings>
+		<OwnerA Name="PLC_Light_Control Instance">
+			<OwnerB Name="TIID^Device 1 (CX-BK)^RB2 (CX-BK)">
+				<Link VarA="CommunicationTask Inputs^GVL_IO.KL6301_IN" VarB="Term 16 (KL6301)^Channel 1^Input Data 1" Size="8" OffsA="16"/>
+				<Link VarA="CommunicationTask Inputs^GVL_IO.KL6301_IN" VarB="Term 16 (KL6301)^Channel 1^Input Data 10" Size="8" OffsA="88"/>
+				<Link VarA="CommunicationTask Inputs^GVL_IO.KL6301_IN" VarB="Term 16 (KL6301)^Channel 1^Input Data 11" Size="8" OffsA="96"/>
+				<Link VarA="CommunicationTask Inputs^GVL_IO.KL6301_IN" VarB="Term 16 (KL6301)^Channel 1^Input Data 12" Size="8" OffsA="104"/>
+				<Link VarA="CommunicationTask Inputs^GVL_IO.KL6301_IN" VarB="Term 16 (KL6301)^Channel 1^Input Data 13" Size="8" OffsA="112"/>
+				<Link VarA="CommunicationTask Inputs^GVL_IO.KL6301_IN" VarB="Term 16 (KL6301)^Channel 1^Input Data 14" Size="8" OffsA="120"/>
+				<Link VarA="CommunicationTask Inputs^GVL_IO.KL6301_IN" VarB="Term 16 (KL6301)^Channel 1^Input Data 15" Size="8" OffsA="128"/>
+				<Link VarA="CommunicationTask Inputs^GVL_IO.KL6301_IN" VarB="Term 16 (KL6301)^Channel 1^Input Data 16" Size="8" OffsA="136"/>
+				<Link VarA="CommunicationTask Inputs^GVL_IO.KL6301_IN" VarB="Term 16 (KL6301)^Channel 1^Input Data 17" Size="8" OffsA="144"/>
+				<Link VarA="CommunicationTask Inputs^GVL_IO.KL6301_IN" VarB="Term 16 (KL6301)^Channel 1^Input Data 18" Size="8" OffsA="152"/>
+				<Link VarA="CommunicationTask Inputs^GVL_IO.KL6301_IN" VarB="Term 16 (KL6301)^Channel 1^Input Data 19" Size="8" OffsA="160"/>
+				<Link VarA="CommunicationTask Inputs^GVL_IO.KL6301_IN" VarB="Term 16 (KL6301)^Channel 1^Input Data 2" Size="8" OffsA="24"/>
+				<Link VarA="CommunicationTask Inputs^GVL_IO.KL6301_IN" VarB="Term 16 (KL6301)^Channel 1^Input Data 20" Size="8" OffsA="168"/>
+				<Link VarA="CommunicationTask Inputs^GVL_IO.KL6301_IN" VarB="Term 16 (KL6301)^Channel 1^Input Data 21" Size="8" OffsA="176"/>
+				<Link VarA="CommunicationTask Inputs^GVL_IO.KL6301_IN" VarB="Term 16 (KL6301)^Channel 1^Input Data 22" Size="8" OffsA="184"/>
+				<Link VarA="CommunicationTask Inputs^GVL_IO.KL6301_IN" VarB="Term 16 (KL6301)^Channel 1^Input Data 3" Size="8" OffsA="32"/>
+				<Link VarA="CommunicationTask Inputs^GVL_IO.KL6301_IN" VarB="Term 16 (KL6301)^Channel 1^Input Data 4" Size="8" OffsA="40"/>
+				<Link VarA="CommunicationTask Inputs^GVL_IO.KL6301_IN" VarB="Term 16 (KL6301)^Channel 1^Input Data 5" Size="8" OffsA="48"/>
+				<Link VarA="CommunicationTask Inputs^GVL_IO.KL6301_IN" VarB="Term 16 (KL6301)^Channel 1^Input Data 6" Size="8" OffsA="56"/>
+				<Link VarA="CommunicationTask Inputs^GVL_IO.KL6301_IN" VarB="Term 16 (KL6301)^Channel 1^Input Data 7" Size="8" OffsA="64"/>
+				<Link VarA="CommunicationTask Inputs^GVL_IO.KL6301_IN" VarB="Term 16 (KL6301)^Channel 1^Input Data 8" Size="8" OffsA="72"/>
+				<Link VarA="CommunicationTask Inputs^GVL_IO.KL6301_IN" VarB="Term 16 (KL6301)^Channel 1^Input Data 9" Size="8" OffsA="80"/>
+				<Link VarA="CommunicationTask Inputs^GVL_IO.KL6301_IN" VarB="Term 16 (KL6301)^Channel 1^Parameter Status" Size="16"/>
+				<Link VarA="CommunicationTask Inputs^GVL_IO.stKL6821InData_RB2" VarB="Term 17 (KL6821)^Channel 1^Data In 0" Size="8" OffsA="16"/>
+				<Link VarA="CommunicationTask Inputs^GVL_IO.stKL6821InData_RB2" VarB="Term 17 (KL6821)^Channel 1^Data In 1" Size="8" OffsA="24"/>
+				<Link VarA="CommunicationTask Inputs^GVL_IO.stKL6821InData_RB2" VarB="Term 17 (KL6821)^Channel 1^Data In 2" Size="8" OffsA="32"/>
+				<Link VarA="CommunicationTask Inputs^GVL_IO.stKL6821InData_RB2" VarB="Term 17 (KL6821)^Channel 1^Data In 3" Size="8" OffsA="40"/>
+				<Link VarA="CommunicationTask Inputs^GVL_IO.stKL6821InData_RB2" VarB="Term 17 (KL6821)^Channel 1^State" Size="16"/>
+				<Link VarA="CommunicationTask Outputs^GVL_IO.KL6301_OUT" VarB="Term 16 (KL6301)^Channel 1^Output Data 1" Size="8" OffsA="16"/>
+				<Link VarA="CommunicationTask Outputs^GVL_IO.KL6301_OUT" VarB="Term 16 (KL6301)^Channel 1^Output Data 10" Size="8" OffsA="88"/>
+				<Link VarA="CommunicationTask Outputs^GVL_IO.KL6301_OUT" VarB="Term 16 (KL6301)^Channel 1^Output Data 11" Size="8" OffsA="96"/>
+				<Link VarA="CommunicationTask Outputs^GVL_IO.KL6301_OUT" VarB="Term 16 (KL6301)^Channel 1^Output Data 12" Size="8" OffsA="104"/>
+				<Link VarA="CommunicationTask Outputs^GVL_IO.KL6301_OUT" VarB="Term 16 (KL6301)^Channel 1^Output Data 13" Size="8" OffsA="112"/>
+				<Link VarA="CommunicationTask Outputs^GVL_IO.KL6301_OUT" VarB="Term 16 (KL6301)^Channel 1^Output Data 14" Size="8" OffsA="120"/>
+				<Link VarA="CommunicationTask Outputs^GVL_IO.KL6301_OUT" VarB="Term 16 (KL6301)^Channel 1^Output Data 15" Size="8" OffsA="128"/>
+				<Link VarA="CommunicationTask Outputs^GVL_IO.KL6301_OUT" VarB="Term 16 (KL6301)^Channel 1^Output Data 16" Size="8" OffsA="136"/>
+				<Link VarA="CommunicationTask Outputs^GVL_IO.KL6301_OUT" VarB="Term 16 (KL6301)^Channel 1^Output Data 17" Size="8" OffsA="144"/>
+				<Link VarA="CommunicationTask Outputs^GVL_IO.KL6301_OUT" VarB="Term 16 (KL6301)^Channel 1^Output Data 18" Size="8" OffsA="152"/>
+				<Link VarA="CommunicationTask Outputs^GVL_IO.KL6301_OUT" VarB="Term 16 (KL6301)^Channel 1^Output Data 19" Size="8" OffsA="160"/>
+				<Link VarA="CommunicationTask Outputs^GVL_IO.KL6301_OUT" VarB="Term 16 (KL6301)^Channel 1^Output Data 2" Size="8" OffsA="24"/>
+				<Link VarA="CommunicationTask Outputs^GVL_IO.KL6301_OUT" VarB="Term 16 (KL6301)^Channel 1^Output Data 20" Size="8" OffsA="168"/>
+				<Link VarA="CommunicationTask Outputs^GVL_IO.KL6301_OUT" VarB="Term 16 (KL6301)^Channel 1^Output Data 21" Size="8" OffsA="176"/>
+				<Link VarA="CommunicationTask Outputs^GVL_IO.KL6301_OUT" VarB="Term 16 (KL6301)^Channel 1^Output Data 22" Size="8" OffsA="184"/>
+				<Link VarA="CommunicationTask Outputs^GVL_IO.KL6301_OUT" VarB="Term 16 (KL6301)^Channel 1^Output Data 3" Size="8" OffsA="32"/>
+				<Link VarA="CommunicationTask Outputs^GVL_IO.KL6301_OUT" VarB="Term 16 (KL6301)^Channel 1^Output Data 4" Size="8" OffsA="40"/>
+				<Link VarA="CommunicationTask Outputs^GVL_IO.KL6301_OUT" VarB="Term 16 (KL6301)^Channel 1^Output Data 5" Size="8" OffsA="48"/>
+				<Link VarA="CommunicationTask Outputs^GVL_IO.KL6301_OUT" VarB="Term 16 (KL6301)^Channel 1^Output Data 6" Size="8" OffsA="56"/>
+				<Link VarA="CommunicationTask Outputs^GVL_IO.KL6301_OUT" VarB="Term 16 (KL6301)^Channel 1^Output Data 7" Size="8" OffsA="64"/>
+				<Link VarA="CommunicationTask Outputs^GVL_IO.KL6301_OUT" VarB="Term 16 (KL6301)^Channel 1^Output Data 8" Size="8" OffsA="72"/>
+				<Link VarA="CommunicationTask Outputs^GVL_IO.KL6301_OUT" VarB="Term 16 (KL6301)^Channel 1^Output Data 9" Size="8" OffsA="80"/>
+				<Link VarA="CommunicationTask Outputs^GVL_IO.KL6301_OUT" VarB="Term 16 (KL6301)^Channel 1^Parameter Control" Size="16"/>
+				<Link VarA="CommunicationTask Outputs^GVL_IO.stKL6821OutData_RB2" VarB="Term 17 (KL6821)^Channel 1^Ctrl" Size="16"/>
+				<Link VarA="CommunicationTask Outputs^GVL_IO.stKL6821OutData_RB2" VarB="Term 17 (KL6821)^Channel 1^Data Out 0" Size="8" OffsA="16"/>
+				<Link VarA="CommunicationTask Outputs^GVL_IO.stKL6821OutData_RB2" VarB="Term 17 (KL6821)^Channel 1^Data Out 1" Size="8" OffsA="24"/>
+				<Link VarA="CommunicationTask Outputs^GVL_IO.stKL6821OutData_RB2" VarB="Term 17 (KL6821)^Channel 1^Data Out 2" Size="8" OffsA="32"/>
+				<Link VarA="CommunicationTask Outputs^GVL_IO.stKL6821OutData_RB2" VarB="Term 17 (KL6821)^Channel 1^Data Out 3" Size="8" OffsA="40"/>
+			</OwnerB>
+			<OwnerB Name="TIID^Device 2 (RT-Ethernet Protocol)^RB1_BK9050 (BK9050-0000 192.168.26.122)">
+				<Link VarA="CommunicationTask Inputs^GVL_IO.stKL6821InData_RB1" VarB="Term 12 (KL6821)^Channel 1^Data In 0" Size="8" OffsA="16"/>
+				<Link VarA="CommunicationTask Inputs^GVL_IO.stKL6821InData_RB1" VarB="Term 12 (KL6821)^Channel 1^Data In 1" Size="8" OffsA="24"/>
+				<Link VarA="CommunicationTask Inputs^GVL_IO.stKL6821InData_RB1" VarB="Term 12 (KL6821)^Channel 1^Data In 2" Size="8" OffsA="32"/>
+				<Link VarA="CommunicationTask Inputs^GVL_IO.stKL6821InData_RB1" VarB="Term 12 (KL6821)^Channel 1^Data In 3" Size="8" OffsA="40"/>
+				<Link VarA="CommunicationTask Inputs^GVL_IO.stKL6821InData_RB1" VarB="Term 12 (KL6821)^Channel 1^State" Size="16"/>
+				<Link VarA="CommunicationTask Outputs^GVL_IO.stKL6821OutData_RB1" VarB="Term 12 (KL6821)^Channel 1^Ctrl" Size="16"/>
+				<Link VarA="CommunicationTask Outputs^GVL_IO.stKL6821OutData_RB1" VarB="Term 12 (KL6821)^Channel 1^Data Out 0" Size="8" OffsA="16"/>
+				<Link VarA="CommunicationTask Outputs^GVL_IO.stKL6821OutData_RB1" VarB="Term 12 (KL6821)^Channel 1^Data Out 1" Size="8" OffsA="24"/>
+				<Link VarA="CommunicationTask Outputs^GVL_IO.stKL6821OutData_RB1" VarB="Term 12 (KL6821)^Channel 1^Data Out 2" Size="8" OffsA="32"/>
+				<Link VarA="CommunicationTask Outputs^GVL_IO.stKL6821OutData_RB1" VarB="Term 12 (KL6821)^Channel 1^Data Out 3" Size="8" OffsA="40"/>
+				<Link VarA="PlcTask Outputs^GVL_IO.bStreetLamp_DO1" VarB="Term 11 (KL2408)^Channel 1^Output" Size="1"/>
+			</OwnerB>
+			<OwnerB Name="TIID^Device 2 (RT-Ethernet Protocol)^RB3_BK9050 (BK9050-0000 192.168.26.120)">
+				<Link VarA="CommunicationTask Inputs^GVL_IO.stKL6821InData_RB3" VarB="Term 6 (KL6821)^Channel 1^Data In 0" Size="8" OffsA="16"/>
+				<Link VarA="CommunicationTask Inputs^GVL_IO.stKL6821InData_RB3" VarB="Term 6 (KL6821)^Channel 1^Data In 1" Size="8" OffsA="24"/>
+				<Link VarA="CommunicationTask Inputs^GVL_IO.stKL6821InData_RB3" VarB="Term 6 (KL6821)^Channel 1^Data In 2" Size="8" OffsA="32"/>
+				<Link VarA="CommunicationTask Inputs^GVL_IO.stKL6821InData_RB3" VarB="Term 6 (KL6821)^Channel 1^Data In 3" Size="8" OffsA="40"/>
+				<Link VarA="CommunicationTask Inputs^GVL_IO.stKL6821InData_RB3" VarB="Term 6 (KL6821)^Channel 1^State" Size="16"/>
+				<Link VarA="CommunicationTask Outputs^GVL_IO.stKL6821OutData_RB3" VarB="Term 6 (KL6821)^Channel 1^Ctrl" Size="16"/>
+				<Link VarA="CommunicationTask Outputs^GVL_IO.stKL6821OutData_RB3" VarB="Term 6 (KL6821)^Channel 1^Data Out 0" Size="8" OffsA="16"/>
+				<Link VarA="CommunicationTask Outputs^GVL_IO.stKL6821OutData_RB3" VarB="Term 6 (KL6821)^Channel 1^Data Out 1" Size="8" OffsA="24"/>
+				<Link VarA="CommunicationTask Outputs^GVL_IO.stKL6821OutData_RB3" VarB="Term 6 (KL6821)^Channel 1^Data Out 2" Size="8" OffsA="32"/>
+				<Link VarA="CommunicationTask Outputs^GVL_IO.stKL6821OutData_RB3" VarB="Term 6 (KL6821)^Channel 1^Data Out 3" Size="8" OffsA="40"/>
+			</OwnerB>
+			<OwnerB Name="TIID^Device 5 (BACnet IP)">
+				<Link VarA="CommunicationTask Inputs^Tc2_BACnetRev12.BACnet_Globals.fbBACnet_Adapter._AmsNetId" VarB="Inputs^AmsNetId"/>
+				<Link VarA="CommunicationTask Inputs^Tc2_BACnetRev12.BACnet_Globals.fbBACnet_Adapter._DeviceStatus" VarB="Inputs^Device Status"/>
+			</OwnerB>
+			<OwnerB Name="TIID^Device 5 (BACnet IP)^Beckhoff_0 (BACnet Server)">
+				<Link VarA="CommunicationTask Inputs^GVL_BACnet.Device._ServerStatus" VarB="Inputs^Server Status"/>
+				<Link VarA="CommunicationTask Outputs^GVL_BACnet.Device._ServerControl" VarB="Outputs^Server Control"/>
+			</OwnerB>
+			<OwnerB Name="TIID^Device 5 (BACnet IP)^Beckhoff_0 (BACnet Server)^Beckhoff_0 (BACnet Device Object)">
+				<Link VarA="CommunicationTask Inputs^GVL_BACnet.Device._LocalDate" VarB="Inputs^LocalDate"/>
+				<Link VarA="CommunicationTask Inputs^GVL_BACnet.Device._LocalTime" VarB="Inputs^LocalTime"/>
+				<Link VarA="CommunicationTask Inputs^GVL_BACnet.Device._ObjectId" VarB="Inputs^ObjectIdentifier"/>
+				<Link VarA="CommunicationTask Inputs^GVL_BACnet.Device._SystemStatus" VarB="Inputs^SystemStatus"/>
+			</OwnerB>
+			<OwnerB Name="TIID^Device 5 (BACnet IP)^Beckhoff_0 (BACnet Server)^GVL_BACnet (BACnet Structured View Object)^fbBACnet_AV_Gates (BACnet Analog Value Object)">
+				<Link VarA="CommunicationTask Inputs^GVL_BACnet.fbBACnet_AV_Gates._PresentValue" VarB="Inputs^PresentValue"/>
+				<Link VarA="CommunicationTask Inputs^GVL_BACnet.fbBACnet_AV_Gates._StatusFlags" VarB="Inputs^StatusFlags"/>
+				<Link VarA="CommunicationTask Outputs^GVL_BACnet.fbBACnet_AV_Gates._PresentValue_Priority12" VarB="Outputs^PresentValue_Priority12"/>
+			</OwnerB>
+			<OwnerB Name="TIID^Device 5 (BACnet IP)^Beckhoff_0 (BACnet Server)^GVL_BACnet (BACnet Structured View Object)^fbBACnet_AV_SL_ActualLevel_1 (BACnet Analog Value Object)">
+				<Link VarA="PlcTask Inputs^GVL_BACnet.fbBACnet_AV_SL_ActualLevel_1._PresentValue" VarB="Inputs^PresentValue"/>
+				<Link VarA="PlcTask Inputs^GVL_BACnet.fbBACnet_AV_SL_ActualLevel_1._StatusFlags" VarB="Inputs^StatusFlags"/>
+				<Link VarA="PlcTask Outputs^GVL_BACnet.fbBACnet_AV_SL_ActualLevel_1._PresentValue_Priority12" VarB="Outputs^PresentValue_Priority12"/>
+			</OwnerB>
+			<OwnerB Name="TIID^Device 5 (BACnet IP)^Beckhoff_0 (BACnet Server)^GVL_BACnet (BACnet Structured View Object)^fbBACnet_AV_SL_ActualLevel_10 (BACnet Analog Value Object)">
+				<Link VarA="PlcTask Inputs^GVL_BACnet.fbBACnet_AV_SL_ActualLevel_10._PresentValue" VarB="Inputs^PresentValue"/>
+				<Link VarA="PlcTask Inputs^GVL_BACnet.fbBACnet_AV_SL_ActualLevel_10._StatusFlags" VarB="Inputs^StatusFlags"/>
+				<Link VarA="PlcTask Outputs^GVL_BACnet.fbBACnet_AV_SL_ActualLevel_10._PresentValue_Priority12" VarB="Outputs^PresentValue_Priority12"/>
+			</OwnerB>
+			<OwnerB Name="TIID^Device 5 (BACnet IP)^Beckhoff_0 (BACnet Server)^GVL_BACnet (BACnet Structured View Object)^fbBACnet_AV_SL_ActualLevel_2 (BACnet Analog Value Object)">
+				<Link VarA="PlcTask Inputs^GVL_BACnet.fbBACnet_AV_SL_ActualLevel_2._PresentValue" VarB="Inputs^PresentValue"/>
+				<Link VarA="PlcTask Inputs^GVL_BACnet.fbBACnet_AV_SL_ActualLevel_2._StatusFlags" VarB="Inputs^StatusFlags"/>
+				<Link VarA="PlcTask Outputs^GVL_BACnet.fbBACnet_AV_SL_ActualLevel_2._PresentValue_Priority12" VarB="Outputs^PresentValue_Priority12"/>
+			</OwnerB>
+			<OwnerB Name="TIID^Device 5 (BACnet IP)^Beckhoff_0 (BACnet Server)^GVL_BACnet (BACnet Structured View Object)^fbBACnet_AV_SL_ActualLevel_3 (BACnet Analog Value Object)">
+				<Link VarA="PlcTask Inputs^GVL_BACnet.fbBACnet_AV_SL_ActualLevel_3._PresentValue" VarB="Inputs^PresentValue"/>
+				<Link VarA="PlcTask Inputs^GVL_BACnet.fbBACnet_AV_SL_ActualLevel_3._StatusFlags" VarB="Inputs^StatusFlags"/>
+				<Link VarA="PlcTask Outputs^GVL_BACnet.fbBACnet_AV_SL_ActualLevel_3._PresentValue_Priority12" VarB="Outputs^PresentValue_Priority12"/>
+			</OwnerB>
+			<OwnerB Name="TIID^Device 5 (BACnet IP)^Beckhoff_0 (BACnet Server)^GVL_BACnet (BACnet Structured View Object)^fbBACnet_AV_SL_ActualLevel_4 (BACnet Analog Value Object)">
+				<Link VarA="PlcTask Inputs^GVL_BACnet.fbBACnet_AV_SL_ActualLevel_4._PresentValue" VarB="Inputs^PresentValue"/>
+				<Link VarA="PlcTask Inputs^GVL_BACnet.fbBACnet_AV_SL_ActualLevel_4._StatusFlags" VarB="Inputs^StatusFlags"/>
+				<Link VarA="PlcTask Outputs^GVL_BACnet.fbBACnet_AV_SL_ActualLevel_4._PresentValue_Priority12" VarB="Outputs^PresentValue_Priority12"/>
+			</OwnerB>
+			<OwnerB Name="TIID^Device 5 (BACnet IP)^Beckhoff_0 (BACnet Server)^GVL_BACnet (BACnet Structured View Object)^fbBACnet_AV_SL_ActualLevel_5 (BACnet Analog Value Object)">
+				<Link VarA="PlcTask Inputs^GVL_BACnet.fbBACnet_AV_SL_ActualLevel_5._PresentValue" VarB="Inputs^PresentValue"/>
+				<Link VarA="PlcTask Inputs^GVL_BACnet.fbBACnet_AV_SL_ActualLevel_5._StatusFlags" VarB="Inputs^StatusFlags"/>
+				<Link VarA="PlcTask Outputs^GVL_BACnet.fbBACnet_AV_SL_ActualLevel_5._PresentValue_Priority12" VarB="Outputs^PresentValue_Priority12"/>
+			</OwnerB>
+			<OwnerB Name="TIID^Device 5 (BACnet IP)^Beckhoff_0 (BACnet Server)^GVL_BACnet (BACnet Structured View Object)^fbBACnet_AV_SL_ActualLevel_6 (BACnet Analog Value Object)">
+				<Link VarA="PlcTask Inputs^GVL_BACnet.fbBACnet_AV_SL_ActualLevel_6._PresentValue" VarB="Inputs^PresentValue"/>
+				<Link VarA="PlcTask Inputs^GVL_BACnet.fbBACnet_AV_SL_ActualLevel_6._StatusFlags" VarB="Inputs^StatusFlags"/>
+				<Link VarA="PlcTask Outputs^GVL_BACnet.fbBACnet_AV_SL_ActualLevel_6._PresentValue_Priority12" VarB="Outputs^PresentValue_Priority12"/>
+			</OwnerB>
+			<OwnerB Name="TIID^Device 5 (BACnet IP)^Beckhoff_0 (BACnet Server)^GVL_BACnet (BACnet Structured View Object)^fbBACnet_AV_SL_ActualLevel_7 (BACnet Analog Value Object)">
+				<Link VarA="PlcTask Inputs^GVL_BACnet.fbBACnet_AV_SL_ActualLevel_7._PresentValue" VarB="Inputs^PresentValue"/>
+				<Link VarA="PlcTask Inputs^GVL_BACnet.fbBACnet_AV_SL_ActualLevel_7._StatusFlags" VarB="Inputs^StatusFlags"/>
+				<Link VarA="PlcTask Outputs^GVL_BACnet.fbBACnet_AV_SL_ActualLevel_7._PresentValue_Priority12" VarB="Outputs^PresentValue_Priority12"/>
+			</OwnerB>
+			<OwnerB Name="TIID^Device 5 (BACnet IP)^Beckhoff_0 (BACnet Server)^GVL_BACnet (BACnet Structured View Object)^fbBACnet_AV_SL_ActualLevel_8 (BACnet Analog Value Object)">
+				<Link VarA="PlcTask Inputs^GVL_BACnet.fbBACnet_AV_SL_ActualLevel_8._PresentValue" VarB="Inputs^PresentValue"/>
+				<Link VarA="PlcTask Inputs^GVL_BACnet.fbBACnet_AV_SL_ActualLevel_8._StatusFlags" VarB="Inputs^StatusFlags"/>
+				<Link VarA="PlcTask Outputs^GVL_BACnet.fbBACnet_AV_SL_ActualLevel_8._PresentValue_Priority12" VarB="Outputs^PresentValue_Priority12"/>
+			</OwnerB>
+			<OwnerB Name="TIID^Device 5 (BACnet IP)^Beckhoff_0 (BACnet Server)^GVL_BACnet (BACnet Structured View Object)^fbBACnet_AV_SL_ActualLevel_9 (BACnet Analog Value Object)">
+				<Link VarA="PlcTask Inputs^GVL_BACnet.fbBACnet_AV_SL_ActualLevel_9._PresentValue" VarB="Inputs^PresentValue"/>
+				<Link VarA="PlcTask Inputs^GVL_BACnet.fbBACnet_AV_SL_ActualLevel_9._StatusFlags" VarB="Inputs^StatusFlags"/>
+				<Link VarA="PlcTask Outputs^GVL_BACnet.fbBACnet_AV_SL_ActualLevel_9._PresentValue_Priority12" VarB="Outputs^PresentValue_Priority12"/>
+			</OwnerB>
+			<OwnerB Name="TIID^Device 5 (BACnet IP)^Beckhoff_0 (BACnet Server)^GVL_BACnet (BACnet Structured View Object)^fbBACnet_AV_SL_Error (BACnet Analog Value Object)">
+				<Link VarA="PlcTask Inputs^GVL_BACnet.fbBACnet_AV_SL_Error._PresentValue" VarB="Inputs^PresentValue"/>
+				<Link VarA="PlcTask Inputs^GVL_BACnet.fbBACnet_AV_SL_Error._StatusFlags" VarB="Inputs^StatusFlags"/>
+				<Link VarA="PlcTask Outputs^GVL_BACnet.fbBACnet_AV_SL_Error._PresentValue_Priority12" VarB="Outputs^PresentValue_Priority12"/>
+			</OwnerB>
+			<OwnerB Name="TIID^Device 5 (BACnet IP)^Beckhoff_0 (BACnet Server)^GVL_BACnet (BACnet Structured View Object)^fbBACnet_AV_SL_Level_1 (BACnet Analog Value Object)">
+				<Link VarA="PlcTask Inputs^GVL_BACnet.fbBACnet_AV_SL_Level_1._PresentValue" VarB="Inputs^PresentValue"/>
+				<Link VarA="PlcTask Inputs^GVL_BACnet.fbBACnet_AV_SL_Level_1._StatusFlags" VarB="Inputs^StatusFlags"/>
+				<Link VarA="PlcTask Outputs^GVL_BACnet.fbBACnet_AV_SL_Level_1._PresentValue_Priority12" VarB="Outputs^PresentValue_Priority12"/>
+			</OwnerB>
+			<OwnerB Name="TIID^Device 5 (BACnet IP)^Beckhoff_0 (BACnet Server)^GVL_BACnet (BACnet Structured View Object)^fbBACnet_AV_SL_Level_10 (BACnet Analog Value Object)">
+				<Link VarA="PlcTask Inputs^GVL_BACnet.fbBACnet_AV_SL_Level_10._PresentValue" VarB="Inputs^PresentValue"/>
+				<Link VarA="PlcTask Inputs^GVL_BACnet.fbBACnet_AV_SL_Level_10._StatusFlags" VarB="Inputs^StatusFlags"/>
+				<Link VarA="PlcTask Outputs^GVL_BACnet.fbBACnet_AV_SL_Level_10._PresentValue_Priority12" VarB="Outputs^PresentValue_Priority12"/>
+			</OwnerB>
+			<OwnerB Name="TIID^Device 5 (BACnet IP)^Beckhoff_0 (BACnet Server)^GVL_BACnet (BACnet Structured View Object)^fbBACnet_AV_SL_Level_2 (BACnet Analog Value Object)">
+				<Link VarA="PlcTask Inputs^GVL_BACnet.fbBACnet_AV_SL_Level_2._PresentValue" VarB="Inputs^PresentValue"/>
+				<Link VarA="PlcTask Inputs^GVL_BACnet.fbBACnet_AV_SL_Level_2._StatusFlags" VarB="Inputs^StatusFlags"/>
+				<Link VarA="PlcTask Outputs^GVL_BACnet.fbBACnet_AV_SL_Level_2._PresentValue_Priority12" VarB="Outputs^PresentValue_Priority12"/>
+			</OwnerB>
+			<OwnerB Name="TIID^Device 5 (BACnet IP)^Beckhoff_0 (BACnet Server)^GVL_BACnet (BACnet Structured View Object)^fbBACnet_AV_SL_Level_3 (BACnet Analog Value Object)">
+				<Link VarA="PlcTask Inputs^GVL_BACnet.fbBACnet_AV_SL_Level_3._PresentValue" VarB="Inputs^PresentValue"/>
+				<Link VarA="PlcTask Inputs^GVL_BACnet.fbBACnet_AV_SL_Level_3._StatusFlags" VarB="Inputs^StatusFlags"/>
+				<Link VarA="PlcTask Outputs^GVL_BACnet.fbBACnet_AV_SL_Level_3._PresentValue_Priority12" VarB="Outputs^PresentValue_Priority12"/>
+			</OwnerB>
+			<OwnerB Name="TIID^Device 5 (BACnet IP)^Beckhoff_0 (BACnet Server)^GVL_BACnet (BACnet Structured View Object)^fbBACnet_AV_SL_Level_4 (BACnet Analog Value Object)">
+				<Link VarA="PlcTask Inputs^GVL_BACnet.fbBACnet_AV_SL_Level_4._PresentValue" VarB="Inputs^PresentValue"/>
+				<Link VarA="PlcTask Inputs^GVL_BACnet.fbBACnet_AV_SL_Level_4._StatusFlags" VarB="Inputs^StatusFlags"/>
+				<Link VarA="PlcTask Outputs^GVL_BACnet.fbBACnet_AV_SL_Level_4._PresentValue_Priority12" VarB="Outputs^PresentValue_Priority12"/>
+			</OwnerB>
+			<OwnerB Name="TIID^Device 5 (BACnet IP)^Beckhoff_0 (BACnet Server)^GVL_BACnet (BACnet Structured View Object)^fbBACnet_AV_SL_Level_5 (BACnet Analog Value Object)">
+				<Link VarA="PlcTask Inputs^GVL_BACnet.fbBACnet_AV_SL_Level_5._PresentValue" VarB="Inputs^PresentValue"/>
+				<Link VarA="PlcTask Inputs^GVL_BACnet.fbBACnet_AV_SL_Level_5._StatusFlags" VarB="Inputs^StatusFlags"/>
+				<Link VarA="PlcTask Outputs^GVL_BACnet.fbBACnet_AV_SL_Level_5._PresentValue_Priority12" VarB="Outputs^PresentValue_Priority12"/>
+			</OwnerB>
+			<OwnerB Name="TIID^Device 5 (BACnet IP)^Beckhoff_0 (BACnet Server)^GVL_BACnet (BACnet Structured View Object)^fbBACnet_AV_SL_Level_6 (BACnet Analog Value Object)">
+				<Link VarA="PlcTask Inputs^GVL_BACnet.fbBACnet_AV_SL_Level_6._PresentValue" VarB="Inputs^PresentValue"/>
+				<Link VarA="PlcTask Inputs^GVL_BACnet.fbBACnet_AV_SL_Level_6._StatusFlags" VarB="Inputs^StatusFlags"/>
+				<Link VarA="PlcTask Outputs^GVL_BACnet.fbBACnet_AV_SL_Level_6._PresentValue_Priority12" VarB="Outputs^PresentValue_Priority12"/>
+			</OwnerB>
+			<OwnerB Name="TIID^Device 5 (BACnet IP)^Beckhoff_0 (BACnet Server)^GVL_BACnet (BACnet Structured View Object)^fbBACnet_AV_SL_Level_7 (BACnet Analog Value Object)">
+				<Link VarA="PlcTask Inputs^GVL_BACnet.fbBACnet_AV_SL_Level_7._PresentValue" VarB="Inputs^PresentValue"/>
+				<Link VarA="PlcTask Inputs^GVL_BACnet.fbBACnet_AV_SL_Level_7._StatusFlags" VarB="Inputs^StatusFlags"/>
+				<Link VarA="PlcTask Outputs^GVL_BACnet.fbBACnet_AV_SL_Level_7._PresentValue_Priority12" VarB="Outputs^PresentValue_Priority12"/>
+			</OwnerB>
+			<OwnerB Name="TIID^Device 5 (BACnet IP)^Beckhoff_0 (BACnet Server)^GVL_BACnet (BACnet Structured View Object)^fbBACnet_AV_SL_Level_8 (BACnet Analog Value Object)">
+				<Link VarA="PlcTask Inputs^GVL_BACnet.fbBACnet_AV_SL_Level_8._PresentValue" VarB="Inputs^PresentValue"/>
+				<Link VarA="PlcTask Inputs^GVL_BACnet.fbBACnet_AV_SL_Level_8._StatusFlags" VarB="Inputs^StatusFlags"/>
+				<Link VarA="PlcTask Outputs^GVL_BACnet.fbBACnet_AV_SL_Level_8._PresentValue_Priority12" VarB="Outputs^PresentValue_Priority12"/>
+			</OwnerB>
+			<OwnerB Name="TIID^Device 5 (BACnet IP)^Beckhoff_0 (BACnet Server)^GVL_BACnet (BACnet Structured View Object)^fbBACnet_AV_SL_Level_9 (BACnet Analog Value Object)">
+				<Link VarA="PlcTask Inputs^GVL_BACnet.fbBACnet_AV_SL_Level_9._PresentValue" VarB="Inputs^PresentValue"/>
+				<Link VarA="PlcTask Inputs^GVL_BACnet.fbBACnet_AV_SL_Level_9._StatusFlags" VarB="Inputs^StatusFlags"/>
+				<Link VarA="PlcTask Outputs^GVL_BACnet.fbBACnet_AV_SL_Level_9._PresentValue_Priority12" VarB="Outputs^PresentValue_Priority12"/>
+			</OwnerB>
+			<OwnerB Name="TIID^Device 5 (BACnet IP)^Beckhoff_0 (BACnet Server)^GVL_BACnet (BACnet Structured View Object)^fbBACnet_AV_SL_Manual (BACnet Analog Value Object)">
+				<Link VarA="PlcTask Inputs^GVL_BACnet.fbBACnet_AV_SL_Manual._PresentValue" VarB="Inputs^PresentValue"/>
+				<Link VarA="PlcTask Inputs^GVL_BACnet.fbBACnet_AV_SL_Manual._StatusFlags" VarB="Inputs^StatusFlags"/>
+				<Link VarA="PlcTask Outputs^GVL_BACnet.fbBACnet_AV_SL_Manual._PresentValue_Priority12" VarB="Outputs^PresentValue_Priority12"/>
+			</OwnerB>
+			<OwnerB Name="TIID^Device 5 (BACnet IP)^Beckhoff_0 (BACnet Server)^GVL_BACnet (BACnet Structured View Object)^fbBACnet_AV_SL_Motion (BACnet Analog Value Object)">
+				<Link VarA="PlcTask Inputs^GVL_BACnet.fbBACnet_AV_SL_Motion._PresentValue" VarB="Inputs^PresentValue"/>
+				<Link VarA="PlcTask Inputs^GVL_BACnet.fbBACnet_AV_SL_Motion._StatusFlags" VarB="Inputs^StatusFlags"/>
+				<Link VarA="PlcTask Outputs^GVL_BACnet.fbBACnet_AV_SL_Motion._PresentValue_Priority12" VarB="Outputs^PresentValue_Priority12"/>
+			</OwnerB>
+			<OwnerB Name="TIID^Device 5 (BACnet IP)^Beckhoff_0 (BACnet Server)^GVL_BACnet (BACnet Structured View Object)^fbBACnet_AV_SL_Scene (BACnet Analog Value Object)">
+				<Link VarA="PlcTask Inputs^GVL_BACnet.fbBACnet_AV_SL_Scene._PresentValue" VarB="Inputs^PresentValue"/>
+				<Link VarA="PlcTask Inputs^GVL_BACnet.fbBACnet_AV_SL_Scene._StatusFlags" VarB="Inputs^StatusFlags"/>
+				<Link VarA="PlcTask Outputs^GVL_BACnet.fbBACnet_AV_SL_Scene._PresentValue_Priority12" VarB="Outputs^PresentValue_Priority12"/>
+			</OwnerB>
+			<OwnerB Name="TIID^Device 5 (BACnet IP)^Beckhoff_0 (BACnet Server)^GVL_BACnet (BACnet Structured View Object)^fbBACnet_BV_Alarm (BACnet Binary Value Object)">
+				<Link VarA="CommunicationTask Inputs^GVL_BACnet.fbBACnet_BV_Alarm._PresentValue" VarB="Inputs^PresentValue"/>
+				<Link VarA="CommunicationTask Inputs^GVL_BACnet.fbBACnet_BV_Alarm._StatusFlags" VarB="Inputs^StatusFlags"/>
+				<Link VarA="CommunicationTask Outputs^GVL_BACnet.fbBACnet_BV_Alarm._PresentValue_Priority12" VarB="Outputs^PresentValue_Priority12"/>
+			</OwnerB>
+		</OwnerA>
+	</Mappings>
+</TcSmItem>

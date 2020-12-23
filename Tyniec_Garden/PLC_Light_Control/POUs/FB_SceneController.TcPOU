@@ -2,10 +2,7 @@
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.5">
   <POU Name="FB_SceneController" Id="{130ce1fb-8efb-4aa7-9bf7-6373c671b6e1}" SpecialFunc="None">
     <Declaration><![CDATA[(*
-Funion block manages the scene data. When rising edge on bSceneON is detected
-it recalls a scene from the memory. If rising edge is detected on bSaveScene
-it saves the scene to memory under bySceneID number.
-Futhermore it save the information about individual lamps being cut off from the scene.
+Funion block manages the scene data. 
 Main idea is that FB uses GVL_IO.arrStreetLamps as 'live buffer' ,
 GVL_IO.arrScenes<  > on the other hand is a data 'memory buffer'. 
 *)
@@ -18,26 +15,53 @@ END_VAR
 VAR
 	bySceneID			: BYTE;		//number of scene that is being manipulated
 	iSelector			: INT := 0;	//variable used in CASE statement
+	iSelAutoInTwo		: INT := 0; //variable used when iSelector = 5
 	iCounter			: INT := 0;	//for loop counter
 	
 	
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[//if FB is not busy
-IF NOT bBusy THEN
-	//read BACnet object
-	iSelector := REAL_TO_INT(fbBACnet_AV_SL_Scene.fPresentValue);
-END_IF
-
+      <ST><![CDATA[
 CASE iSelector OF
 	0:	//idle state
-		;
+		//if FB is not busy
+		IF NOT bBusy THEN
+			//read BACnet object
+			iSelector := REAL_TO_INT(fbBACnet_AV_SL_Scene.fPresentValue);
+		END_IF
 		
-	1..127:	//SceneON
+	5:	//set lamps to auto-mode scene values
+		
+		bySceneID := 5;
+		CASE iSelAutoInTwo OF
+			0:
+				//reset manual mode variable
+				bBACnet_ResetManual := FALSE;
+				
+				iSelAutoInTwo := 10;
+			
+			10:
+				GVL_IO.arrStreetLamps[1].nLevel  := GVL_IO.arrScenesStreetLampsLevels[5, 1]; 
+				GVL_IO.arrStreetLamps[2].nLevel  := GVL_IO.arrScenesStreetLampsLevels[5, 2]; 
+				GVL_IO.arrStreetLamps[3].nLevel  := GVL_IO.arrScenesStreetLampsLevels[5, 3]; 
+				GVL_IO.arrStreetLamps[4].nLevel  := GVL_IO.arrScenesStreetLampsLevels[5, 4]; 
+				GVL_IO.arrStreetLamps[5].nLevel  := GVL_IO.arrScenesStreetLampsLevels[5, 5]; 
+				GVL_IO.arrStreetLamps[6].nLevel  := GVL_IO.arrScenesStreetLampsLevels[5, 6]; 
+				GVL_IO.arrStreetLamps[7].nLevel  := GVL_IO.arrScenesStreetLampsLevels[5, 7]; 
+				GVL_IO.arrStreetLamps[8].nLevel  := GVL_IO.arrScenesStreetLampsLevels[5, 8]; 
+				GVL_IO.arrStreetLamps[9].nLevel  := GVL_IO.arrScenesStreetLampsLevels[5, 9]; 
+				GVL_IO.arrStreetLamps[10].nLevel := GVL_IO.arrScenesStreetLampsLevels[5, 10];
+				
+				
+				iSelAutoInTwo := 0;
+				iSelector := 255;
+		END_CASE
+		
+	1..4, 6..10:	//SceneON
 		bBusy := TRUE;	//set a flag indicating that this FB is busy
 		
-		//reset manual modeS
+		//reset manual mode
 		bBACnet_SetManual := FALSE;
 		
 		//convert int to byte
@@ -83,7 +107,7 @@ CASE iSelector OF
 		iSelector := 255;		
 		
 		
-	128..254:	//SaveScene
+	128..137:	//SaveScene
 		bBusy := TRUE;	//set a flag indicating that this FB is busy
 		
 		bySceneID := INT_TO_BYTE(iSelector) - 127;
@@ -99,7 +123,21 @@ CASE iSelector OF
 		bBusy := FALSE;		//indicate that this FB is no longer busy
 		
 	255:
-		bBACnet_SetManual := TRUE;
+		//depending on which scene has been called
+		CASE bySceneID OF
+			0:
+				;	//do nothing
+				
+			5:
+				//set all manual flags to FALSE
+				bBACnet_ResetManual := TRUE;	
+				
+			//default behaviour
+			ELSE
+				// set all lamps (manual flags) to manual mode
+				bBACnet_SetManual := TRUE;
+		END_CASE
+		
 		bBusy := FALSE;		//indicate that this FB is no longer busy
 		iSelector := 0;		//after rewriting data go back to idle
 		
@@ -110,16 +148,24 @@ END_CASE
 ]]></ST>
     </Implementation>
     <LineIds Name="FB_SceneController">
-      <LineId Id="283" Count="0" />
-      <LineId Id="281" Count="0" />
-      <LineId Id="27" Count="0" />
-      <LineId Id="108" Count="0" />
-      <LineId Id="282" Count="0" />
       <LineId Id="180" Count="0" />
       <LineId Id="42" Count="0" />
       <LineId Id="53" Count="0" />
+      <LineId Id="374" Count="3" />
       <LineId Id="55" Count="0" />
+      <LineId Id="429" Count="0" />
       <LineId Id="135" Count="0" />
+      <LineId Id="434" Count="0" />
+      <LineId Id="464" Count="0" />
+      <LineId Id="440" Count="1" />
+      <LineId Id="444" Count="5" />
+      <LineId Id="451" Count="8" />
+      <LineId Id="450" Count="0" />
+      <LineId Id="466" Count="0" />
+      <LineId Id="460" Count="1" />
+      <LineId Id="463" Count="0" />
+      <LineId Id="442" Count="0" />
+      <LineId Id="439" Count="0" />
       <LineId Id="56" Count="0" />
       <LineId Id="76" Count="1" />
       <LineId Id="275" Count="1" />
@@ -153,7 +199,17 @@ END_CASE
       <LineId Id="123" Count="0" />
       <LineId Id="140" Count="2" />
       <LineId Id="278" Count="0" />
-      <LineId Id="346" Count="1" />
+      <LineId Id="346" Count="0" />
+      <LineId Id="385" Count="1" />
+      <LineId Id="392" Count="1" />
+      <LineId Id="430" Count="1" />
+      <LineId Id="433" Count="0" />
+      <LineId Id="432" Count="0" />
+      <LineId Id="398" Count="0" />
+      <LineId Id="397" Count="0" />
+      <LineId Id="394" Count="2" />
+      <LineId Id="388" Count="0" />
+      <LineId Id="347" Count="0" />
       <LineId Id="350" Count="0" />
       <LineId Id="352" Count="0" />
       <LineId Id="348" Count="0" />

@@ -43,16 +43,16 @@ END_IF
 IF rtIsNight.Q THEN
 	//turn lights ON
 	//if they are not in manual mode	
-	IF NOT GVL_IO.arrStreetLamps[1].bManualCtrl  THEN GVL_IO.arrStreetLamps[1].nLevel  := c_byBrightness_Night; END_IF
-	IF NOT GVL_IO.arrStreetLamps[2].bManualCtrl  THEN GVL_IO.arrStreetLamps[2].nLevel  := c_byBrightness_Night; END_IF
-	IF NOT GVL_IO.arrStreetLamps[3].bManualCtrl  THEN GVL_IO.arrStreetLamps[3].nLevel  := c_byBrightness_Night; END_IF
-	IF NOT GVL_IO.arrStreetLamps[4].bManualCtrl  THEN GVL_IO.arrStreetLamps[4].nLevel  := c_byBrightness_Night; END_IF
-	IF NOT GVL_IO.arrStreetLamps[5].bManualCtrl  THEN GVL_IO.arrStreetLamps[5].nLevel  := c_byBrightness_Night; END_IF
-	IF NOT GVL_IO.arrStreetLamps[6].bManualCtrl  THEN GVL_IO.arrStreetLamps[6].nLevel  := c_byBrightness_Night; END_IF
-	IF NOT GVL_IO.arrStreetLamps[7].bManualCtrl  THEN GVL_IO.arrStreetLamps[7].nLevel  := c_byBrightness_Night; END_IF
-	IF NOT GVL_IO.arrStreetLamps[8].bManualCtrl  THEN GVL_IO.arrStreetLamps[8].nLevel  := c_byBrightness_Night; END_IF
-	IF NOT GVL_IO.arrStreetLamps[9].bManualCtrl  THEN GVL_IO.arrStreetLamps[9].nLevel  := c_byBrightness_Night; END_IF
-	IF NOT GVL_IO.arrStreetLamps[10].bManualCtrl THEN GVL_IO.arrStreetLamps[10].nLevel := c_byBrightness_Night; END_IF
+	IF NOT GVL_IO.arrStreetLamps[1].bManualCtrl  THEN GVL_IO.arrStreetLamps[1].nLevel  := GVL_IO.arrScenesStreetLampsLevels[5, 1];  END_IF
+	IF NOT GVL_IO.arrStreetLamps[2].bManualCtrl  THEN GVL_IO.arrStreetLamps[2].nLevel  := GVL_IO.arrScenesStreetLampsLevels[5, 2];  END_IF
+	IF NOT GVL_IO.arrStreetLamps[3].bManualCtrl  THEN GVL_IO.arrStreetLamps[3].nLevel  := GVL_IO.arrScenesStreetLampsLevels[5, 3];  END_IF
+	IF NOT GVL_IO.arrStreetLamps[4].bManualCtrl  THEN GVL_IO.arrStreetLamps[4].nLevel  := GVL_IO.arrScenesStreetLampsLevels[5, 4];  END_IF
+	IF NOT GVL_IO.arrStreetLamps[5].bManualCtrl  THEN GVL_IO.arrStreetLamps[5].nLevel  := GVL_IO.arrScenesStreetLampsLevels[5, 5];  END_IF
+	IF NOT GVL_IO.arrStreetLamps[6].bManualCtrl  THEN GVL_IO.arrStreetLamps[6].nLevel  := GVL_IO.arrScenesStreetLampsLevels[5, 6];  END_IF
+	IF NOT GVL_IO.arrStreetLamps[7].bManualCtrl  THEN GVL_IO.arrStreetLamps[7].nLevel  := GVL_IO.arrScenesStreetLampsLevels[5, 7];  END_IF
+	IF NOT GVL_IO.arrStreetLamps[8].bManualCtrl  THEN GVL_IO.arrStreetLamps[8].nLevel  := GVL_IO.arrScenesStreetLampsLevels[5, 8];  END_IF
+	IF NOT GVL_IO.arrStreetLamps[9].bManualCtrl  THEN GVL_IO.arrStreetLamps[9].nLevel  := GVL_IO.arrScenesStreetLampsLevels[5, 9];  END_IF
+	IF NOT GVL_IO.arrStreetLamps[10].bManualCtrl THEN GVL_IO.arrStreetLamps[10].nLevel := GVL_IO.arrScenesStreetLampsLevels[5, 10]; END_IF
 
 	//turn one street lamp ON
 	GVL_IO.bStreetLamp_DO1 := TRUE;
@@ -94,16 +94,16 @@ FOR i := 1 TO byStreetLampsCount BY 1 DO
 		//in the night to c_byBrightness_Night
 		IF F_IsNight() THEN
 			CASE i OF
-				1: 	GVL_IO.arrStreetLamps[1].nLevel  := c_byBrightness_Night;
-				2: 	GVL_IO.arrStreetLamps[2].nLevel  := c_byBrightness_Night;
-				3: 	GVL_IO.arrStreetLamps[3].nLevel  := c_byBrightness_Night;
-				4: 	GVL_IO.arrStreetLamps[4].nLevel  := c_byBrightness_Night;
-				5: 	GVL_IO.arrStreetLamps[5].nLevel  := c_byBrightness_Night;
-				6: 	GVL_IO.arrStreetLamps[6].nLevel  := c_byBrightness_Night;
-				7: 	GVL_IO.arrStreetLamps[7].nLevel  := c_byBrightness_Night;
-				8: 	GVL_IO.arrStreetLamps[8].nLevel  := c_byBrightness_Night;
-				9: 	GVL_IO.arrStreetLamps[9].nLevel  := c_byBrightness_Night;
-				10:	GVL_IO.arrStreetLamps[10].nLevel := c_byBrightness_Night;
+				1: 	GVL_IO.arrStreetLamps[1].nLevel  := GVL_IO.arrScenesStreetLampsLevels[5, 1]; 
+				2: 	GVL_IO.arrStreetLamps[2].nLevel  := GVL_IO.arrScenesStreetLampsLevels[5, 2]; 
+				3: 	GVL_IO.arrStreetLamps[3].nLevel  := GVL_IO.arrScenesStreetLampsLevels[5, 3]; 
+				4: 	GVL_IO.arrStreetLamps[4].nLevel  := GVL_IO.arrScenesStreetLampsLevels[5, 4]; 
+				5: 	GVL_IO.arrStreetLamps[5].nLevel  := GVL_IO.arrScenesStreetLampsLevels[5, 5]; 
+				6: 	GVL_IO.arrStreetLamps[6].nLevel  := GVL_IO.arrScenesStreetLampsLevels[5, 6]; 
+				7: 	GVL_IO.arrStreetLamps[7].nLevel  := GVL_IO.arrScenesStreetLampsLevels[5, 7]; 
+				8: 	GVL_IO.arrStreetLamps[8].nLevel  := GVL_IO.arrScenesStreetLampsLevels[5, 8]; 
+				9: 	GVL_IO.arrStreetLamps[9].nLevel  := GVL_IO.arrScenesStreetLampsLevels[5, 9]; 
+				10:	GVL_IO.arrStreetLamps[10].nLevel := GVL_IO.arrScenesStreetLampsLevels[5, 10];
 			END_CASE
 		ELSE
 		//at the daylight to c_byBrightness_Day
