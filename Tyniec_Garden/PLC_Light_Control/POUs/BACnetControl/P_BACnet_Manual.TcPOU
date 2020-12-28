@@ -33,19 +33,17 @@ CASE iSelSet OF
 		END_IF
 		
 	10:
+		//set temporary value
 		fbBACnet_AV_SL_Manual.fPV := DWORD_TO_REAL(2#0001111111111111);
 		iSelSet := 20;
 	20:
 		//dalay for BACnet to catch up PLC
 		ton_DelayForBACnet_Set(IN := NOT ton_DelayForBACnet_Set.Q, PT := T#100MS);
 		IF ton_DelayForBACnet_Set.Q THEN
-			//if fPresentValue and fPV are different
-			IF fbBACnet_AV_SL_Manual.fPresentValue <> fbBACnet_AV_SL_Manual.fPV THEN
-				//increment fPV by 2#0001000000000000 to force the change of fPresentValue
-				fbBACnet_AV_SL_Manual.fPV := fbBACnet_AV_SL_Manual.fPV + DWORD_TO_REAL(2#0001000000000000);
-			ELSE
-				iSelSet := 30;
-			END_IF
+			//set the value
+			fbBACnet_AV_SL_Manual.fPV := DWORD_TO_REAL(2#0000111111111111);
+			//go to next step
+			iSelSet := 30;
 		END_IF
 	30:
 		ton_DelayForBACnet_Set(IN := NOT ton_DelayForBACnet_Set.Q, PT := T#100MS);
@@ -63,19 +61,17 @@ CASE iSelReset OF
 			iSelReset := 10;	
 		END_IF
 	10:
+		//set temporary value
 		fbBACnet_AV_SL_Manual.fPV := DWORD_TO_REAL(2#0001000000000000);
 		iSelReset := 20;
 	20:
 		//dalay for BACnet to catch up PLC
 		ton_DelayForBACnet(IN := NOT ton_DelayForBACnet.Q, PT := T#100MS);
 		IF ton_DelayForBACnet.Q THEN
-			//if fPresentValue and fPV are different
-			IF fbBACnet_AV_SL_Manual.fPresentValue <> fbBACnet_AV_SL_Manual.fPV THEN
-				//increment fPV by 2#0001000000000000 to force the change of fPresentValue
-				fbBACnet_AV_SL_Manual.fPV := fbBACnet_AV_SL_Manual.fPV + DWORD_TO_REAL(2#0001000000000000);
-			ELSE
-				iSelReset := 30;
-			END_IF
+			//set the value
+			fbBACnet_AV_SL_Manual.fPV := DWORD_TO_REAL(2#0000000000000000);
+			//go to next step
+			iSelReset := 30;
 		END_IF
 	30:
 		ton_DelayForBACnet(IN := NOT ton_DelayForBACnet.Q, PT := T#100MS);
@@ -114,22 +110,26 @@ GVL_IO.arrStreetLamps[10].bManualCtrl := dwManual.9;
       <LineId Id="207" Count="0" />
       <LineId Id="209" Count="1" />
       <LineId Id="247" Count="5" />
-      <LineId Id="212" Count="20" />
+      <LineId Id="212" Count="0" />
+      <LineId Id="274" Count="0" />
+      <LineId Id="213" Count="5" />
+      <LineId Id="275" Count="2" />
+      <LineId Id="224" Count="0" />
+      <LineId Id="226" Count="6" />
       <LineId Id="208" Count="0" />
       <LineId Id="80" Count="0" />
       <LineId Id="54" Count="0" />
       <LineId Id="76" Count="0" />
       <LineId Id="257" Count="3" />
-      <LineId Id="87" Count="2" />
+      <LineId Id="87" Count="1" />
+      <LineId Id="278" Count="0" />
+      <LineId Id="89" Count="0" />
       <LineId Id="91" Count="0" />
       <LineId Id="90" Count="0" />
       <LineId Id="108" Count="1" />
       <LineId Id="107" Count="0" />
-      <LineId Id="99" Count="0" />
-      <LineId Id="92" Count="1" />
-      <LineId Id="97" Count="0" />
+      <LineId Id="279" Count="1" />
       <LineId Id="95" Count="1" />
-      <LineId Id="94" Count="0" />
       <LineId Id="110" Count="0" />
       <LineId Id="190" Count="0" />
       <LineId Id="192" Count="1" />
